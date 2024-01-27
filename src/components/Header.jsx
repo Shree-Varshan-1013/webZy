@@ -1,0 +1,31 @@
+import React from 'react'
+
+const Header = () => {
+    return (
+        <header className="text-gray-600 body-font">
+            <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+                <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-10 h-10 text-white p-2 bg-purple2 rounded-full" viewBox="0 0 24 24">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                    </svg>
+                    <span className="ml-3 text-xl color-caramel">WebZy</span>
+                </a>
+                <nav className="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400	flex flex-wrap items-center text-base justify-center">
+                    <a className="mr-5 hover:text-gray-900">Services</a>
+                    <a className="mr-5 hover:text-gray-900">Pricing</a>
+                    <a className="mr-5 hover:text-gray-900">About</a>
+                    <a className="mr-5 hover:text-gray-900">Contact</a>
+                </nav>
+                <a href="#_" className="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-purple2 transition duration-300 ease-out border-2 border-purple rounded-full shadow-md group">
+                    <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple2 group-hover:translate-x-0 ease">
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </span>
+                    <span className="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">Login</span>
+                    <span className="relative invisible">Button Text</span>
+                </a>
+            </div>
+        </header>
+    )
+}
+
+export default Header

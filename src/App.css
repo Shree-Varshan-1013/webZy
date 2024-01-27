@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Anuphan:wght@200;300&family=Arvo:wght@700&family=Baskervville&family=Black+Han+Sans&family=Inter&family=Noto+Sans:wght@300&display=swap');
+
+.logos-slide img{
+    margin: 0 40px;
+    display: inline-block;
+}
+
+.logos-slide{
+    white-space: nowrap;
+    animation: 45s slide infinite linear;
+}
+
+.logos:hover .logos-slide{
+    animation-play-state: paused
+}
+
+.logos{
+    overflow: hidden;
+    padding: 60px 0 0 0;
+    background: white;
+    position: relative;
+}
+
+.logos::before{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+    content: "";
+    z-index: 2;
+}
+
+.logos::after{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 250px;
+    height: 100%;
+    background: linear-gradient(to left, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+    content: "";
+    z-index: 2;
+}
+
+@keyframes slide {
+    from{
+        transform: translateX(0);
+    }
+    
+    to{
+        transform: translateX(-100%);
+    }
+}

@@ -2,13 +2,19 @@
 
 export default {
   content: ["./src/**/*.{html,js,jsx}"],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        caramel: '#FFDBC3',
-        purple: '#9F91CC',
-        purple2: '#5C4B99',
-        purple3: '#3D246C',
+        caramel: '#F7F4F3',
+        caramel2:'#D5D5D5',
+        purple: '#79016D',
+        purple2: '#4F0147',
+        dblue:'#0D3B66',
+        dblue2:'#155EA2',
+        dyellow:'#F4D35E',
+        dyellow2:'#F7E08D',
+        charcoal:'#2D4654'
       },
       fontFamily:{
         alfa: ["Alfa Slab One", "serif"],

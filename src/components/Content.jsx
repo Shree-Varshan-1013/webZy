@@ -3,12 +3,12 @@ import React from 'react'
 const Content = () => {
     return (
         <div>
-            <section className="text-gray-600 body-font">
+            <section className="text-gray-600 body-font dark:bg-slate-900">
                 <div className="container px-5 py-10 mx-auto">
                     <div className="flex flex-col text-center w-full mb-20">
-                        <h2 className="text-xs text-purple-500 tracking-widest font-medium title-font mb-1">ROOF PARTY POLAROID</h2>
-                        <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Master Cleanse Reliac Heirloom</h1>
-                        <p className="lg:w-2/3 mx-auto leading-relaxed text-base">Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical gentrify, subway tile poke farm-to-table. Franzen you probably haven't heard of them man bun deep jianbing selfies heirloom prism food truck ugh squid celiac humblebrag.</p>
+                        <h2 className="text-xs dark:text-caramel tracking-widest mb-1 font-anuphan font-semibold">BUILT WITH AWESOME TECHNOLOGIES</h2>
+                        <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900 dark:text-caramel font-basker">Shop Smart, Shop Savvy!</h1>
+                        <p className="font-anuphan lg:w-2/3 mx-auto leading-relaxed text-base dark:text-caramel2 dark:text-md ">Our advanced recommendation system ensures you discover products tailored to your preferences, while the personalized shopping journey guarantees that every product aligns perfectly with your unique taste. Enjoy a seamless experience where your choices matter, and returns are hassle-free.</p>
                     </div>
                     <div className="flex flex-wrap">
                         <div className="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60">

@@ -8,8 +8,8 @@ export default {
       colors: {
         caramel: '#F7F4F3',
         caramel2:'#D5D5D5',
-        purple: '#79016D',
-        purple2: '#4F0147',
+        purple: '#AC61BD',
+        purple2: '#743681',
         dblue:'#0D3B66',
         dblue2:'#155EA2',
         dyellow:'#F4D35E',

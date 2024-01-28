@@ -28,7 +28,7 @@ const ProfileDropdown = () => {
                         <img className="w-full object-cover" src="/assets/avatar.png" alt="Profile" />
                     </button>
                     {
-                        isOpen && (<div className="absolute right-0 mt-3 flex w-60 flex-col gap-3 rounded-xl bg-slate-900 p-4 text-slate-100 shadow-lg dark:border dark:border-white">
+                        isOpen && (<div className="absolute right-0 mt-3 flex w-60 flex-col gap-3 rounded-xl bg-slate-900 p-4 text-slate-100 shadow-lg">
                             <div className="flex gap-3 items-center">
                                 <div className="flex items-center justify-center rounded-lg h-12 w-12 overflow-hidden border-2 border-slate-600">
                                     <img className="w-full object-cover" src="/assets/avatar.png" alt="Profile" />

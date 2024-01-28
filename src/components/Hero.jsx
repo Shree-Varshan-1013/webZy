@@ -1,12 +1,15 @@
 import { Suspense, useEffect, useState } from 'react';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css'
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Hero = () => {
 
     const [data, setData] = useState([]);
 
     useEffect(() => {
+        AOS.init();
         fetch('https://jsonplaceholder.typicode.com/todos/1')
             .then(response => response.json())
             .then(json => {
@@ -16,8 +19,8 @@ const Hero = () => {
     }, [])
 
     return (
-        <section className="text-gray-600 body-font dark:bg-slate-900">
-            <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+        <section className="relative text-gray-600 body-font dark:bg-slate-900">
+            <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center" style={{backgroundImage:"url(/img/banner.svg)", backgroundSize:"cover"}}>
                 <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
                     <img className="object-cover object-center rounded" alt="hero" src="/img/tree-swing.svg" />
                 </div>

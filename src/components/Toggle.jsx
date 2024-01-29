@@ -44,11 +44,11 @@ const Toggle = () => {
 
     return (
         <button
-            className="w-20 h-8 rounded-full bg-white flex items-center transition duration-300 focus:outline-none shadow"
+            className="w-[70px] h-8 rounded-full bg-white flex items-center transition duration-300 focus:outline-none shadow"
             onClick={toggleTheme}
         >
             <div
-                className={`w-10 h-10 relative rounded-full transition duration-500 transform p-1 text-white ${isDarkmode ? 'bg-gray-700 translate-x-full' : 'bg-yellow-500 -translate-x-2'
+                className={`w-9 h-9 relative rounded-full transition duration-500 transform p-1 text-white ${isDarkmode ? 'bg-gray-700 translate-x-full' : 'bg-yellow-500 -translate-x-2'
                     }`}
             >
                 {isDarkmode ? darkIcon : lightIcon}

@@ -17,7 +17,7 @@ const Hero = () => {
                 console.log(json)
                 setData(json)
             })
-    }, [])
+    }, []);
 
     return (
         <section className="relative text-gray-600 body-font dark:bg-slate-900">
@@ -29,9 +29,6 @@ const Hero = () => {
                     <h1 className="title-font sm:text-4xl text-3xl mb-4 font-alfa text-gray-900 dark:text-caramel">Discover the Joy of Seamless Shopping</h1>
                     <p className="font-anuphan mb-8 leading-relaxed text-xl dark:text-caramel2">
                         Unlock a world of convenience with our online shopping experience. Browse, click, and enjoy the simplicity of shopping from the comfort of your own space. Elevate your style effortlessly</p>
-                    {/* <Suspense fallback={<Skeleton height={30} />}>
-                            <p className="text-sm mt-2 text-gray-500 mb-8 w-full">{data.title}</p>
-                        </Suspense> */}
                     <div className="flex lg:flex-row md:flex-col">
                         <button className="bg-gray-100 inline-flex py-3 px-5 rounded-lg items-center hover:bg-gray-200 focus:outline-none">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="w-6 h-6" viewBox="0 0 512 512">

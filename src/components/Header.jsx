@@ -7,13 +7,9 @@ import { useDispatch } from "react-redux";
 
 const Header = () => {
 
-    // const dispatch = useDispatch();
-    
     const navigate = useNavigate();
 
-    // const { user } = useSelector((state) => state.global);
-
-    const [isLogin, setLogin] = useState(true);
+    const { isLoggedIn } = useSelector((state) => state.global);
 
     return (
         <header className="text-gray-600 body-font sticky top-0 z-[1100] w-full backdrop-blur bg-opacity-90 font-anuphan dark:bg-slate-500 dark:bg-opacity-20">
@@ -30,11 +26,11 @@ const Header = () => {
                     <a className="mr-5 text-gray-900 font-semibold dark:font-medium dark:text-white">About</a>
                     <a className="mr-5 text-gray-900 font-semibold dark:font-medium dark:text-white">Contact</a>
                     <div className='flex justify-center'>
-                        <Toggle/>
+                        <Toggle />
                     </div>
                 </nav>
                 {
-                    isLogin ? (<ProfileDropdown />) : (<a onClick={() => navigate("/sign-in")} className="relative inline-flex items-center justify-center p-4 px-3 py-2 overflow-hidden font-medium text-purple2 transition duration-300 ease-out border-2 border-purple rounded-full shadow-md group">
+                    isLoggedIn ? (<ProfileDropdown />) : (<a onClick={() => navigate("/sign-in")} className="relative inline-flex items-center justify-center p-4 px-3 py-2 overflow-hidden font-medium text-purple2 transition duration-300 ease-out border-2 border-purple rounded-full shadow-md group">
                         <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-purple2 group-hover:translate-x-0 ease">
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                         </span >

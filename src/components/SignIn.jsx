@@ -5,19 +5,26 @@ import { signInSchema } from "../schemas/index2";
 import Swal from "sweetalert2";
 import Authentication from '../services/auth/Authentication';
 import { Toaster, toast } from 'sonner';
+import { useDispatch } from 'react-redux';
+import { addUserDetails, addToken, addRole, toggleLogin } from '../config/GlobalSlice';
+import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
+
+    const navigate = useNavigate();
+
+    const dispatch = useDispatch();
 
     const initialState = {
         userName: "",
         userPassword: "",
     };
+
     const initialUserData = {
-        userFirstName: "",
-        userLastName: "",
-        userName: "",
-        role: ""
-    }
+        "userFirstName": "",
+        "userLastName": "",
+        "userName": ""
+    };
 
     const [userData, setUser] = useState(initialUserData);
 
@@ -33,14 +40,18 @@ const SignIn = () => {
         });
 
     const getToast = () => {
-        toast('My toast message', {
-            action: {
-                label: "Close",
-                onClick: () => {
-                    console.log("clicked");
-                },
-            }
-        });
+        // toast('My toast message', {
+        //     action: {
+        //         label: "Close",
+        //         onClick: () => {
+        //             console.log("clicked");
+        //         },
+        //     }
+        // });
+        toast.loading('Validating.....');
+        setTimeout(()=>{
+            toast.success('done');
+        }, 3000);
     };
 
     const eventLogin = async () => {
@@ -57,20 +68,23 @@ const SignIn = () => {
             console.log(role)
 
             setUser({
-                userFirstName: user.userFirstName,
-                userLastName: user.userLastName,
-                userName: user.userName,
-                role: role
-            })
+                "userFirstName": user.userFirstName,
+                "userLastName": user.userLastName,
+                "userName": user.userName,
+            });
+
+            console.log(userData)
 
             getToast();
 
             setTimeout(() => {
-                // dispatch(addUser(user_email));
-                // dispatch(addColor(color));
-                // dispatch(addToken(token));
-                // navigate("/");
-            }, 3000);
+                toast.success("Successfully Signed In !")
+                dispatch(addUserDetails(userData));
+                dispatch(toggleLogin());
+                dispatch(addRole(role));
+                dispatch(addToken(token));
+                navigate("/");
+            }, 2000);
         } catch (error) {
             console.log(error);
             Swal.fire({
@@ -89,8 +103,8 @@ const SignIn = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 1 }}
         >
-            <Toaster position='top-right' />
             <div className='m-10'>
+            <Toaster position='top-right' />
                 <div className='flex max-w-lg mx-auto overflow-hidden bg-white rounded-lg lg:space-x-8 lg:max-w-5xl'>
                     <div className="items-center hidden lg:flex lg:w-1/2">
                         <img src="/img/login.svg" width="85%" />

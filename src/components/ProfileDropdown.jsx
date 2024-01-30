@@ -1,8 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react'
+import { useDispatch } from 'react-redux';
+import { Toaster, toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
+import { toggleLogin } from '../config/GlobalSlice';
 
 const ProfileDropdown = () => {
 
     const [isOpen, setIsOpen] = useState(false);
+
+    const dispatch = useDispatch();
+
+    const navigate = useNavigate();
 
     const dropdownRef = useRef(null);
 
@@ -19,6 +27,18 @@ const ProfileDropdown = () => {
             document.removeEventListener('click', handleClickOutside);
         };
     }, []);
+
+    const getToast = () => {
+        toast.loading("Logging you out !");
+    }
+
+    const eventLogout = () => {
+        getToast();
+        setTimeout(() => {
+            dispatch(toggleLogin());
+            navigate('/');
+        }, 5000);
+    }
 
     return (
         <>
@@ -77,7 +97,7 @@ const ProfileDropdown = () => {
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-6 w-6">
                                     <path fillRule="evenodd" d="M7.5 3.75A1.5 1.5 0 006 5.25v13.5a1.5 1.5 0 001.5 1.5h6a1.5 1.5 0 001.5-1.5V15a.75.75 0 011.5 0v3.75a3 3 0 01-3 3h-6a3 3 0 01-3-3V5.25a3 3 0 013-3h6a3 3 0 013 3V9A.75.75 0 0115 9V5.25a1.5 1.5 0 00-1.5-1.5h-6zm10.72 4.72a.75.75 0 011.06 0l3 3a.75.75 0 010 1.06l-3 3a.75.75 0 11-1.06-1.06l1.72-1.72H9a.75.75 0 010-1.5h10.94l-1.72-1.72a.75.75 0 010-1.06z" clipRule="evenodd"></path>
                                 </svg>
-                                <span>Logout</span>
+                                <span onClick={eventLogout}>Logout</span>
                             </button>
                         </div>
                         )

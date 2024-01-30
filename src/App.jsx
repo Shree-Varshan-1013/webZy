@@ -6,9 +6,13 @@ import { AnimatePresence } from "framer-motion";
 import Contact from './components/Contact'
 import SignIn from './components/SignIn'
 import './App.css'
+import { useSelector } from 'react-redux';
 function App() {
 
   const location = useLocation();
+
+  const { role } = useSelector((state) => state.global);
+
   console.log(location);
 
   return (

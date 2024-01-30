@@ -3,6 +3,7 @@ import Blogs from './Blogs'
 import Content from './Content'
 import Logos from './Logos'
 import { motion } from "framer-motion";
+import Pricing from './Pricing';
 
 const Home = () => {
   return (
@@ -16,6 +17,7 @@ const Home = () => {
       <Logos />
       <Content />
       <Blogs />
+      <Pricing />
     </motion.div>
   )
 }

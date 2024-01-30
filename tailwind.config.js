@@ -7,16 +7,16 @@ export default {
     extend: {
       colors: {
         caramel: '#F7F4F3',
-        caramel2:'#D5D5D5',
+        caramel2: '#D5D5D5',
         purple: '#AC61BD',
         purple2: '#743681',
-        dblue:'#0D3B66',
-        dblue2:'#155EA2',
-        dyellow:'#F4D35E',
-        dyellow2:'#F7E08D',
-        charcoal:'#2D4654'
+        dblue: '#0D3B66',
+        dblue2: '#155EA2',
+        dyellow: '#F4D35E',
+        dyellow2: '#F7E08D',
+        charcoal: '#2D4654'
       },
-      fontFamily:{
+      fontFamily: {
         alfa: ["Alfa Slab One", "serif"],
         anuphan: ["Anuphan", "sans-serif"],
         arvo: ["Arvo", "serif"],

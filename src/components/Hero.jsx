@@ -1,23 +1,8 @@
-import { Suspense, useEffect, useState } from 'react';
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css'
-import AOS from "aos";
-import "aos/dist/aos.css";
-import ClearStateButton from '../config/ClearStateButton';
+// import AOS from "aos";
+// import "aos/dist/aos.css";
 
 const Hero = () => {
-
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-        AOS.init();
-        fetch('https://jsonplaceholder.typicode.com/todos/1')
-            .then(response => response.json())
-            .then(json => {
-                console.log(json)
-                setData(json)
-            })
-    }, []);
 
     return (
         <section className="relative text-gray-600 body-font dark:bg-slate-900">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { motion } from 'framer-motion';
 import { useFormik } from "formik";
 import { signInSchema } from "../schemas/index2";

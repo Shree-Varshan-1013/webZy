@@ -1,9 +1,7 @@
-import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Toggle from './Toggle.jsx';
 import ProfileDropdown from './ProfileDropdown';
 import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
 
 const Header = () => {
 

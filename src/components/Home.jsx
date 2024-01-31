@@ -17,8 +17,7 @@ const Home = () => {
       <Logos />
       <Content />
       <Blogs />
-      <Pricing />
-    </motion.div>
+    </motion.div> 
   )
 }
 

@@ -14,7 +14,7 @@ export default {
         dblue2: '#155EA2',
         dyellow: '#F4D35E',
         dyellow2: '#F7E08D',
-        charcoal: '#2D4654'
+        charcoal: '#2f2e41'
       },
       fontFamily: {
         alfa: ["Alfa Slab One", "serif"],

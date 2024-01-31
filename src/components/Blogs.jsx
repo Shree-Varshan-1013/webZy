@@ -1,3 +1,5 @@
+import Pricing from "./Pricing"
+
 const Blogs = () => {
     return (
         <div>
@@ -88,6 +90,7 @@ const Blogs = () => {
                     </div>
                 </div>
             </section>
+            <Pricing/>
             <section className="text-gray-600 body-font overflow-hidden dark:bg-slate-900" style={{backgroundImage:"url(/img/trio.svg)", backgroundSize:"cover", backgroundPositionY:"center"}}>
                 <div className="container px-5 py-24 mx-auto backdrop-blur-lg">
                     <div className="flex flex-wrap -m-12">

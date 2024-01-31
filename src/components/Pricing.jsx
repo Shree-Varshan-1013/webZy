@@ -1,7 +1,7 @@
 const Pricing = () => {
     return (
-        <section className="text-gray-600 body-font overflow-hidden">
-            <div className="container px-5 py-24 mx-auto">
+        <section className="text-gray-600 body-font overflow-hidden dark:bg-slate-900 backdrop-blur-lg" style={{ backgroundImage: "url(/img/bottom3.svg)", backgroundPositionY:"center"}}>
+            <div className="container px-5 py-24 mx-auto backdrop-blur-lg">
                 <div className="flex flex-col text-center w-full mb-20">
                     <h1 className="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">Pricing</h1>
                     <p className="lg:w-2/3 mx-auto leading-relaxed text-base text-gray-500">Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical.</p>

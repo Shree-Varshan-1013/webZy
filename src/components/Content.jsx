@@ -130,7 +130,6 @@ const Content = () => {
                             </div>
                         </div>
                     </div>
-                    <span className="p-20"></span>
                 </div>
             </section>
         </div>

@@ -4,6 +4,7 @@ import Content from './Content'
 import Logos from './Logos'
 import { motion } from "framer-motion";
 import Pricing from './Pricing';
+import Gallery from './Gallery';
 
 const Home = () => {
   return (
@@ -16,6 +17,7 @@ const Home = () => {
       <Hero />
       <Logos />
       <Content />
+      <Gallery />
       <Blogs />
     </motion.div> 
   )

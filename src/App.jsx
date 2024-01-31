@@ -17,7 +17,7 @@ function App() {
   console.log(location);
 
   return (
-    <div className='overflow-hidden'>
+    <>
       <Header />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
@@ -28,7 +28,7 @@ function App() {
         </Routes>
       </AnimatePresence>
       <Footer />
-    </div>
+    </>
   )
 }
 

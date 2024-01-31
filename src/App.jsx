@@ -5,8 +5,9 @@ import Home from './components/Home'
 import { AnimatePresence } from "framer-motion";
 import Contact from './components/Contact'
 import SignIn from './components/SignIn'
-import './App.css'
 import { useSelector } from 'react-redux';
+import PageNotFound from './components/pagenotFound';
+import Unauthorize from './components/Unauthorize';
 function App() {
 
   const location = useLocation();
@@ -16,18 +17,18 @@ function App() {
   console.log(location);
 
   return (
-    <>
+    <div className='overflow-hidden'>
       <Header />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/contact" element={<Contact />} />
           <Route exact path="/sign-in" element={<SignIn />} />
-          <Route exact path="*" element={<div>Page not found</div>} />
+          <Route exact path="*" element={<Unauthorize />} />
         </Routes>
       </AnimatePresence>
       <Footer />
-    </>
+    </div>
   )
 }
 

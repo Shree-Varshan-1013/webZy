@@ -8,6 +8,7 @@ import SignIn from './components/SignIn'
 import { useSelector } from 'react-redux';
 import PageNotFound from './components/pagenotFound';
 import Unauthorize from './components/Unauthorize';
+import './App.css';
 function App() {
 
   const location = useLocation();

@@ -29,7 +29,8 @@ function App() {
       </AnimatePresence>
       <Footer />
     </>
-  )
+  );
+  
 }
 
 export default App

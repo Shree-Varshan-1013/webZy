@@ -24,7 +24,7 @@ function App() {
           <Route exact path="/" element={<Home />} />
           <Route exact path="/contact" element={<Contact />} />
           <Route exact path="/sign-in" element={<SignIn />} />
-          <Route exact path="*" element={<Unauthorize />} />
+          <Route exact path="*" element={<PageNotFound />} />
         </Routes>
       </AnimatePresence>
       <Footer />

@@ -3,7 +3,6 @@ import 'react-loading-skeleton/dist/skeleton.css'
 // import "aos/dist/aos.css";
 
 const Hero = () => {
-
     return (
         <section className="relative text-gray-600 body-font dark:bg-slate-900" style={{ backgroundImage: "url(/img/banner.svg)", backgroundSize: "cover" }}>
             <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">

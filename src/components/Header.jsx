@@ -6,8 +6,10 @@ import { useSelector } from "react-redux";
 const Header = () => {
 
     const navigate = useNavigate();
-
+    
     const { isLoggedIn } = useSelector((state) => state.global);
+    
+    // const isLoggedIn  = true;
 
     return (
         <header className="text-gray-600 body-font sticky top-0 z-[1100] w-full backdrop-blur bg-opacity-90 font-anuphan dark:bg-slate-500 dark:bg-opacity-20">

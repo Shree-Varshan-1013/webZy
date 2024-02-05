@@ -1,5 +1,6 @@
 import AdminSideBar from "./AdminSideBar"
-import Toggle from "./Toggle"
+import Card from "./Card"
+import DataCard from "./DataCard"
 
 const AdminDashboard = () => {
 
@@ -7,6 +8,7 @@ const AdminDashboard = () => {
         <>
             <div className="flex flex-row">
                 <AdminSideBar />
+                <DataCard />
             </div>
         </>
     )

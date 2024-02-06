@@ -49,7 +49,7 @@ const SignIn = () => {
         //     }
         // });
         toast.loading('Validating.....');
-        setTimeout(()=>{
+        setTimeout(() => {
             toast.success('done');
         }, 3000);
     };
@@ -103,19 +103,19 @@ const SignIn = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 1 }}
         >
-            <div className='m-10'>
-            <Toaster position='top-right' />
-                <div className='flex max-w-lg mx-auto overflow-hidden bg-white rounded-lg lg:space-x-8 lg:max-w-5xl'>
+            <div className='block dark:bg-slate-900 h-screen backdrop-blur-lg' style={{backgroundImage:"url(/img/trio-new.svg)", backgroundSize:"cover"}}>
+                <Toaster position='top-right' />
+                <div className='flex w-full overflow-hidden bg-white dark:bg-slate-900 border-none p-10 backdrop-blur-lg' style={{backgroundImage:"inherit", backgroundRepeat:"no-repeat", backgroundSize:"cover"}}>
                     <div className="items-center hidden lg:flex lg:w-1/2">
-                        <img src="/img/login.svg" width="85%" />
+                        <img src="/img/login-lap.svg" width="85%" />
                     </div>
                     <div className='w-full px-6 py-8 md:px-8 lg:w-1/2'>
                         <form onSubmit={handleSubmit}>
-                            <h2 className='text-2xl text-center text-gray-700 font-semibold'>Welcome back</h2>
-                            <p className='mt-2 text-xl text-center text-gray-600'>We are <span className='text-purple'>Happy </span>to see you back</p>
+                            <h2 className='text-2xl text-center text-gray-700 font-semibold font-anuphan dark:text-white'>Welcome back</h2>
+                            <p className='mt-2 text-xl text-center text-gray-600 font-anuphan dark:text-white'>We are <span className='text-purple font-anuphan'>Happy </span>to see you back</p>
                             <div className=''>
                                 <div className="mt-1">
-                                    <label className="block text-md mb-2 text-gray-700">
+                                    <label className="block text-md mb-2 text-gray-700 font-anuphan dark:text-white">
                                         Username
                                     </label>
                                     <input
@@ -125,15 +125,11 @@ const SignIn = () => {
                                         value={values.userName}
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        className='w-full py-2 rounded-lg border border-grey-200 text-grey-darker focus:border-primary focus:outline-none focus:ring focus:ring-purple2 focus:ring-opacity-20 pl-4'
-                                        placeholder='Enter Username'
+                                        className='dark:bg-slate-900 dark:text-white font-anuphan w-full py-2 rounded-lg border border-grey-200 text-grey-darker focus:outline-none focus:border-purple3 focus:ring focus:ring-purple3 focus:ring-opacity-20 pl-4'
                                     />
-                                    {errors.userName && touched.userName ? (
-                                        <p style={{ color: "red" }}>{errors.userName}</p>
-                                    ) : null}
                                 </div>
                                 <div className='block mt-3'>
-                                    <label className="block text-md mb-2 text-gray-700">
+                                    <label className="block text-md mb-2 text-gray-700 font-anuphan dark:text-white">
                                         Password
                                     </label>
                                     <div className='mb-1'>
@@ -144,22 +140,18 @@ const SignIn = () => {
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                             value={values.userPassword}
-                                            className='rounded-lg border border-gray-200 text-grey-darker w-full py-2 focus:border-primary focus:outline-none focus:ring focus:ring-purple2 focus:ring-opacity-20 pl-4'
-                                            placeholder='Enter password' />
+                                            className='dark:bg-slate-900 dark:text-white font-anuphan w-full py-2 rounded-lg border border-grey-200 text-grey-darker focus:outline-none focus:border-purple3 focus:ring focus:ring-purple3 focus:ring-opacity-20 pl-4'
+                                        />
                                     </div>
-                                    {errors.userPassword && touched.userPassword ? (
-                                        <p style={{ color: "red" }}>{errors.userPassword}</p>
-                                    ) : null}
                                 </div>
-                                <div className='mb-5 text-gray-500'>
+                                <div className='mb-5 text-gray-500 font-anuphan dark:text-white'>
                                     <p>Forget password ?</p>
                                 </div>
-                                <div>
-                                    <button type="submit" className='w-full bg-purple2 py-2 px-4 rounded-lg hover:bg-purple text-white'>Sign in</button>
-                                </div>
+                                <button className="flex items-center justify-center mt-auto rounded w-full py-2.5 text-center overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300 font-anuphan dark:text-white">Sign In
+                                </button>
                                 <div className='flex items-center justify-between mt-4'>
                                     <span className='w-1/5 border'></span>
-                                    <a className='text-sm font-medium text-gray-500'>CREATE ACCOUNT</a>
+                                    <a className='text-sm font-medium text-gray-500 font-anuphan dark:text-white cursor-pointer' onClick={() => navigate("/sign-up ")}>CREATE ACCOUNT</a>
                                     <span className='w-1/5 border'></span>
                                 </div>
                             </div>

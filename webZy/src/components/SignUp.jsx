@@ -1,0 +1,139 @@
+import { useState } from 'react'
+import { motion } from 'framer-motion'
+import { Toaster, toast } from 'sonner';
+import { signUpSchema } from '../schemas';
+import { useFormik } from 'formik';
+const SignUp = () => {
+
+
+    const initialState = {
+        "userFirstName": "",
+        "userLastName": "",
+        "userName": ""
+    };
+    const [userData, setUser] = useState(initialState);
+
+
+    const { values, errors, handleBlur, handleChange, handleSubmit, touched } =
+        useFormik({
+            initialValues: initialState,
+            validationSchema: signUpSchema,
+            onSubmit: (values, action) => {
+                console.log(values);
+                // eventLogin();
+                action.resetForm();
+            },
+        });
+
+    const getToast = () => {
+        // toast('My toast message', {
+        //     action: {
+        //         label: "Close",
+        //         onClick: () => {
+        //             console.log("clicked");
+        //         },
+        //     }
+        // });
+        toast.loading('Validating.....');
+        setTimeout(() => {
+            toast.success('done');
+        }, 3000);
+    };
+
+    return (
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+        >
+            <div className='dark:bg-slate-900'>
+                <Toaster position='top-right' />
+                <div className='flex max-w-lg mx-auto overflow-hidden bg-white dark:bg-slate-900 rounded-lg lg:space-x-8 lg:max-w-5xl'>
+                    <div className="items-center hidden lg:flex lg:w-1/2">
+                        <img src="/img/welcome.svg" width="85%" />
+                    </div>
+                    <div className='w-full px-6 py-8 md:px-8 lg:w-1/2'>
+                        <form onSubmit={handleSubmit}>
+                            <h2 className='text-2xl text-center text-gray-700 font-semibold font-anuphan dark:text-white'>Welcome</h2>
+                            <p className='mt-2 text-xl text-center text-gray-600 font-anuphan dark:text-white'>Join <span className='text-purple font-anuphan'>Webzy </span>community</p>
+                            <div className=''>
+                                <div className="mt-1">
+                                    <label className="block text-md mb-2 text-gray-700 dark:text-white font-anuphan">
+                                        Name
+                                    </label>
+                                    <input
+                                        id="email"
+                                        type="text"
+                                        name="userName"
+                                        value={values.userName}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        className='dark:bg-slate-900 dark:text-white font-anuphan w-full py-2 rounded-lg border border-grey-200 text-grey-darker focus:outline-none focus:border-purple3 focus:ring focus:ring-purple3 focus:ring-opacity-20 pl-4'
+                                    />
+                                </div>
+                                <div className='block mt-3'>
+                                    <label className="block text-md mb-2 text-gray-700 dark:text-white font-anuphan">
+                                        E-mail
+                                    </label>
+                                    <div className='mb-1'>
+                                        <input
+                                            id="email"
+                                            type="email"
+                                            name="email"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.email}
+                                            className='dark:bg-slate-900 dark:text-white font-anuphan w-full py-2 rounded-lg border border-grey-200 text-grey-darker focus:outline-none focus:border-purple3 focus:ring focus:ring-purple3 focus:ring-opacity-20 pl-4'
+                                        />
+                                    </div>
+                                </div>
+                                <div className='block mt-3'>
+                                    <label className="block text-md mb-2 text-gray-700 dark:text-white font-anuphan">
+                                        Password
+                                    </label>
+                                    <div className='mb-1'>
+                                        <input
+                                            id="password"
+                                            type="password"
+                                            name="userPassword"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.userPassword}
+                                            className='dark:bg-slate-900 dark:text-white font-anuphan w-full py-2 rounded-lg border border-grey-200 text-grey-darker focus:outline-none focus:border-purple3 focus:ring focus:ring-purple3 focus:ring-opacity-20 pl-4'
+                                        />
+                                    </div>
+                                </div>
+                                <div className='block mt-3 mb-5'>
+                                    <label className="block text-md mb-2 text-gray-700 dark:text-white font-anuphan">
+                                        Confirm Password
+                                    </label>
+                                    <div className='mb-1'>
+                                        <input
+                                            id="password"
+                                            type="password"
+                                            name="userPassword"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.userPassword}
+                                            className='dark:bg-slate-900 dark:text-white font-anuphan w-full py-2 rounded-lg border border-grey-200 text-grey-darker focus:outline-none focus:border-purple3 focus:ring focus:ring-purple3 focus:ring-opacity-20 pl-4'
+                                        />
+                                    </div>
+                                </div>
+                                <button className="flex items-center justify-center mt-auto rounded w-full py-2.5 text-center overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300 font-anuphan dark:text-white">Sign Up
+                                </button>
+                                <div className='flex items-center justify-between mt-4'>
+                                    <span className='w-1/5 border'></span>
+                                    <a className='text-sm font-medium text-gray-500 font-anuphan dark:text-white'>DO YOU HAVE AN ACCOUNT?</a>
+                                    <span className='w-1/5 border'></span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </motion.div>
+    )
+}
+
+export default SignUp

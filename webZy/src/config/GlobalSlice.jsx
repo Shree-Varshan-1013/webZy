@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     isLoggedIn: false,
+    isDark: true,
     user: null,
     role: "PUBLIC",
     accessToken: null,
@@ -14,6 +15,9 @@ const globalSlice = createSlice({
     reducers: {
         toggleLogin: (state, action) => {
             state.isLoggedIn = !state.isLoggedIn;
+        },
+        toggleDarkMode: (state, action) => {
+            state.isDark = !state.isDark;
         },
         addUser: (state, action) => {
             state.user = action.payload;
@@ -38,6 +42,7 @@ const globalSlice = createSlice({
 
 export const {
     toggleLogin,
+    toggleDarkMode,
     addUser,
     deleteUser,
     addRole,

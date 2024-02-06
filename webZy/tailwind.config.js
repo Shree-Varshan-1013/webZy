@@ -10,6 +10,8 @@ export default {
         caramel2: '#D5D5D5',
         purple: '#AC61BD',
         purple2: '#743681',
+        purple3: '#B65FCF',
+        purple4: '#E39FF6',
         dblue: '#0D3B66',
         dblue2: '#155EA2',
         dyellow: '#F4D35E',

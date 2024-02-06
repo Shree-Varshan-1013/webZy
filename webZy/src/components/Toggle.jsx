@@ -1,22 +1,26 @@
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { toggleDarkMode } from '../config/GlobalSlice';
 
 const Toggle = () => {
+
+    const dispatch = useDispatch();
 
     const [isDarkmode, setIsDarkmode] = useState(true);
 
     useEffect(() => {
         const storedTheme = localStorage.getItem('isDarkmode');
+        // dispatch(toggleDarkMode);
         setIsDarkmode(storedTheme === 'true');
     }, []);
-
+    
     useEffect(() => {
-
         localStorage.setItem('isDarkmode', isDarkmode.toString());
-
         document.documentElement.classList.toggle("dark", isDarkmode);
     }, [isDarkmode]);
-
+    
     const toggleTheme = () => {
+        dispatch(toggleDarkMode);
         setIsDarkmode(!isDarkmode);
     };
 

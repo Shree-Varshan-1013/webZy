@@ -1,6 +1,4 @@
 import React from 'react'
-import '../components/unauth.css'
-
 const Unauthorize = () => {
     return (
         <div className='flex'>

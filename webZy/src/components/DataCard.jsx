@@ -1,9 +1,31 @@
 import React from 'react'
-import { FaAirFreshener } from "react-icons/fa";
-
+import Chart from "react-apexcharts";
+import {useSelector} from 'react-redux';
 const DataCard = () => {
+
+    const { isDark } = useSelector((state) => state.global);
+
+    const state = {
+        options: {
+            chart: {
+                id: "basic-bar",
+                background: isDark ? '#1a1a1a' : '#ffffff', // Set background color based on dark mode
+                foreColor: isDark ? '#ffffff' : '#373d3f', // Set text color based on dark mode
+            },
+            xaxis: {
+                categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
+            }
+        },
+        series: [
+            {
+                name: "series-1",
+                data: [30, 40, 45, 50, 49, 60, 70, 91]
+            }
+        ]
+    };
+
     return (
-        <div className=" dark:bg-slate-900 w-full" style={{backgroundImage:"url(/img/bottom.svg)", backgroundRepeat:"no-repeat", backgroundSize:"cover"}}>    
+        <div className=" dark:bg-slate-900 w-full h-screen" style={{ backgroundImage: "url(/img/bottom3.svg)", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>
             <div className="p-4">
                 <nav className="block w-full max-w-full bg-transparent text-white shadow-none rounded-xl transition-all px-0 py-1">
                     <div className="flex flex-col-reverse justify-between gap-6 md:flex-row md:items-center">
@@ -12,16 +34,15 @@ const DataCard = () => {
                                 <ol className="flex flex-wrap items-center w-full bg-opacity-60 rounded-md bg-transparent p-0 transition-all">
                                     <li className="flex items-center text-blue-gray-900 antialiased font-sans text-sm font-normal leading-normal cursor-pointer transition-colors duration-300 hover:text-light-blue-500">
                                         <a href="#">
-                                            <p className="block antialiased font-sans text-sm leading-normal text-blue-900 font-normal opacity-50 transition-all hover:text-blue-500 hover:opacity-100">dashboard</p>
+                                            <p className="block antialiased font-anuphan text-sm leading-normal dark:text-purple4 text-purple2 font-normal transition-all hover:opacity-100">dashboard</p>
                                         </a>
-                                        <span className="text-gray-500 text-sm antialiased font-sans font-normal leading-normal mx-2 pointer-events-none select-none">/</span>
+                                        <span className="text-gray-500 text-sm antialiased font-anuphan font-normal leading-normal mx-2 pointer-events-none select-none">/</span>
                                     </li>
-                                    <li className="flex items-center text-blue-900 antialiased font-sans text-sm font-normal leading-normal cursor-pointer transition-colors duration-300 hover:text-blue-500">
-                                        <p className="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal">home</p>
+                                    <li className="flex items-center text-white-900 antialiased font-sans text-sm font-normal leading-normal cursor-pointer transition-colors duration-300 hover:text-purple3">
+                                        <p className="block antialiased font-anuphan text-sm leading-normal text-black font-normal dark:text-white">home</p>
                                     </li>
                                 </ol>
                             </nav>
-                            <h6 className="block antialiased tracking-normal font-sans text-base font-semibold leading-relaxed text-gray-900">home</h6>
                         </div>
                         <div className="flex items-center">
                             <button className="relative middle none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs text-gray-500 hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30 grid xl:hidden" type="button">
@@ -61,7 +82,7 @@ const DataCard = () => {
                         </div>
                     </div>
                 </nav>
-                <div className="mt-12">
+                <div className="mt-8">
                     <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
                         <div className="relative flex flex-col bg-clip-border rounded-xl bg-white dark:bg-slate-800 text-gray-700 shadow-md">
                             <div className="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-blue-600 to-blue-400 text-white shadow-blue-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
@@ -76,13 +97,13 @@ const DataCard = () => {
                                 <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900 dark:text-white">$53k</h4>
                             </div>
                             <div className="border-t border-blue-gray-50 p-4">
-                                <p className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600 dark:text-white">
+                                <p className="block antialiased font-anuphan text-base leading-relaxed font-normal text-blue-gray-600 dark:text-white">
                                     <strong className="text-green-500 ">+55%</strong>&nbsp;than last week
                                 </p>
                             </div>
                         </div>
                         <div className="relative flex flex-col bg-clip-border rounded-xl bg-white dark:bg-slate-800 text-gray-700 shadow-md">
-                            <div className="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-pink-600 to-pink-400 text-white shadow-pink-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
+                            <div className="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-purple2 to-purple text-white shadow-purple3 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="w-6 h-6 text-white">
                                     <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clipRule="evenodd"></path>
                                 </svg>
@@ -92,7 +113,7 @@ const DataCard = () => {
                                 <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900 dark:text-white">2,300</h4>
                             </div>
                             <div className="border-t border-blue-gray-50 p-4">
-                                <p className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600 dark:text-white">
+                                <p className="block antialiased font-anuphan text-base leading-relaxed font-normal text-blue-gray-600 dark:text-white">
                                     <strong className="text-green-500">+3%</strong>&nbsp;than last month
                                 </p>
                             </div>
@@ -108,7 +129,7 @@ const DataCard = () => {
                                 <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900 dark:text-white">3,462</h4>
                             </div>
                             <div className="border-t border-blue-gray-50 p-4">
-                                <p className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600 dark:text-white">
+                                <p className="block antialiased font-anuphan text-base leading-relaxed font-normal text-blue-gray-600 dark:text-white">
                                     <strong className="text-red-500">-2%</strong>&nbsp;than yesterday
                                 </p>
                             </div>
@@ -124,12 +145,18 @@ const DataCard = () => {
                                 <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900 dark:text-white">$103,430</h4>
                             </div>
                             <div className="border-t border-blue-gray-50 p-4">
-                                <p className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600 dark:text-white">
+                                <p className="block antialiased font-anuphan text-base leading-relaxed font-normal text-blue-gray-600 dark:text-white">
                                     <strong className="text-green-500">+5%</strong>&nbsp;than yesterday
                                 </p>
                             </div>
                         </div>
                     </div>
+                    <Chart
+                        options={state.options}
+                        series={state.series}
+                        type="line"
+                        width="500"
+                    />
 
                     {/* <div className="mb-2 grid grid-cols-1 gap-6 xl:grid-cols-3">
                         <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md overflow-hidden xl:col-span-2">
@@ -264,7 +291,7 @@ const DataCard = () => {
                         </div>
                     </div> */}
                 </div>
-              
+
             </div>
         </div>
     )

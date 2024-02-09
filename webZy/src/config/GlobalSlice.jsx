@@ -29,7 +29,7 @@ const globalSlice = createSlice({
             state.role = action.payload;
         },
         deleteRole: (state, action) => {
-            state.role = null;
+            state.role = "PUBLIC";
         },
         addUserDetails: (state, action) => {
             state.userDetails = action.payload;

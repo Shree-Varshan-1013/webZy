@@ -16,13 +16,14 @@ public class AppUser {
 	public AppUser() { }
 	
 	
-	public AppUser(String userName, String userFirstName, String userLastName, String userPassword, Set<Role> role) {
+	public AppUser(String userName, String userFirstName, String userLastName, String userPassword, Set<Role> role, String email) {
 		super();
 		this.userName = userName;
 		this.userFirstName = userFirstName;
 		this.userLastName = userLastName;
 		this.userPassword = userPassword;
 		this.role = role;
+		this.email = email;
 	}
 
 
@@ -32,6 +33,7 @@ public class AppUser {
 	private String userFirstName;
 	private String userLastName;
 	private String userPassword;
+	private String email;
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "APP_USER_ROLE", 
@@ -82,6 +84,14 @@ public class AppUser {
 
 	public void setRole(Set<Role> role) {
 		this.role = role;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	

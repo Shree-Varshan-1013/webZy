@@ -1508,14 +1508,6 @@ video {
   padding: 1.5rem;
 }
 
-.p-11 {
-  padding: 2.75rem;
-}
-
-.p-20 {
-  padding: 5rem;
-}
-
 .px-0 {
   padding-left: 0px;
   padding-right: 0px;
@@ -1623,10 +1615,6 @@ video {
 
 .pt-0 {
   padding-top: 0px;
-}
-
-.pt-5 {
-  padding-top: 1.25rem;
 }
 
 .text-left {
@@ -1953,17 +1941,8 @@ video {
   --tw-ring-color: rgb(255 255 255 / 0.1);
 }
 
-.blur {
-  --tw-blur: blur(8px);
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-
 .blur-3xl {
   --tw-blur: blur(64px);
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
-}
-
-.filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
@@ -2140,11 +2119,6 @@ video {
   --tw-ring-color: rgb(172 97 189 / var(--tw-ring-opacity));
 }
 
-.focus\:ring-purple2:focus {
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgb(116 54 129 / var(--tw-ring-opacity));
-}
-
 .focus\:ring-purple3:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(182 95 207 / var(--tw-ring-opacity));
@@ -2215,10 +2189,6 @@ video {
   --tw-bg-opacity: 0.2;
 }
 
-:is(.dark .dark\:font-anuphan) {
-  font-family: Anuphan, sans-serif;
-}
-
 :is(.dark .dark\:font-medium) {
   font-weight: 500;
 }
@@ -2263,6 +2233,10 @@ video {
 
   .sm\:mt-0 {
     margin-top: 0px;
+  }
+
+  .sm\:h-screen {
+    height: 100vh;
   }
 
   .sm\:w-1\/2 {
@@ -2438,6 +2412,18 @@ video {
     width: 66.666667%;
   }
 
+  .lg\:w-\[40\%\] {
+    width: 40%;
+  }
+
+  .lg\:w-\[75\%\] {
+    width: 75%;
+  }
+
+  .lg\:w-\[80\%\] {
+    width: 80%;
+  }
+
   .lg\:w-full {
     width: 100%;
   }
@@ -2464,6 +2450,18 @@ video {
 
   .lg\:flex-row {
     flex-direction: row;
+  }
+
+  .lg\:items-center {
+    align-items: center;
+  }
+
+  .lg\:justify-center {
+    justify-content: center;
+  }
+
+  .lg\:justify-between {
+    justify-content: space-between;
   }
 
   .lg\:space-x-8 > :not([hidden]) ~ :not([hidden]) {

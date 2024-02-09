@@ -44,8 +44,8 @@ function App() {
       {isAdminHomePage ? null : <Header />}
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
-          <Route exact path="/admin-dash" element={<AdminDashboard />} />
-          <Route exact path="/" element={<Home />} />
+          <Route exact path="/admin-dash" element={<AdminDashboard role={role} />} />
+          <Route exact path="/" element={<Home />} /> 
           <Route exact path="/contact" element={<Contact />} />
           <Route exact path="/sign-in" element={<SignIn />} />
           <Route exact path="/sign-up" element={<SignUp />} />
@@ -58,4 +58,4 @@ function App() {
 
 }
 
-export default App
+export default App;

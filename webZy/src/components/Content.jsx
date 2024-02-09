@@ -1,7 +1,7 @@
 const Content = () => {
     return (
         <div>
-            <section className="text-gray-600 body-font dark:bg-slate-900" style={{ backgroundImage: "url(/img/bottom3.svg)", backgroundSize: "cover" }}>
+            <section className="text-gray-600 body-font dark:bg-slate-900" style={{ backgroundImage: "url(/img/bottom3.svg)", backgroundSize: "cover" }} name="services">
                 <div className="container px-5 py-10 mx-auto">
                     <div className="flex flex-col text-center w-full mb-20">
                         <h2 className="text-xs dark:text-caramel tracking-widest mb-1 font-anuphan font-semibold">BUILT WITH AWESOME TECHNOLOGIES</h2>

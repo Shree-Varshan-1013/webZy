@@ -1,6 +1,7 @@
 import React from 'react'
 import Chart from "react-apexcharts";
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
+import MyChart from './MyChart';
 const DataCard = () => {
 
     const { isDark } = useSelector((state) => state.global);
@@ -151,12 +152,6 @@ const DataCard = () => {
                             </div>
                         </div>
                     </div>
-                    <Chart
-                        options={state.options}
-                        series={state.series}
-                        type="line"
-                        width="500"
-                    />
 
                     {/* <div className="mb-2 grid grid-cols-1 gap-6 xl:grid-cols-3">
                         <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md overflow-hidden xl:col-span-2">
@@ -292,6 +287,9 @@ const DataCard = () => {
                     </div> */}
                 </div>
 
+            </div>
+            <div className='h-120'>
+                <MyChart />
             </div>
         </div>
     )

@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom';
-import Toggle from './Toggle.jsx';
 import ProfileDropdown from './ProfileDropdown';
+import { Link } from 'react-scroll';
 import { useSelector } from "react-redux";
+import Toggle from './Toggle.jsx';
 
 const Header = () => {
 
@@ -21,10 +22,10 @@ const Header = () => {
                     <span className="ml-3 text-xl color-caramel dark:text-white">WebZy</span>
                 </a>
                 <nav className="md:mr-auto md:ml-4 md:py-1 md:pl-4 md:border-l md:border-gray-400 flex flex-wrap items-center text-base justify-center">
-                    <a className="mr-5 text-gray-900 font-semibold dark:font-medium dark:text-white">Services</a>
-                    <a className="mr-5 text-gray-900 font-semibold dark:font-medium dark:text-white">Pricing</a>
-                    <a className="mr-5 text-gray-900 font-semibold dark:font-medium dark:text-white">About</a>
-                    <a className="mr-5 text-gray-900 font-semibold dark:font-medium dark:text-white">Contact</a>
+                    <Link to="services" smooth duration={1500} className="mr-5 cursor-pointer text-gray-900 font-semibold dark:font-medium dark:text-white">Services</Link>
+                    <Link to="pricing" smooth duration={1500} className="mr-5 cursor-pointer text-gray-900 font-semibold dark:font-medium dark:text-white">Pricing</Link>
+                    <Link to="about" smooth duration={1500} className="mr-5 cursor-pointer text-gray-900 font-semibold dark:font-medium dark:text-white">About</Link>
+                    <Link to="contact" smooth duration={1500} className="mr-5 cursor-pointer text-gray-900 font-semibold dark:font-medium dark:text-white">Contact</Link>
                     <div className='flex justify-center'>
                         <Toggle />
                     </div>

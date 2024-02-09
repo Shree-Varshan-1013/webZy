@@ -50,6 +50,7 @@ public class UserServiceImpl implements UserService {
 		admin.setUserFirstName("Shree Varshan");
 		admin.setUserLastName("G");
 		admin.setUserPassword(getEncodedPassword("shree12345"));
+		admin.setEmail("shree@gmail.com");
 		Set<Role> roles = new HashSet<>();
 		roles.add(adminRole);
 		admin.setRole(roles);
@@ -59,6 +60,11 @@ public class UserServiceImpl implements UserService {
 
 	public String getEncodedPassword(String password) {
 		return passwordEncoder.encode(password);
+	}
+
+	@Override
+	public AppUser findUserNameByEmail(String email) {
+		return userRepo.findByEmail(email);
 	}
 
 }

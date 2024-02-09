@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
-import { toggleLogin } from '../config/GlobalSlice';
+import { deleteRole, toggleLogin } from '../config/GlobalSlice';
 
 const ProfileDropdown = () => {
 
@@ -36,6 +36,7 @@ const ProfileDropdown = () => {
         getToast();
         setTimeout(() => {
             dispatch(toggleLogin());
+            dispatch(deleteRole());
             navigate('/');
         }, 5000);
     }

@@ -16,7 +16,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.authentication.configuration.GlobalAuthenticationConfigurerAdapter;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -35,7 +34,7 @@ public class JwtService implements UserDetailsService {
 
 	@Autowired
 	private AppUserRepo userRepo;
-
+	
 	@Autowired
 	private JwtUtil jwtUtil;
 
@@ -58,13 +57,24 @@ public class JwtService implements UserDetailsService {
 
 		String userName = jwtRequest.getUserName();
 		String userPassword = jwtRequest.getUserPassword();
-		authenticate(userName, userPassword);
+	
+		boolean isEmail = userName.contains("@");
 
-		final UserDetails userDetails = loadUserByUsername(userName);
+		String newUserName = null;
+
+		if (isEmail) {
+			newUserName = userRepo.findByEmail(userName).getUserName();
+		} else {
+			newUserName = userName;
+		}
+
+		authenticate(newUserName, userPassword);
+
+		final UserDetails userDetails = loadUserByUsername(newUserName);
 
 		String newGeneratedToken = jwtUtil.generateToken(userDetails);
 
-		AppUser user = userRepo.findById(userName).get();
+		AppUser user = userRepo.findById(newUserName).get();
 
 		return new JwtResponse(user, newGeneratedToken);
 	}

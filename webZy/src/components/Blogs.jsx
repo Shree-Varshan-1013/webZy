@@ -4,7 +4,7 @@ const Blogs = () => {
     return (
         <div>
             <Pricing/>
-            <section className="text-gray-600 body-font overflow-hidden dark:bg-slate-900" style={{backgroundImage:"url(/img/trio.svg)", backgroundSize:"cover", backgroundPositionY:"center"}}>
+            <section className="text-gray-600 body-font overflow-hidden dark:bg-slate-900" style={{backgroundImage:"url(/img/trio.svg)", backgroundSize:"cover", backgroundPositionY:"center"}}name="about">
                 <div className="container px-5 py-24 mx-auto backdrop-blur-lg">
                     <div className="flex flex-wrap -m-12">
                         <div className="p-12 md:w-1/2 flex flex-col items-start dark:text-caramel font-anuphan">

@@ -1,6 +1,6 @@
 const Pricing = () => {
     return (
-        <section className="text-gray-600 body-font overflow-hidden dark:bg-slate-900 backdrop-blur-lg" style={{ backgroundImage: "url(/img/bottom3.svg)", backgroundPositionY: "center" }}>
+        <section className="text-gray-600 body-font overflow-hidden dark:bg-slate-900 backdrop-blur-lg" style={{ backgroundImage: "url(/img/bottom3.svg)", backgroundPositionY: "center" }} name="pricing">
             <div className="container px-5 py-24 mx-auto backdrop-blur-lg">
                 <div className="flex flex-col text-center w-full mb-20">
                     <h1 className="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900 dark:text-white font-basker">Pricing</h1>

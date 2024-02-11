@@ -1,11 +1,66 @@
-import React from 'react'
-
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useFormik } from 'formik';
+import { signUpSchema } from '../../schemas';
+import { toast, Toaster } from 'sonner';
+import AdminService from '../../services/AdminService';
 const AddAdmin = () => {
 
-    
+    const navigate = useNavigate();
+
+    const initialState = {
+        "userFirstName": "",
+        "userLastName": "",
+        "userName": "",
+        "email": "",
+        "userPassword": "",
+        "confirmPassword": ""
+    };
+
+
+    const { values, errors, handleBlur, handleChange, handleSubmit, touched } =
+        useFormik({
+            initialValues: initialState,
+            validationSchema: signUpSchema,
+            onSubmit: (values, action) => {
+                console.log(values);
+                eventRegister(values);
+                action.resetForm();
+            },
+        });
+
+    const getToast = () => {
+        // toast('My toast message', {
+        //     action: {
+        //         label: "Close",
+        //         onClick: () => {
+        //             console.log("clicked");
+        //         },
+        //     }
+        // });
+        toast.loading('Validating.....');
+        setTimeout(() => {
+            toast.success('done');
+        }, 3000);
+    };
+
+    const eventRegister = async (values) => {
+
+        const res = await AdminService.registerNewAdmin(values);
+        console.log(res);
+
+        getToast();
+
+        setTimeout(() => {
+            toast.success("Successfully Signed In !")
+        }, 2000);
+
+    }
+
+
     return (
         <div className=" dark:bg-slate-900 w-full h-screen" style={{ backgroundImage: "url(/img/bottom3.svg)", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>
-            <div className="pl-4 pr-4">
+            <div className='pl-4 pr-4'>
                 <nav className="block w-full max-w-full bg-transparent text-white shadow-none rounded-xl transition-all px-0 py-1">
                     <div className="flex flex-col-reverse justify-between gap-6 md:flex-row md:items-center">
                         <div className="capitalize">
@@ -59,32 +114,66 @@ const AddAdmin = () => {
                         </div>
                     </div>
                 </nav>
-                <div className='w-full px-6 py-8 md:px-8 lg:w-1/2 lg:flex lg:justify-center lg:items-center'>
-                    <div className='lg:w-[80%] '>
+            </div>
+            <div className="pl-4 pr-4 flex justify-center">
+                <Toaster position='top-right' />
+                <div className='w-full px-6 md:px-8 lg:w-1/2 flex justify-center items-center'>
+                    <div className='lg:w-[100%]'>
                         <form onSubmit={handleSubmit}>
-                            <h2 className='text-2xl text-center text-gray-700 font-semibold font-anuphan dark:text-white'>Welcome</h2>
-                            <p className='mt-2 text-xl text-center text-gray-600 font-anuphan dark:text-white'>Join <span className='text-purple font-anuphan'>Webzy </span>community</p>
+                            <p className=' mb-5 text-xl text-center text-gray-600 font-anuphan dark:text-white'>Join <span className='text-purple font-anuphan'>Webzy </span>community</p>
                             <div className=''>
-                                <div className="mt-1">
-                                    <label className="block text-md mb-2 text-gray-700 dark:text-white font-anuphan">
-                                        UserName
-                                    </label>
-                                    <input
-                                        id="email"
-                                        type="text"
-                                        name="userName"
-                                        value={values.userName}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        className='dark:bg-slate-900 dark:text-white font-anuphan w-full py-2 rounded-lg border border-grey-200 text-grey-darker focus:outline-none focus:border-purple3 focus:ring focus:ring-purple3 focus:ring-opacity-20 pl-4'
-                                    />
+                                <div className="grid grid-cols-2 gap-4 pb-3">
+                                    <div className="col-span-1">
+                                        <label className="block text-md mb-2 text-gray-700 dark:text-white font-anuphan">
+                                            First Name
+                                        </label>
+                                        <input
+                                            id="userFirstName"
+                                            type="text"
+                                            name="userFirstName"
+                                            value={values.userFirstName}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            className='dark:bg-slate-900 dark:text-white font-anuphan w-full py-2 rounded-lg border border-grey-200 text-grey-darker focus:outline-none focus:border-purple3 focus:ring focus:ring-purple3 focus:ring-opacity-20 pl-4'
+                                        />
+                                        {errors.userFirstName && touched.userFirstName ? (<div className='text-red-500 text-sm font-anuphan'>{errors.userFirstName}</div>) : null}
+                                    </div>
+                                    <div className="col-span-1">
+                                        <label className="block text-md mb-2 text-gray-700 dark:text-white font-anuphan">
+                                        Last Name
+                                        </label>
+                                        <input
+                                            id="userLastName"
+                                            type="text"
+                                            name="userLastName"
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            value={values.userLastName}
+                                            className='dark:bg-slate-900 dark:text-white font-anuphan w-full py-2 rounded-lg border border-grey-200 text-grey-darker focus:outline-none focus:border-purple3 focus:ring focus:ring-purple3 focus:ring-opacity-20 pl-4'
+                                        />
+                                        {errors.userLastName && touched.userLastName ? (<div className='text-red-500 text-sm font-anuphan'>{errors.userLastName}</div>) : null}
+                                    </div>
                                 </div>
-                                {errors.userName && touched.userName ? (<div className='text-red-500 text-sm font-anuphan'>{errors.userName}</div>) : null}
-                                <div className='block mt-3'>
-                                    <label className="block text-md mb-2 text-gray-700 dark:text-white font-anuphan">
-                                        E-mail
-                                    </label>
-                                    <div className='mb-1'>
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="col-span-1">
+                                        <label className="block text-md mb-2 text-gray-700 dark:text-white font-anuphan">
+                                            Username
+                                        </label>
+                                        <input
+                                            id="userName"
+                                            type="text"
+                                            name="userName"
+                                            value={values.userName}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            className='dark:bg-slate-900 dark:text-white font-anuphan w-full py-2 rounded-lg border border-grey-200 text-grey-darker focus:outline-none focus:border-purple3 focus:ring focus:ring-purple3 focus:ring-opacity-20 pl-4'
+                                        />
+                                        {errors.userName && touched.userName ? (<div className='text-red-500 text-sm font-anuphan'>{errors.userName}</div>) : null}
+                                    </div>
+                                    <div className="col-span-1">
+                                        <label className="block text-md mb-2 text-gray-700 dark:text-white font-anuphan">
+                                            Email
+                                        </label>
                                         <input
                                             id="email"
                                             type="email"
@@ -94,8 +183,8 @@ const AddAdmin = () => {
                                             value={values.email}
                                             className='dark:bg-slate-900 dark:text-white font-anuphan w-full py-2 rounded-lg border border-grey-200 text-grey-darker focus:outline-none focus:border-purple3 focus:ring focus:ring-purple3 focus:ring-opacity-20 pl-4'
                                         />
+                                        {errors.email && touched.email ? (<div className='text-red-500 text-sm font-anuphan'>{errors.email}</div>) : null}
                                     </div>
-                                    {errors.email && touched.email ? (<div className='text-red-500 text-sm font-anuphan'>{errors.email}</div>) : null}
                                 </div>
                                 <div className='block mt-3'>
                                     <label className="block text-md mb-2 text-gray-700 dark:text-white font-anuphan">
@@ -131,13 +220,8 @@ const AddAdmin = () => {
                                     </div>
                                     {errors.confirmPassword && touched.confirmPassword ? (<div className='text-red-500 text-sm font-anuphan'>{errors.confirmPassword}</div>) : null}
                                 </div>
-                                <button type='submit' className="flex items-center justify-center mt-auto rounded w-full py-2.5 text-center overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300 font-anuphan dark:text-white">Sign Up
+                                <button type='submit' className="flex items-center justify-center mt-auto rounded w-full py-2.5 text-center overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300 font-anuphan dark:text-white">Add
                                 </button>
-                                <div className='flex items-center justify-between mt-4'>
-                                    <span className='w-1/5 border'></span>
-                                    <a className='text-sm font-medium text-gray-500 font-anuphan dark:text-white cursor-pointer' onClick={() => navigate("/sign-in")}>DO YOU HAVE AN ACCOUNT?</a>
-                                    <span className='w-1/5 border'></span>
-                                </div>
                             </div>
                         </form>
                     </div>

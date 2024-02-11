@@ -25,7 +25,7 @@ const AdminSideBarContent = ({ activeLink }) => {
                 animate={{ opacity: 1, y: 0 }} // Move up to original position
                 exit={{ opacity: 0, y: -50 }} // Exit by moving back down
                 transition={{ duration: 0.5 }}
-                className="w-full block dark:bg-slate-900 overflow-hidden">
+                className="w-full block dark:bg-slate-900">
                 {content}
             </motion.div>
         </AnimatePresence>

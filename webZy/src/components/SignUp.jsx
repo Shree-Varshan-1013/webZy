@@ -50,7 +50,6 @@ const SignUp = () => {
         const res = await Authentication.register(values);
         console.log(res);
 
-
         getToast();
 
         setTimeout(() => {
@@ -72,7 +71,7 @@ const SignUp = () => {
                     <div className="items-center hidden lg:flex lg:w-[40%] justify-center">
                         <img src="/img/welcome.svg" width="85%" />
                     </div>
-                    <div className='w-full px-6 py-8 md:px-8 lg:w-1/2 lg:flex lg:justify-center lg:items-center'>
+                    <div className='w-full px-6 py-[80px] md:px-8 lg:w-1/2 lg:flex lg:justify-center lg:items-center'>
                         <div className='lg:w-[80%] '>
                             <form onSubmit={handleSubmit}>
                                 <h2 className='text-2xl text-center text-gray-700 font-semibold font-anuphan dark:text-white'>Welcome</h2>

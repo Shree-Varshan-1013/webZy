@@ -5,7 +5,7 @@ const ADMIN_API_BASE_URL = "http://localhost:2018/api/v1/admin";
 class AdminService {
   getUsersInfos(token) {
     return axios.get(
-      ADMIN_API_BASE_URL + "/getAllUsers/",
+      ADMIN_API_BASE_URL + "/get-all-users",
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -13,6 +13,17 @@ class AdminService {
       }
     );
   }
+  registerNewAdmin(token, data) {
+    return axios.post(
+        ADMIN_API_BASE_URL + "/register-new-admin",
+        data,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+    );
+}
   
   getParticularProviderById(token, username) {
     return axios.get(

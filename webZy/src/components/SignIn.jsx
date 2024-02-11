@@ -96,7 +96,7 @@ const SignIn = () => {
                     <div className="items-center hidden lg:flex lg:w-[40%] justify-center">
                         <img src="/img/login-lap.svg" width="85%" />
                     </div>
-                    <div className='w-full px-6 py-8 md:px-8 lg:w-1/2 lg:flex justify-center items-center'>
+                    <div className='w-full px-6 py-24 md:px-8 lg:w-1/2 lg:flex justify-center items-center'>
                         <div className='lg:w-[75%]'>
                             <form onSubmit={handleSubmit}>
                                 <h2 className='text-2xl text-center text-gray-700 font-semibold font-anuphan dark:text-white'>Welcome back</h2>

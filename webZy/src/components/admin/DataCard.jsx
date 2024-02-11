@@ -1,8 +1,14 @@
 import React from 'react'
 import Chart from "react-apexcharts";
-import { useSelector } from 'react-redux';
-import MyChart from './MyChart';
+import {useNavigate} from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import MyChart from '../MyChart';
+import { toggleLogin, deleteRole } from '../../config/GlobalSlice';
 const DataCard = () => {
+
+    const dispatch = useDispatch();
+
+    const navigate = useNavigate();
 
     const { isDark } = useSelector((state) => state.global);
 
@@ -25,9 +31,18 @@ const DataCard = () => {
         ]
     };
 
+    const eventLogout = () => {
+        getToast();
+        setTimeout(() => {
+            dispatch(toggleLogin());
+            dispatch(deleteRole());
+            navigate('/');
+        }, 5000);
+    }
+
     return (
         <div className=" dark:bg-slate-900 w-full h-screen" style={{ backgroundImage: "url(/img/bottom3.svg)", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>
-            <div className="p-4">
+            <div className="pl-4 pr-4">
                 <nav className="block w-full max-w-full bg-transparent text-white shadow-none rounded-xl transition-all px-0 py-1">
                     <div className="flex flex-col-reverse justify-between gap-6 md:flex-row md:items-center">
                         <div className="capitalize">
@@ -54,10 +69,8 @@ const DataCard = () => {
                                 </span>
                             </button>
                             <a href="#">
-                                <button className="middle none font-sans font-bold center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-gray-500 hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30 hidden items-center gap-1 px-4 xl:flex" type="button">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="h-5 w-5 text-blue-gray-500">
-                                        <path fillRule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clipRule="evenodd"></path>
-                                    </svg>Sign In</button>
+                                <button onClick={() => eventLogout()} className="middle none font-sans font-bold center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-gray-500 hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30 hidden items-center gap-1 px-4 xl:flex" type="button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v1" /></svg><span className="font-anuphan">Logout</span></button>
                                 <button className="relative middle none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs text-gray-500 hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30 grid xl:hidden" type="button">
                                     <span className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="h-5 w-5 text-blue-gray-500">

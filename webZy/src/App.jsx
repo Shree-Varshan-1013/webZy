@@ -10,8 +10,9 @@ import { useSelector } from 'react-redux';
 import PageNotFound from './components/pagenotFound';
 import './App.css';
 import Loader from './common/Loader';
-import AdminDashboard from './components/AdminDashboard'
+import AdminDashboard from './components/admin/AdminDashboard'
 import SignUp from './components/SignUp'  
+import Profile from './components/Profile'
 function App() {
 
   const location = useLocation();
@@ -49,6 +50,7 @@ function App() {
           <Route exact path="/contact" element={<Contact />} />
           <Route exact path="/sign-in" element={<SignIn />} />
           <Route exact path="/sign-up" element={<SignUp />} />
+          <Route exact path="/profile" element={<Profile />} />
           <Route exact path="*" element={<PageNotFound />} />
         </Routes>
       </AnimatePresence>

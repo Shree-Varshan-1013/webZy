@@ -1,6 +1,11 @@
-import Toggle from './Toggle'
+import Toggle from '../Toggle'
 
-const AdminSideBar = () => {
+const AdminSideBar = ({ setActiveLink }) => {
+
+    const handleLinkClick = (link) => {
+        setActiveLink(link);
+    };
+
     return (
         <div className="flex flex-col items-center w-40 h-screen overflow-hidden text-gray-400 bg-white dark:bg-slate-900 font-anuphan" style={{ backgroundImage: "url(/img/adminSideNavbar.svg)", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>
             <a className="flex items-center w-full px-3 mt-3" href="#">
@@ -16,23 +21,21 @@ const AdminSideBar = () => {
                             <Toggle />
                         </div>
                     </a>
-                    <a className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300" href="#">
+                    <a onClick={() => handleLinkClick("link1")} className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300" href="#">
                         <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                         </svg>
                         <span className="ml-2 text-sm font-medium text-black dark:text-caramel">Dasboard</span>
                     </a>
-                    <a className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300" href="#">
+                    <a onClick={() => handleLinkClick("link3")} className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300" href="#">
                         <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
-                        <span className="ml-2 text-sm font-medium text-black dark:text-caramel">Search</span>
+                        <span  className="ml-2 text-sm font-medium text-black dark:text-caramel">Search</span>
                     </a>
-                    <a className="flex items-center w-full h-12 px-3 mt-2 text-gray-200 hover:bg-gray-700 hover:text-white rounded" href="#">
-                        <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                        </svg>
-                        <span className="ml-2 text-sm font-medium text-black dark:text-caramel ">Insights</span>
+                    <a onClick={() => handleLinkClick("link2")} className="flex items-center w-full h-12 px-3 mt-2 text-gray-200 hover:bg-gray-700 hover:text-white rounded" href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="currentColor" fillRule="evenodd" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2s10 4.477 10 10m-7-3a3 3 0 1 1-6 0a3 3 0 0 1 6 0m-3 11.5a8.46 8.46 0 0 0 4.807-1.489c.604-.415.862-1.205.51-1.848C16.59 15.83 15.09 15 12 15c-3.09 0-4.59.83-5.318 2.163c-.351.643-.093 1.433.511 1.848A8.46 8.46 0 0 0 12 20.5" clipRule="evenodd"/></svg>
+                        <span className="ml-2 text-sm font-medium text-black dark:text-caramel ">Users</span>
                     </a>
                     <a className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300" href="#">
                         <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -73,4 +76,4 @@ const AdminSideBar = () => {
     )
 }
 
-export default AdminSideBar
+export default AdminSideBar;

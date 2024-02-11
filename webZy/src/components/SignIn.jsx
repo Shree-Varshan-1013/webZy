@@ -15,20 +15,13 @@ const SignIn = () => {
 
     const dispatch = useDispatch();
 
+
     const initialState = {
-        userName: "",
-        userPassword: "",
-    };
+        "userName":"",
+        "userPassword":"",
+    }
 
-    const initialUserData = {
-        "userFirstName": "",
-        "userLastName": "",
-        "userName": ""
-    };
-
-    const [userData, setUser] = useState(initialUserData);
-
-    const { values, errors, handleBlur, handleChange, handleSubmit, touched } =
+    const { values, errors, handleBlur, handleChange, handleSubmit } =
         useFormik({
             initialValues: initialState,
             validationSchema: signInSchema,
@@ -63,23 +56,11 @@ const SignIn = () => {
             const token = response.data.jwtToken;
             const role = response.data.user.role[0].roleName;
 
-            console.log(user)
-            console.log(token)
-            console.log(role)
-
-            setUser({
-                "userFirstName": user.userFirstName,
-                "userLastName": user.userLastName,
-                "userName": user.userName,
-            });
-
-            console.log(userData)
-
             getToast();
 
             setTimeout(() => {
                 toast.success("Successfully Signed In !")
-                dispatch(addUserDetails(userData));
+                dispatch(addUserDetails(user));
                 dispatch(toggleLogin());
                 dispatch(addRole(role));
                 dispatch(addToken(token));

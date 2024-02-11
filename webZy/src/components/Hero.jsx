@@ -4,7 +4,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 const Hero = () => {
     return (
-        <section className="relative text-gray-600 body-font dark:bg-slate-900" style={{ backgroundImage: "url(/img/banner.svg)", backgroundSize: "cover" }}>
+        <section className="relative text-gray-600 body-font dark:bg-slate-900 pt-[70px]" style={{ backgroundImage: "url(/img/banner.svg)", backgroundSize: "cover" }}>
             <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
                 <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 mb-10 md:mb-0">
                     <img className="object-cover object-center rounded" alt="hero" src="/img/tree-swing.svg" />

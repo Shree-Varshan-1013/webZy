@@ -15,7 +15,6 @@ public class AppUser {
 	
 	public AppUser() { }
 	
-	
 	public AppUser(String userName, String userFirstName, String userLastName, String userPassword, Set<Role> role, String email) {
 		super();
 		this.userName = userName;

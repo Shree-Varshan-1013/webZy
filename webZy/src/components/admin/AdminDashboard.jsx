@@ -15,7 +15,7 @@ const AdminDashboard = ({ role }) => {
         <div className="block h-150">
             {
                 role === "ADMIN" ? (
-                    <div className="flex flex-row">
+                    <div className="flex flex-row dark:bg-slate-900" style={{ backgroundImage: "url(/img/bottom3.svg)", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>
                         <AdminSideBar setActiveLink={setActiveLink} />
                         <AdminSideBarContent activeLink={activeLink} />
                     </div>

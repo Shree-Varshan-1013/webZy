@@ -1,0 +1,17 @@
+version: '3'
+services:
+
+  webzy-back-end:
+    image: "sam:latest"
+    container_name: webzy-end
+    ports:
+      - "2018:2018"
+    environment:
+      - SPRING.PROFILES.ACTIVE=default
+  webzy-front-end:
+    image: "webzy-ui:0.0.1"
+    container_name: webzy-front-end
+    ports:
+      - "5713:5713"
+    links:
+      - webzy-back-end

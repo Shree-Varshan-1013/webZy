@@ -7,12 +7,12 @@ import { AnimatePresence } from "framer-motion";
 import Contact from './components/Contact'
 import SignIn from './components/SignIn'
 import { useSelector } from 'react-redux';
-import PageNotFound from './components/pagenotFound';
 import './App.css';
 import Loader from './common/Loader';
 import AdminDashboard from './components/admin/AdminDashboard'
 import SignUp from './components/SignUp'  
 import Profile from './components/Profile'
+import PageNotFound from './components/PageNotFound';
 function App() {
 
   const location = useLocation();

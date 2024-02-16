@@ -14,27 +14,27 @@ const Pricing = () => {
                     <div className="p-4 xl:w-1/4 md:w-1/2 w-full">
                         <div className="h-full p-6 rounded-lg border-2 border-gray-400 flex flex-col relative overflow-hidden">
                             <h2 className="text-sm tracking-widest title-font mb-1 font-medium">START</h2>
-                            <h1 className="text-5xl text-gray-900 pb-4 mb-4 border-b border-gray-200 leading-none">Free</h1>
+                            <h1 className="text-5xl text-gray-900 dark:text-white pb-4 mb-4 border-b border-gray-200 leading-none">Free</h1>
                             <p className="flex items-center text-gray-600 mb-2">
                                 <span className="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
                                     <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" className="w-3 h-3" viewBox="0 0 24 24">
                                         <path d="M20 6L9 17l-5-5"></path>
                                     </svg>
-                                </span>Vexillologist pitchfork
+                                </span><span className="dark:text-gray-400">Shree</span>
                             </p>
                             <p className="flex items-center text-gray-600 mb-2">
                                 <span className="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
                                     <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" className="w-3 h-3" viewBox="0 0 24 24">
                                         <path d="M20 6L9 17l-5-5"></path>
                                     </svg>
-                                </span>Tumeric plaid portland
+                                </span><span className="dark:text-gray-400">sample</span>
                             </p>
                             <p className="flex items-center text-gray-600 mb-6">
                                 <span className="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
                                     <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" className="w-3 h-3" viewBox="0 0 24 24">
                                         <path d="M20 6L9 17l-5-5"></path>
                                     </svg>
-                                </span>Mixtape chillwave tumeric
+                                </span><span className="dark:text-gray-400">Hello</span>
                             </p>
                             <button className="flex items-center mt-auto rounded px-5 py-2.5 overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300">Button
                                 <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 ml-auto" viewBox="0 0 24 24">
@@ -49,7 +49,7 @@ const Pricing = () => {
                             <span className="bg-purple text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl">POPULAR</span>
                             <h2 className="text-sm tracking-widest title-font mb-1 font-medium">PRO</h2>
                             <h1 className="text-5xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
-                                <span>$38</span>
+                                <span className="dark:text-white">$38</span>
                                 <span className="text-lg ml-1 font-normal text-gray-500">/mo</span>
                             </h1>
                             <p className="flex items-center text-gray-600 mb-2">
@@ -64,7 +64,7 @@ const Pricing = () => {
                                     <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" className="w-3 h-3" viewBox="0 0 24 24">
                                         <path d="M20 6L9 17l-5-5"></path>
                                     </svg>
-                                </span>Tumeric plaid portland
+                                </span><span className="dark:text-gray-400">Hello</span>
                             </p>
                             <p className="flex items-center text-gray-600 mb-2">
                                 <span className="w-4 h-4 mr-2 inline-flex items-center justify-center bg-gray-400 text-white rounded-full flex-shrink-0">
@@ -92,7 +92,7 @@ const Pricing = () => {
                         <div className="h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden">
                             <h2 className="text-sm tracking-widest title-font mb-1 font-medium">BUSINESS</h2>
                             <h1 className="text-5xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
-                                <span>$56</span>
+                                <span className="dark:text-white">$56</span>
                                 <span className="text-lg ml-1 font-normal text-gray-500">/mo</span>
                             </h1>
                             <p className="flex items-center text-gray-600 mb-2">
@@ -142,7 +142,7 @@ const Pricing = () => {
                         <div className="h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden">
                             <h2 className="text-sm tracking-widest title-font mb-1 font-medium">SPECIAL</h2>
                             <h1 className="text-5xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
-                                <span>$72</span>
+                                <span className="dark:text-white">$72</span>
                                 <span className="text-lg ml-1 font-normal text-gray-500">/mo</span>
                             </h1>
                             <p className="flex items-center text-gray-600 mb-2">

@@ -1,5 +1,8 @@
-FROM openjdk:11
+FROM eclipse-temurin
 
-ADD target/jwt-0.0.1-SNAPSHOT.jar app.jar
+COPY target/*.jar testapp.jar
 
-ENTRYPOINT [ "java", "-jar", "app.jar"]
+EXPOSE 2018
+
+ENTRYPOINT ["java", "-jar", "testapp.jar"]
+

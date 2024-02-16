@@ -9,4 +9,7 @@ public interface AdminService {
     public List<AppUser> getAllUsers();
 
     public AppUser registerNewAdmin(AppUser user);
+
+    public List<AppUser> searchUsers(String searchTerm);
+
 }

@@ -10,7 +10,11 @@ public class JwtResponse {
 		this.jwtToken = jwtToken;
 	}
 	
-	private AppUser user;
+	public JwtResponse(String string) {
+		this.jwtToken = "Error: " + string;
+    }
+
+    private AppUser user;
 	private String jwtToken;
 	
 	public AppUser getUser() {

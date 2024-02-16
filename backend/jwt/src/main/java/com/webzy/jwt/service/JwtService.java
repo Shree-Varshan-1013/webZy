@@ -21,6 +21,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.webzy.jwt.dao.AppUserRepo;
@@ -39,6 +41,10 @@ public class JwtService implements UserDetailsService {
 	private JwtUtil jwtUtil;
 
 	public static AuthenticationManager authenticationManager = null;
+
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
 	@Bean
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
@@ -69,14 +75,18 @@ public class JwtService implements UserDetailsService {
 		}
 
 		authenticate(newUserName, userPassword);
-
+		
 		final UserDetails userDetails = loadUserByUsername(newUserName);
 
-		String newGeneratedToken = jwtUtil.generateToken(userDetails);
+		if(userDetails != null && passwordEncoder().matches(userPassword, userDetails.getPassword())){
+			String newGeneratedToken = jwtUtil.generateToken(userDetails);
+	
+			AppUser user = userRepo.findById(newUserName).get();
 
-		AppUser user = userRepo.findById(newUserName).get();
+			return new JwtResponse(user, newGeneratedToken);
+			}
 
-		return new JwtResponse(user, newGeneratedToken);
+		return new JwtResponse("Invalid Credentials !");
 	}
 
 	@Override

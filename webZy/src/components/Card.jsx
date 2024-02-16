@@ -10,7 +10,6 @@ const Card = () => {
                 <button className='px-4 py-2 bg-red-500 rounded focus:outline-none hover:bg-red-600'>Cancel</button>
                 <button className='px-4 py-2 rounded bg-green-500 focus:outline-none hover:bg-green-600'>Accept</button>
             </div>
-           
         </div> 
     )
 }

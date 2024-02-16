@@ -1,7 +1,9 @@
 package com.webzy.jwt.service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +35,7 @@ public class AdminServiceImpl implements AdminService {
     public List<AppUser> getAllUsers() {
         return appUserRepo.findAll();
     }
-    
+
     @Override
     public AppUser registerNewAdmin(AppUser user) {
         Role role = roleRepo.findById("ADMIN").get();
@@ -44,4 +46,32 @@ public class AdminServiceImpl implements AdminService {
         return appUserRepo.save(user);
     }
 
+    @Override
+    public List<AppUser> searchUsers(String searchTerm) {
+        System.out.println("inside search=======");
+        if (searchTerm != null && !searchTerm.isEmpty()) {
+            System.out.println("inside -if search=======");
+            AppUser emailUsers = appUserRepo.findByEmail(searchTerm);
+            List<AppUser> usernames = appUserRepo.findByUserName(searchTerm);
+            System.out.println(usernames + "=======");
+            // Set<Role> roles = new HashSet<>();
+            // Role myRole = new Role();
+            // myRole.setRoleName(searchTerm.toUpperCase());
+            // roles.add(myRole);
+            List<AppUser> roleUsers = appUserRepo.findByRole(searchTerm);
+
+            if (!Objects.isNull(emailUsers)) {
+                List<AppUser> r = new ArrayList<>();
+                r.add(emailUsers);
+                return r;
+            }
+            else if(!usernames.isEmpty()) {
+                return usernames;
+            }
+            else if(!roleUsers.isEmpty()){
+                return roleUsers;
+            }
+        }
+        return appUserRepo.findAll();
+    }
 }

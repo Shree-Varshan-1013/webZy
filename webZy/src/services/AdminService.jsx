@@ -27,7 +27,7 @@ class AdminService {
   
   getParticularProviderById(token, username) {
     return axios.get(
-      ADMIN_API_BASE_URL + "/get/" + username ,
+      ADMIN_API_BASE_URL + "/search/" + username ,
       {
         headers: {
           Authorization: `Bearer ${token}`,

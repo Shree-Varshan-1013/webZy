@@ -10,8 +10,8 @@ import com.webzy.jwt.entity.JwtRequest;
 import com.webzy.jwt.entity.JwtResponse;
 import com.webzy.jwt.service.JwtService;
 
+@CrossOrigin(origins = "http://localhost:5713")
 @RestController
-@CrossOrigin
 public class JwtController {
 
 	@Autowired

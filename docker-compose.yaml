@@ -2,16 +2,25 @@ version: '3'
 services:
 
   webzy-back-end:
-    image: "sam:latest"
-    container_name: webzy-end
+    image: "webzy-backend:0.0.1"
+    container_name: webzy-back-end
     ports:
       - "2018:2018"
     environment:
       - SPRING.PROFILES.ACTIVE=default
+    networks:
+      - webzy-network
+
   webzy-front-end:
     image: "webzy-ui:0.0.1"
     container_name: webzy-front-end
     ports:
       - "5713:5713"
-    links:
+    depends_on:
       - webzy-back-end
+    networks:
+      - webzy-network
+
+networks:
+  webzy-network:
+    driver: bridge

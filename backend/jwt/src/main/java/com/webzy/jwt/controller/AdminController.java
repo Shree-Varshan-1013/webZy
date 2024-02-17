@@ -2,7 +2,6 @@ package com.webzy.jwt.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,13 +13,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.webzy.jwt.entity.AppUser;
 import com.webzy.jwt.service.AdminServiceImpl;
+
+import lombok.RequiredArgsConstructor;
+
 @CrossOrigin(origins = "http://localhost:5713")
 @RestController
 @RequestMapping("api/v1/admin")
+@RequiredArgsConstructor
 public class AdminController {
 
-    @Autowired
-    private AdminServiceImpl adminService;
+    private final AdminServiceImpl adminService;
 
     @GetMapping("/get-all-users")
     @PreAuthorize("hasRole('ADMIN')")

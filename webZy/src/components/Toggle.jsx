@@ -10,7 +10,6 @@ const Toggle = () => {
 
     useEffect(() => {
         const storedTheme = localStorage.getItem('isDarkmode');
-        // dispatch(toggleDarkMode);
         setIsDarkmode(storedTheme === 'true');
     }, []);
     
@@ -20,7 +19,12 @@ const Toggle = () => {
     }, [isDarkmode]);
     
     const toggleTheme = () => {
-        dispatch(toggleDarkMode);
+        if(isDarkmode){
+            dispatch(toggleDarkMode(false));
+        }
+        else{
+            dispatch(toggleDarkMode(true));
+        }
         setIsDarkmode(!isDarkmode);
     };
 

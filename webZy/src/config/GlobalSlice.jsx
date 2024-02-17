@@ -17,7 +17,7 @@ const globalSlice = createSlice({
             state.isLoggedIn = !state.isLoggedIn;
         },
         toggleDarkMode: (state, action) => {
-            state.isDark = !state.isDark;
+            state.isDark = action.payload;
         },
         addUser: (state, action) => {
             state.user = action.payload;

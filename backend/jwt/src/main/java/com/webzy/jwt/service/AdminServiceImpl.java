@@ -15,17 +15,17 @@ import com.webzy.jwt.dao.RoleRepo;
 import com.webzy.jwt.entity.AppUser;
 import com.webzy.jwt.entity.Role;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class AdminServiceImpl implements AdminService {
 
-    @Autowired
-    private AppUserRepo appUserRepo;
+    private final AppUserRepo appUserRepo;
 
-    @Autowired
-    private RoleRepo roleRepo;
+    private final RoleRepo roleRepo;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     public String getEncodedPassword(String password) {
         return passwordEncoder.encode(password);
@@ -52,7 +52,7 @@ public class AdminServiceImpl implements AdminService {
         if (searchTerm != null && !searchTerm.isEmpty()) {
             System.out.println("inside -if search=======");
             AppUser emailUsers = appUserRepo.findByEmail(searchTerm);
-            List<AppUser> usernames = appUserRepo.findByUserName(searchTerm);
+            AppUser usernames = appUserRepo.findByUserName(searchTerm);
             System.out.println(usernames + "=======");
             // Set<Role> roles = new HashSet<>();
             // Role myRole = new Role();
@@ -65,8 +65,10 @@ public class AdminServiceImpl implements AdminService {
                 r.add(emailUsers);
                 return r;
             }
-            else if(!usernames.isEmpty()) {
-                return usernames;
+            else if(!Objects.isNull(usernames)) {
+                List<AppUser> r = new ArrayList<>();
+                r.add(usernames);
+                return r;
             }
             else if(!roleUsers.isEmpty()){
                 return roleUsers;

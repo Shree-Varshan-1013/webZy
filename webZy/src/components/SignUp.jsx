@@ -1,14 +1,16 @@
-import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Toaster, toast } from 'sonner';
 import { signUpSchema } from '../schemas';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { FaCheck } from 'react-icons/fa';
 import Authentication from '../services/auth/Authentication';
+import { useSelector } from 'react-redux';
 const SignUp = () => {
 
     const navigate = useNavigate();
+
+    const { isDark } = useSelector((state) => state.global);
 
     const initialState = {
         "userName": "",
@@ -17,7 +19,6 @@ const SignUp = () => {
         "confirmPassword": ""
     };
 
-    const [userData, setUser] = useState(initialState);
 
     const { values, errors, handleBlur, handleChange, handleSubmit, touched } =
         useFormik({
@@ -30,33 +31,42 @@ const SignUp = () => {
             },
         });
 
+    const eventRegister = async (values) => {
+        try {
+            const data = {
+                userName: values.userName,
+                email: values.email,
+                userPassword: values.userPassword
+            }
+            console.log(values);
+            const res = await Authentication.register(data);
+            console.log(res);
+
+            toast.loading('Registering Please wait !');
+            setTimeout(() => {
+                toast.success("Successfully Registered !", {
+                    icon: <FaCheck style={{ color: "green", fontSize: "1rem" }} />
+                });
+                setTimeout(() => {
+                    navigate('/sign-in');
+                }, 2000);
+            }, 2000);
+        }
+        catch (err) {
+            toast.loading('Registering Please wait !');
+            setTimeout(() => {
+                toast.error('Email or Username already Exists !');
+            }, 4000);
+        }
+    }
+
     const getToast = () => {
-        // toast('My toast message', {
-        //     action: {
-        //         label: "Close",
-        //         onClick: () => {
-        //             console.log("clicked");
-        //         },
-        //     }
-        // });
+
         toast.loading('Validating.....');
         setTimeout(() => {
             toast.success('done');
         }, 3000);
     };
-
-    const eventRegister = async (values) => {
-
-        const res = await Authentication.register(values);
-        console.log(res);
-
-        getToast();
-
-        setTimeout(() => {
-            toast.success("Successfully Signed In !")
-        }, 2000);
-
-    }
 
     return (
         <motion.div
@@ -66,7 +76,7 @@ const SignUp = () => {
             transition={{ duration: 1 }}
         >
             <div className='dark:bg-slate-900'>
-                <Toaster position='top-right' />
+                <Toaster position="top-center" theme="light" visibleToasts={2} richColors/>
                 <div className='flex max-w-lg lg:justify-between mx-auto overflow-hidden bg-white dark:bg-slate-900 rounded-lg lg:space-x-8 lg:max-w-5xl'>
                     <div className="items-center hidden lg:flex lg:w-[40%] justify-center">
                         <img src="/img/welcome.svg" width="85%" />
@@ -82,7 +92,7 @@ const SignUp = () => {
                                             UserName
                                         </label>
                                         <input
-                                            id="email"
+                                            id="userName"
                                             type="text"
                                             name="userName"
                                             value={values.userName}
@@ -91,7 +101,7 @@ const SignUp = () => {
                                             className='dark:bg-slate-900 dark:text-white font-anuphan w-full py-2 rounded-lg border border-grey-200 text-grey-darker focus:outline-none focus:border-purple3 focus:ring focus:ring-purple3 focus:ring-opacity-20 pl-4'
                                         />
                                     </div>
-                                    {errors.userName && touched.userName ? ( <div className='text-red-500 text-sm font-anuphan'>{errors.userName}</div>) : null }
+                                    {errors.userName && touched.userName ? (<div className='text-red-500 text-sm font-anuphan'>{errors.userName}</div>) : null}
                                     <div className='block mt-3'>
                                         <label className="block text-md mb-2 text-gray-700 dark:text-white font-anuphan">
                                             E-mail
@@ -107,7 +117,7 @@ const SignUp = () => {
                                                 className='dark:bg-slate-900 dark:text-white font-anuphan w-full py-2 rounded-lg border border-grey-200 text-grey-darker focus:outline-none focus:border-purple3 focus:ring focus:ring-purple3 focus:ring-opacity-20 pl-4'
                                             />
                                         </div>
-                                        {errors.email && touched.email ? ( <div className='text-red-500 text-sm font-anuphan'>{errors.email}</div>) : null }
+                                        {errors.email && touched.email ? (<div className='text-red-500 text-sm font-anuphan'>{errors.email}</div>) : null}
                                     </div>
                                     <div className='block mt-3'>
                                         <label className="block text-md mb-2 text-gray-700 dark:text-white font-anuphan">
@@ -124,7 +134,7 @@ const SignUp = () => {
                                                 className='dark:bg-slate-900 dark:text-white font-anuphan w-full py-2 rounded-lg border border-grey-200 text-grey-darker focus:outline-none focus:border-purple3 focus:ring focus:ring-purple3 focus:ring-opacity-20 pl-4'
                                             />
                                         </div>
-                                        {errors.userPassword && touched.userPassword ? ( <div className='text-red-500 text-sm font-anuphan'>{errors.userPassword}</div>) : null }
+                                        {errors.userPassword && touched.userPassword ? (<div className='text-red-500 text-sm font-anuphan'>{errors.userPassword}</div>) : null}
                                     </div>
                                     <div className='block mt-3 mb-5'>
                                         <label className="block text-md mb-2 text-gray-700 dark:text-white font-anuphan">
@@ -132,7 +142,7 @@ const SignUp = () => {
                                         </label>
                                         <div className='mb-1'>
                                             <input
-                                                id="password"
+                                                id="confirmpassword"
                                                 type="password"
                                                 name="confirmPassword"
                                                 onChange={handleChange}
@@ -141,7 +151,7 @@ const SignUp = () => {
                                                 className='dark:bg-slate-900 dark:text-white font-anuphan w-full py-2 rounded-lg border border-grey-200 text-grey-darker focus:outline-none focus:border-purple3 focus:ring focus:ring-purple3 focus:ring-opacity-20 pl-4'
                                             />
                                         </div>
-                                        {errors.confirmPassword && touched.confirmPassword ? ( <div className='text-red-500 text-sm font-anuphan'>{errors.confirmPassword}</div>) : null }
+                                        {errors.confirmPassword && touched.confirmPassword ? (<div className='text-red-500 text-sm font-anuphan'>{errors.confirmPassword}</div>) : null}
                                     </div>
                                     <button type='submit' className="flex items-center justify-center mt-auto rounded w-full py-2.5 text-center overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300 font-anuphan dark:text-white">Sign Up
                                     </button>
@@ -150,6 +160,7 @@ const SignUp = () => {
                                         <a className='text-sm font-medium text-gray-500 font-anuphan dark:text-white cursor-pointer' onClick={() => navigate("/sign-in")}>DO YOU HAVE AN ACCOUNT?</a>
                                         <span className='w-1/5 border'></span>
                                     </div>
+                                    <button onClick={getToast}>Sampke</button>
                                 </div>
                             </form>
                         </div>

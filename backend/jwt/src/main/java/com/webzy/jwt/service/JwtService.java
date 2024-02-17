@@ -31,14 +31,15 @@ import com.webzy.jwt.entity.JwtRequest;
 import com.webzy.jwt.entity.JwtResponse;
 import com.webzy.jwt.util.JwtUtil;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class JwtService implements UserDetailsService {
 
-	@Autowired
-	private AppUserRepo userRepo;
-	
-	@Autowired
-	private JwtUtil jwtUtil;
+	private final AppUserRepo userRepo;
+
+	private final JwtUtil jwtUtil;
 
 	public static AuthenticationManager authenticationManager = null;
 
@@ -63,7 +64,7 @@ public class JwtService implements UserDetailsService {
 
 		String userName = jwtRequest.getUserName();
 		String userPassword = jwtRequest.getUserPassword();
-	
+
 		boolean isEmail = userName.contains("@");
 
 		String newUserName = null;
@@ -75,16 +76,16 @@ public class JwtService implements UserDetailsService {
 		}
 
 		authenticate(newUserName, userPassword);
-		
+
 		final UserDetails userDetails = loadUserByUsername(newUserName);
 
-		if(userDetails != null && passwordEncoder().matches(userPassword, userDetails.getPassword())){
+		if (userDetails != null && passwordEncoder().matches(userPassword, userDetails.getPassword())) {
 			String newGeneratedToken = jwtUtil.generateToken(userDetails);
-	
+
 			AppUser user = userRepo.findById(newUserName).get();
 
 			return new JwtResponse(user, newGeneratedToken);
-			}
+		}
 
 		return new JwtResponse("Invalid Credentials !");
 	}

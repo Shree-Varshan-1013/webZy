@@ -6,11 +6,13 @@ import org.springframework.stereotype.Service;
 import com.webzy.jwt.dao.RoleRepo;
 import com.webzy.jwt.entity.Role;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class RoleServiceImpl implements RoleService{
 	
-	@Autowired
-	private RoleRepo roleRepo;
+	private final RoleRepo roleRepo;
 
 	@Override
 	public Role registerNewRole(Role role) {

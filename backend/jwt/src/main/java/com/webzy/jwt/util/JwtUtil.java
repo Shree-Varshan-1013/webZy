@@ -1,7 +1,6 @@
 package com.webzy.jwt.util;
 
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
 import org.springframework.security.core.userdetails.UserDetails;

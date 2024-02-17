@@ -1,10 +1,12 @@
 package com.webzy.jwt.service;
 
+import org.springframework.http.ResponseEntity;
+
 import com.webzy.jwt.entity.AppUser;
 
 public interface UserService {
 	
-	AppUser registerNewUser(AppUser user);
+	ResponseEntity<?> registerNewUser(AppUser user);
 
 	AppUser findUserNameByEmail(String email);
 }

@@ -3,7 +3,7 @@ import Blogs from './Blogs'
 import Content from './Content'
 import Logos from './Logos'
 import { motion } from "framer-motion";
-import Pricing from './Pricing';
+import { Toaster } from 'sonner';
 import Gallery from './Gallery';
 
 const Home = () => {
@@ -15,6 +15,7 @@ const Home = () => {
       transition={{ duration: 1 }}
     >
       <Hero />
+       <Toaster position="top-center" theme="light" visibleToasts={2} richColors/>
       <Logos />
       <Content />
       <Gallery />

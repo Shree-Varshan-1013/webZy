@@ -30,12 +30,18 @@ const ProfileDropdown = () => {
 
     const getToast = () => {
         toast.loading("Logging you out !");
+        setTimeout(() => {
+            toast.success("Successfully logged out see you next time !");
+            dispatch(toggleLogin());
+            setTimeout(() => {
+                navigate('/');
+            }, 2000);
+        }, 2000);
     }
 
     const eventLogout = () => {
         getToast();
         setTimeout(() => {
-            dispatch(toggleLogin());
             dispatch(deleteRole());
             navigate('/');
         }, 5000);

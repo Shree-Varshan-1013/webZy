@@ -12,7 +12,7 @@ public interface AppUserRepo extends JpaRepository<AppUser, String> {
 
     // public List<AppUser> findByEmail(String email);
 
-    public List<AppUser> findByUserName(String userName);
+    public AppUser findByUserName(String userName);
 
     @Query(value = "SELECT u FROM app_user u JOIN u.app_user_role r ON r.role_id = ?1", nativeQuery = true)
     public List<AppUser> findByRole(String roleId);

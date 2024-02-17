@@ -1,8 +1,8 @@
 import * as Yup from 'yup';
 
 export const signUpSchema = Yup.object({
-    userFirstName:Yup.string().required("Please Enter the First Name !"),
-    userLastName:Yup.string().min(1).max(2).required("Please Enter the Last Name !"),
+    // userFirstName:Yup.string().required("Please Enter the First Name !"),
+    // userLastName:Yup.string().min(1).max(2).required("Please Enter the Last Name !"),
     userName:Yup.string().matches(/^[a-zA-Z0-9_]{6,16}$/).min(6).required("Please enter the username !"),
     email:Yup.string().email().required("Please Enter the valid Email !"),
     userPassword:Yup.string().min(6).max(15).required("Please enter the password !"),

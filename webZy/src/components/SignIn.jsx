@@ -92,7 +92,7 @@ const SignIn = () => {
         >
             <Toaster className='z-[9999]' position="top-center" theme="light" visibleToasts={2} richColors />
             <div className='block dark:bg-slate-900 sm:h-screen backdrop-blur-lg' style={{ backgroundImage: "url(/img/trio-new.svg)", backgroundSize: "cover" }}>
-                <div className='flex lg:justify-between w-full overflow-hidden bg-white dark:bg-slate-900 border-none p-10 backdrop-blur-lg' style={{ backgroundImage: "inherit", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>
+                <div className='flex lg:justify-between w-full overflow-hidden bg-white dark:bg-slate-900 border-none backdrop-blur-lg' style={{ backgroundImage: "inherit", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>
                     <div className="items-center hidden lg:flex lg:w-[40%] justify-center">
                         <img src="/img/login-lap.svg" width="85%" />
                     </div>

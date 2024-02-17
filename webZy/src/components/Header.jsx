@@ -10,8 +10,6 @@ const Header = () => {
     
     const { isLoggedIn } = useSelector((state) => state.global);
     
-    // const isLoggedIn  = true;
-
     return (
         <header className="text-gray-600 body-font sticky top-0 z-[1100] w-full font-anuphan dark:bg-slate-500 ">
             <div className="container mx-auto flex flex-wrap p-4 flex-col md:flex-row items-center absolute backdrop-blur bg-opacity-90 dark:bg-opacity-20">

@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { FaGalacticSenate } from "react-icons/fa";
 
 const initialState = {
     isLoggedIn: false,
-    isDark: true,
+    isDark: false,
     user: null,
     role: "PUBLIC",
     accessToken: null,

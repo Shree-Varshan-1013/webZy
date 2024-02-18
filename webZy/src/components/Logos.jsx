@@ -16,10 +16,10 @@ const Logos = () => {
                 <img src="../assets/devicon--postgresql.svg" />
                 <img src="../assets/logos--git.svg" />
                 <img src="../assets/logos--github-icon.svg" />
+                <img src="../assets/logos--visual-studio-code.svg" />
                 <img src="../assets/logos--postman.svg" />
                 <img src="../assets/logos--aws.svg" />
                 <img src="../assets/logos--aws-ec2.svg" />
-                <img src="../assets/logos--visual-studio-code.svg" />
             </div>
         </div>
     )

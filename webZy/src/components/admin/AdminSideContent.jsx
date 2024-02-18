@@ -5,15 +5,15 @@ import Search from './Search';
 import { motion, AnimatePresence } from 'framer-motion';
 import AddAdmin from './AddAdmin';
 
-const AdminSideBarContent = ({ activeLink }) => {
+const AdminSideBarContent = ({ activeLink, eventLogout }) => {
     const [content, setContent] = useState(null);
 
     useEffect(() => {
         const contentMap = {
-            link1: <DataCard />,
-            link2: <AddAdmin />,
-            link3: <UserData />,
-            link4: <Search />
+            link1: <DataCard eventLogout={eventLogout}/>,
+            link2: <AddAdmin eventLogout={eventLogout}/>,
+            link3: <UserData eventLogout={eventLogout}/>,
+            link4: <Search  eventLogout={eventLogout}/>
         };
         setContent(contentMap[activeLink]);
     }, [activeLink]);

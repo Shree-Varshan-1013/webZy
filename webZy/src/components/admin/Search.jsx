@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Search = () => {
+const Search = ({ eventLogout }) => {
     return (
         <div className=" dark:bg-slate-900 w-full h-screen" style={{ backgroundImage: "url(/img/bottom3.svg)", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>
             <div className="pl-4 pr-4">

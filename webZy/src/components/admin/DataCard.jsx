@@ -1,14 +1,9 @@
 import React from 'react'
 import Chart from "react-apexcharts";
-import {useNavigate} from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import MyChart from '../MyChart';
-import { toggleLogin, deleteRole } from '../../config/GlobalSlice';
-const DataCard = () => {
 
-    const dispatch = useDispatch();
-
-    const navigate = useNavigate();
+const DataCard = (eventLogout) => {
 
     const { isDark } = useSelector((state) => state.global);
 
@@ -30,15 +25,6 @@ const DataCard = () => {
             }
         ]
     };
-
-    const eventLogout = () => {
-        getToast();
-        setTimeout(() => {
-            dispatch(toggleLogin());
-            dispatch(deleteRole());
-            navigate('/');
-        }, 5000);
-    }
 
     return (
         <div className=" dark:bg-slate-900 w-full h-screen" style={{ backgroundImage: "url(/img/bottom3.svg)", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>

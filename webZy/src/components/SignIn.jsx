@@ -5,7 +5,7 @@ import { signInSchema } from "../schemas/index2";
 import Swal from "sweetalert2";
 import Authentication from '../services/auth/Authentication';
 import { Toaster, toast } from 'sonner';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addUserDetails, addToken, addRole, toggleLogin } from '../config/GlobalSlice';
 import { useNavigate } from 'react-router-dom';
 
@@ -14,6 +14,8 @@ const SignIn = () => {
     const navigate = useNavigate();
 
     const dispatch = useDispatch();
+
+    const { isDark } = useSelector((state) => state.global);
 
 
     const initialState = {
@@ -80,8 +82,9 @@ const SignIn = () => {
                 text: "Bad Credentials !",
             });
         }
-
     };
+
+    const imageUrl = isDark ? "/img/falls.svg" : "/img/falls-light.svg";
 
     return (
         <motion.div
@@ -91,8 +94,8 @@ const SignIn = () => {
             transition={{ duration: 1 }}
         >
             <Toaster className='z-[9999]' position="top-center" theme="light" visibleToasts={2} richColors />
-            <div className='block dark:bg-slate-900 sm:h-screen backdrop-blur-lg' style={{ backgroundImage: "url(/img/trio-new.svg)", backgroundSize: "cover" }}>
-                <div className='flex lg:justify-between w-full overflow-hidden bg-white dark:bg-slate-900 border-none backdrop-blur-lg' style={{ backgroundImage: "inherit", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>
+            <div className='block dark:bg-slate-900 sm:h-screen backdrop-blur-lg'>
+                <div className='flex lg:justify-between w-full overflow-hidden bg-white dark:bg-slate-900 border-none backdrop-blur-lg pt-10' style={{ backgroundImage: `url(${imageUrl})`, backgroundSize: "cover" }}>
                     <div className="items-center hidden lg:flex lg:w-[40%] justify-center">
                         <img src="/img/login-lap.svg" width="85%" />
                     </div>

@@ -68,6 +68,8 @@ const SignUp = () => {
         }, 3000);
     };
 
+    const imageUrl = isDark ? "/img/falls.svg" : "/img/falls-light.svg";
+
     return (
         <motion.div
             initial={{ opacity: 0 }}
@@ -75,9 +77,9 @@ const SignUp = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 1 }}
         >
-            <div className='dark:bg-slate-900'>
-                <Toaster position="top-center" theme="light" visibleToasts={2} richColors/>
-                <div className='flex max-w-lg lg:justify-between mx-auto overflow-hidden bg-white dark:bg-slate-900 rounded-lg lg:space-x-8 lg:max-w-5xl'>
+            <div className='dark:bg-slate-900' style={{ backgroundImage: `url(${imageUrl})`, backgroundSize: "cover" }}>
+                <Toaster position="top-center" theme="light" visibleToasts={2} richColors />
+                <div className='flex max-w-lg lg:justify-between mx-auto overflow-hidden bg-white dark:bg-slate-900 rounded-lg lg:space-x-8 lg:max-w-5xl' style={{background:"inherit"}}>
                     <div className="items-center hidden lg:flex lg:w-[40%] justify-center">
                         <img src="/img/welcome.svg" width="85%" />
                     </div>

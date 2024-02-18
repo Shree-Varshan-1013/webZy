@@ -4,7 +4,7 @@ import { FaRegEye } from "react-icons/fa";
 import AdminService from '../../services/AdminService';
 import { useSelector } from 'react-redux';
 
-const UserData = () => {
+const UserData = ({ eventLogout }) => {
 
     const { accessToken } = useSelector(state => state.global);
 

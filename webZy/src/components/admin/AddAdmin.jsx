@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import { signUpSchema } from '../../schemas';
 import { toast, Toaster } from 'sonner';
 import AdminService from '../../services/AdminService';
-const AddAdmin = () => {
+const AddAdmin = ({ eventLogout }) => {
 
     const navigate = useNavigate();
 
@@ -140,7 +140,7 @@ const AddAdmin = () => {
                                     </div>
                                     <div className="col-span-1">
                                         <label className="block text-md mb-2 text-gray-700 dark:text-white font-anuphan">
-                                        Last Name
+                                            Last Name
                                         </label>
                                         <input
                                             id="userLastName"

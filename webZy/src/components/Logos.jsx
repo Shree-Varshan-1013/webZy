@@ -1,6 +1,6 @@
 const Logos = () => {
     return (
-        <div className='logos'>
+        <div className='logos select-none'>
             <div className='logos-slide'>
                 <img src="../assets/logos--react.svg" />
                 <img src="../assets/logos--html-5.svg" />

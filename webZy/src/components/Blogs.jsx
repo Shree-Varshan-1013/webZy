@@ -4,7 +4,7 @@ const Blogs = () => {
     return (
         <div>
             <Pricing />
-            <section className="text-gray-600 body-font overflow-hidden dark:bg-slate-900" style={{ backgroundImage: "url(/img/trio.svg)", backgroundSize: "cover", backgroundPositionY: "center" }} name="about">
+            <section className="select-none text-gray-600 body-font overflow-hidden dark:bg-slate-900" style={{ backgroundImage: "url(/img/trio.svg)", backgroundSize: "cover", backgroundPositionY: "center" }} name="about">
                 <div className="container px-5 py-24 mx-auto backdrop-blur-lg">
                     <div className="flex flex-wrap -m-12">
                         <div className="p-12 md:w-1/2 flex flex-col items-start dark:text-caramel font-anuphan">
@@ -72,7 +72,7 @@ const Blogs = () => {
                     </div>
                 </div>
             </section>
-            <div className="relative isolate overflow-hidden bg-gray-900 py-16 sm:py-24 lg:py-32">
+            <div className="select-none relative isolate overflow-hidden bg-gray-900 py-16 sm:py-24 lg:py-32">
                 <div className="mx-auto max-w-7xl px-6 lg:px-8">
                     <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2">
                         <div className="max-w-xl lg:max-w-lg">

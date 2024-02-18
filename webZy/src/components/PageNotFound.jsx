@@ -6,7 +6,7 @@ const PageNotFound = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="w-full h-screen flex flex-col items-center justify-center dark:bg-slate-900 ">
+        <div className="select-none w-full h-screen flex flex-col items-center justify-center dark:bg-slate-900 ">
             <div className='flex flex-col sm:flex-col lg:flex-row justify-center items-center'>
                 <div className='lg:w-1/2 p-10'>
                     <img src='/img/404-light.svg' className='object-fit bg-cover' />

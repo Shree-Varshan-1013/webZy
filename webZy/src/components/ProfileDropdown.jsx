@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
 import { deleteRole, toggleLogin } from '../config/GlobalSlice';
+import { useSelector } from 'react-redux';
 
 const ProfileDropdown = () => {
 
@@ -13,6 +14,8 @@ const ProfileDropdown = () => {
     const navigate = useNavigate();
 
     const dropdownRef = useRef(null);
+
+    const { userDetails } = useSelector((state) => state.global);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -52,24 +55,24 @@ const ProfileDropdown = () => {
             <div className="lg:w-fit-content flex justify-end" ref={dropdownRef}>
                 <div className="relative inline-block">
                     <button className="flex h-12 w-12 items-center justify-center rounded-lg bg-slate-900 text-slate-100 ring-slate-100 transition hover:shadow-md hover:ring-2 overflow-hidden" onClick={() => setIsOpen(!isOpen)} >
-                        <img className="w-full object-cover" src="/assets/avatar.png" alt="Profile" />
+                        <span className="text-white text-4xl font-bold bg-purple3 w-full text-center h-full">{userDetails.userName ? userDetails.userName.charAt(0).toUpperCase() : 'Z'}</span>
                     </button>
                     {
                         isOpen && (<div className="absolute right-0 mt-3 flex w-60 flex-col gap-3 rounded-xl bg-slate-900 dark:bg-slate-800 p-4 text-slate-100 shadow-lg">
                             <div className="flex gap-3 items-center">
                                 <div className="flex items-center justify-center rounded-lg h-12 w-12 overflow-hidden border-2 border-slate-600">
-                                    <img className="w-full object-cover" src="/assets/avatar.png" alt="Profile" />
+                                    <span className="text-white text-4xl font-bold bg-purple3 w-full text-center h-full">{userDetails.userName ? userDetails.userName.charAt(0).toUpperCase() : 'Z'}</span>
                                 </div>
                                 <div>
                                     <div className="flex gap-1 text-sm font-semibold">
-                                        <span>Shree Varshan</span>
+                                        <span>{userDetails.userName}</span>
                                         <span className="text-sky-400">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="h-5 w-5">
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"></path>
                                             </svg>
                                         </span>
                                     </div>
-                                    <div className="text-xs text-slate-400">Admin</div>
+                                    <div className="text-xs text-slate-400">{userDetails.role[0].roleName}</div>
                                 </div>
                             </div>
                             <div className="border-t border-slate-500/30"></div>

@@ -116,7 +116,6 @@ const AddAdmin = ({ eventLogout }) => {
                 </nav>
             </div>
             <div className="pl-4 pr-4 flex justify-center">
-                <Toaster position='top-right' />
                 <div className='w-full px-6 md:px-8 lg:w-1/2 flex justify-center items-center'>
                     <div className='lg:w-[100%]'>
                         <form onSubmit={handleSubmit}>

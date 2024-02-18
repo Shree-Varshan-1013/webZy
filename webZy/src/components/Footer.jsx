@@ -17,8 +17,8 @@ const Footer = () => {
                         </svg>
                         <span onClick={() => navigate('/')} className="cursor-pointer ml-3 text-xl color-caramel dark:text-white font-anuphan">WebZy</span>
                     </a>
-                    <p className="text-sm text-gray-500 sm:ml-6 sm:mt-0 mt-4 font-anuphan">© 2023 WebZy —
-                        <a href="https://twitter.com/knyttneve"  rel="noopener noreferrer" className="text-gray-600 ml-1 font-anuphan" target="_blank">@frozenFlames</a>
+                    <p className="text-sm text-gray-500 sm:ml-6 sm:mt-0 mt-4 font-anuphan dark:text-white">© 2023 WebZy —
+                        <a href="https://twitter.com/knyttneve"  rel="noopener noreferrer" className="text-gray-600 ml-1 font-anuphan dark:text-white" target="_blank">@frozenFlames</a>
                     </p>
                     <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
                         <a className="text-gray-500" href='https://github.com/Shree-Varshan-1013'rel="noreferrer" target='_blank'>

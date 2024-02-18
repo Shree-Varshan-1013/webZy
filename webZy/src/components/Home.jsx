@@ -15,7 +15,7 @@ const Home = () => {
       transition={{ duration: 1 }}
     >
       <Hero />
-       <Toaster position="top-center" theme="light" visibleToasts={2} richColors/>
+       <Toaster position="top-center" theme="light" visibleToasts={2} richColors style={{zIndex:9999, marginTop:"50px"}}/>
       <Logos />
       <Content />
       <Gallery />

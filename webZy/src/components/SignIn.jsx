@@ -34,53 +34,36 @@ const SignIn = () => {
             },
         });
 
-    const getToast = () => {
-        // toast('My toast message', {
-        //     action: {
-        //         label: "Close",
-        //         onClick: () => {
-        //             console.log("clicked");
-        //         },
-        //     }
-        // });
-        toast.loading('Validating.....');
-        setTimeout(() => {
-            toast.success('done');
-        }, 3000);
-    };
-
     const eventLogin = async () => {
-
+        toast.loading('Validating.....');
         try {
             const response = await Authentication.login(values.userName, values.userPassword);
-
+            
             const user = response.data.user;
             const token = response.data.jwtToken;
             const role = response.data.user.role[0].roleName;
-
-            getToast();
+    
 
             setTimeout(() => {
-                toast.success("Successfully Signed In !")
                 dispatch(addUserDetails(user));
                 dispatch(toggleLogin());
                 dispatch(addRole(role));
                 dispatch(addToken(token));
-
+                
                 if (role === "ADMIN") {
+                    toast.success("Successfully Signed In as ADMIN!")
                     navigate("/admin-dash");
                 }
                 else {
+                    toast.success("Successfully Signed In !")
                     navigate("/");
                 }
-            }, 2000);
+            }, 1500);
         } catch (error) {
             console.log(error);
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Bad Credentials !",
-            });
+            setTimeout(() => {
+                toast.error('Invalid Credentials');
+            }, 1500);
         }
     };
 
@@ -93,7 +76,7 @@ const SignIn = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 1 }}
         >
-            <Toaster className='z-[9999]' position="top-center" theme="light" visibleToasts={2} richColors />
+            <Toaster position="top-center" theme="light" visibleToasts={2} richColors style={{zIndex:9999, marginTop:"50px"}}/>
             <div className='block dark:bg-slate-900 sm:h-screen backdrop-blur-lg'>
                 <div className='flex lg:justify-between w-full overflow-hidden bg-white dark:bg-slate-900 border-none backdrop-blur-lg pt-10' style={{ backgroundImage: `url(${imageUrl})`, backgroundSize: "cover" }}>
                     <div className="items-center hidden lg:flex lg:w-[40%] justify-center">

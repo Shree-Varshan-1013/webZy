@@ -3,7 +3,7 @@ import Chart from "react-apexcharts";
 import { useSelector } from 'react-redux';
 import MyChart from '../MyChart';
 
-const DataCard = (eventLogout) => {
+const DataCard = ({eventLogout}) => {
 
     const { isDark } = useSelector((state) => state.global);
 

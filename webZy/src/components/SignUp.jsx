@@ -59,15 +59,6 @@ const SignUp = () => {
             }, 4000);
         }
     }
-
-    const getToast = () => {
-
-        toast.loading('Validating.....');
-        setTimeout(() => {
-            toast.success('done');
-        }, 3000);
-    };
-
     const imageUrl = isDark ? "/img/falls.svg" : "/img/falls-light.svg";
 
     return (
@@ -79,7 +70,7 @@ const SignUp = () => {
         >
             <div className='dark:bg-slate-900' style={{ backgroundImage: `url(${imageUrl})`, backgroundSize: "cover" }}>
                 <Toaster position="top-center" theme="light" visibleToasts={2} richColors />
-                <div className='flex max-w-lg lg:justify-between mx-auto overflow-hidden bg-white dark:bg-slate-900 rounded-lg lg:space-x-8 lg:max-w-5xl' style={{background:"inherit"}}>
+                <div className='flex max-w-lg lg:justify-between mx-auto overflow-hidden bg-white dark:bg-slate-900 rounded-lg lg:space-x-8 lg:max-w-5xl' style={{ background: "inherit" }}>
                     <div className="items-center hidden lg:flex lg:w-[40%] justify-center">
                         <img src="/img/welcome.svg" width="85%" />
                     </div>
@@ -162,7 +153,6 @@ const SignUp = () => {
                                         <a className='text-sm font-medium text-gray-500 font-anuphan dark:text-white cursor-pointer' onClick={() => navigate("/sign-in")}>DO YOU HAVE AN ACCOUNT?</a>
                                         <span className='w-1/5 border'></span>
                                     </div>
-                                    <button onClick={getToast}>Sampke</button>
                                 </div>
                             </form>
                         </div>

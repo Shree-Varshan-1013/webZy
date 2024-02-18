@@ -3,13 +3,12 @@ import ProfileDropdown from './ProfileDropdown';
 import { Link } from 'react-scroll';
 import { useSelector } from "react-redux";
 import Toggle from './Toggle.jsx';
-
 const Header = () => {
 
     const navigate = useNavigate();
-    
-    const { isLoggedIn } = useSelector((state) => state.global);
-    
+
+    const { isLoggedIn, role } = useSelector((state) => state.global);
+
     return (
         <header className="select-none text-gray-600 body-font sticky top-0 z-[1100] w-full font-anuphan dark:bg-slate-500 ">
             <div className="container mx-auto flex flex-wrap p-4 flex-col md:flex-row items-center absolute backdrop-blur bg-opacity-90 dark:bg-opacity-20">
@@ -24,6 +23,9 @@ const Header = () => {
                     <Link to="pricing" smooth duration={1500} className="mr-5 cursor-pointer text-gray-900 font-semibold dark:font-medium dark:text-white">Pricing</Link>
                     <Link to="about" smooth duration={1500} className="mr-5 cursor-pointer text-gray-900 font-semibold dark:font-medium dark:text-white">About</Link>
                     <Link to="contact" smooth duration={1500} className="mr-5 cursor-pointer text-gray-900 font-semibold dark:font-medium dark:text-white">Contact</Link>
+                    {
+                        isLoggedIn && role === "ADMIN" && (<a onClick={() => navigate('/admin-dash')} className="mr-5 cursor-pointer text-gray-900 font-semibold dark:font-medium dark:text-white">Dashboard</a>)
+                    }
                     <div className='flex justify-center'>
                         <Toggle />
                     </div>

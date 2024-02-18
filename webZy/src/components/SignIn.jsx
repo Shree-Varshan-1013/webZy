@@ -1,8 +1,6 @@
-import { useState } from 'react'
 import { motion } from 'framer-motion';
 import { useFormik } from "formik";
 import { signInSchema } from "../schemas/index2";
-import Swal from "sweetalert2";
 import Authentication from '../services/auth/Authentication';
 import { Toaster, toast } from 'sonner';
 import { useDispatch, useSelector } from 'react-redux';

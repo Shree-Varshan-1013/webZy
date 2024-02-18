@@ -33,7 +33,6 @@ const Profile = () => {
                             <p className="text-lg font-normal text-gray-600 pr-5">Email </p>
                             <p className="text-xl font-bold text-navy-700 dark:text-white">{userDetails.email}</p>
                         </div>
-
                     </div>
                 </div>
             </div>

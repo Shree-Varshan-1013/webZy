@@ -1,12 +1,9 @@
-import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik';
 import { signUpSchema } from '../../schemas';
-import { toast, Toaster } from 'sonner';
+import { toast } from 'sonner';
 import AdminService from '../../services/AdminService';
 const AddAdmin = ({ eventLogout }) => {
-
-    const navigate = useNavigate();
 
     const initialState = {
         "userFirstName": "",
@@ -30,14 +27,6 @@ const AddAdmin = ({ eventLogout }) => {
         });
 
     const getToast = () => {
-        // toast('My toast message', {
-        //     action: {
-        //         label: "Close",
-        //         onClick: () => {
-        //             console.log("clicked");
-        //         },
-        //     }
-        // });
         toast.loading('Validating.....');
         setTimeout(() => {
             toast.success('done');
@@ -87,7 +76,7 @@ const AddAdmin = ({ eventLogout }) => {
                                 </span>
                             </button>
                             <a href="#">
-                                <button onClick={() => eventLogout()} className="middle none font-sans font-bold center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-gray-500 hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30 hidden items-center gap-1 px-4 xl:flex" type="button">
+                                <button onClick={eventLogout} className="middle none font-sans font-bold center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-gray-500 hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30 hidden items-center gap-1 px-4 xl:flex" type="button">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v1" /></svg><span className="font-anuphan">Logout</span></button>
                                 <button className="relative middle none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs text-gray-500 hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30 grid xl:hidden" type="button">
                                     <span className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">

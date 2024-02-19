@@ -24,10 +24,10 @@ public class PlanController {
     @Autowired
     private PlanServiceImpl planService;
 
-    @PostConstruct
-    public void initializeDummyData() {
-        planService.initializeDummyData();
-    }
+    // @PostConstruct
+    // public void initializeDummyData() {
+    //     planService.initializeDummyData();
+    // }
 
     @GetMapping("/")
     public List<Plan> getAllPlans() {

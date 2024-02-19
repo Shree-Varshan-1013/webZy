@@ -23,6 +23,7 @@ public class Addon {
     private double addonPrice;
     private String addonDetails;
     private String addonValidity;
+	private String OperatorName;
 
     @OneToMany(mappedBy = "addon", cascade = CascadeType.ALL)
     private List<Recharge> recharges;

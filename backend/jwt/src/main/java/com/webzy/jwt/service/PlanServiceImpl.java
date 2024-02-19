@@ -42,7 +42,6 @@ public class PlanServiceImpl implements PlanService {
         planRepository.deleteById(id);
     }
 
-    // Dummy data initialization method
     public void initializeDummyData() {
         List<Plan> dummyPlans = Arrays.asList(
                 createPlan("Prepaid", "Jio", "Gold Plan", "20 days", "1 GB/day",

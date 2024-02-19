@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
-import { deleteRole, toggleLogin } from '../config/GlobalSlice';
+import { addToken, addUserDetails, deleteRole, deleteToken, deleteUserDetails, toggleLogin } from '../config/GlobalSlice';
 import { useSelector } from 'react-redux';
 
 const ProfileDropdown = () => {
@@ -36,6 +36,9 @@ const ProfileDropdown = () => {
         setTimeout(() => {
             toast.success("Successfully logged out see you next time !");
             dispatch(toggleLogin());
+            dispatch(deleteRole());
+            dispatch(addUserDetails(null));
+            dispatch(addToken(null));
             setTimeout(() => {
                 navigate('/');
             }, 2000);
@@ -45,7 +48,6 @@ const ProfileDropdown = () => {
     const eventLogout = () => {
         getToast();
         setTimeout(() => {
-            dispatch(deleteRole());
             navigate('/');
         }, 5000);
     }

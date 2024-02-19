@@ -36,8 +36,7 @@ public class WebsecurityConfiguration{
             "/v3/api-docs/**",
             "/swagger-ui/**",
             // other public endpoints
-            "/authenticate",
-            "/registerNewUser"
+            "/auth/**",
     };
 	
 	private final JwtRequestFilter jwtRequestFilter;

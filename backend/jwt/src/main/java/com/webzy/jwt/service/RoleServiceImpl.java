@@ -1,6 +1,5 @@
 package com.webzy.jwt.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.webzy.jwt.dao.RoleRepo;

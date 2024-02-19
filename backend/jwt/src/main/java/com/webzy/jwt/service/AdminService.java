@@ -6,10 +6,10 @@ import com.webzy.jwt.entity.AppUser;
 
 public interface AdminService {
 
-    public List<AppUser> getAllUsers();
+    List<AppUser> getAllUsers();
 
-    public AppUser registerNewAdmin(AppUser user);
-
-    public List<AppUser> searchUsers(String searchTerm);
+    AppUser registerNewAdmin(AppUser user);
+    
+    List<AppUser> searchUsers(String searchTerm);
 
 }

@@ -3,7 +3,6 @@ package com.webzy.jwt.service;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -40,11 +39,12 @@ public class UserServiceImpl implements UserService {
 					.build();
 		}
 
-		Role role = roleRepo.findById("USER").orElseThrow(() -> new RuntimeException("Role 'USER' not found"));
+		Role role = roleRepo.findById("CUSTOMER").orElseThrow(() -> new RuntimeException("Role 'USER' not found"));
 		Set<Role> roles = new HashSet<>();
 		roles.add(role);
 		user.setRole(roles);
 		user.setUserPassword(getEncodedPassword(user.getUserPassword()));
+		user.setMobileNumber(user.getMobileNumber());
 		AppUser savedUser = userRepo.save(user);
 		return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
 	}
@@ -56,13 +56,14 @@ public class UserServiceImpl implements UserService {
 		roleRepo.save(adminRole);
 
 		Role userRole = new Role();
-		userRole.setRoleName("USER");
-		userRole.setRoleDescription("User Role");
+		userRole.setRoleName("CUSTOMER");
+		userRole.setRoleDescription("Customer Role");
 		roleRepo.save(userRole);
 
 		AppUser admin = new AppUser();
 		admin.setUserName("shree1013");
 		admin.setUserPassword(getEncodedPassword("shree12345"));
+		admin.setMobileNumber(6369442740L);
 		admin.setEmail("shree@gmail.com");
 		Set<Role> roles = new HashSet<>();
 		roles.add(adminRole);

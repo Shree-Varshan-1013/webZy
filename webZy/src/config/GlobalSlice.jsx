@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { FaGalacticSenate } from "react-icons/fa";
 
 const initialState = {
     isLoggedIn: false,
@@ -25,6 +24,9 @@ const globalSlice = createSlice({
         },
         addToken: (state, action) => {
             state.accessToken = action.payload;
+        },
+        deleteToken: (state, action) => {
+            state.accessToken = null;
         },
         addRole: (state, action) => {
             state.role = action.payload;

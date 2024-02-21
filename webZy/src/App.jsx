@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { AnimatePresence } from "framer-motion";
 import Loader from './common/Loader';
-const LazyHome = React.lazy(() => import(''));
+const LazyHome = React.lazy(() => import('./components/Home'));
 const LazyContact = React.lazy(() => import('./components/Contact'));
 const LazyAdminDashboard = React.lazy(() => import('./components/admin/AdminDashboard'));
 const LazyProfile = React.lazy(() => import('./components/Profile'));

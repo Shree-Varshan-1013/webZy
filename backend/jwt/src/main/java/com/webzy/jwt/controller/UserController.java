@@ -10,7 +10,7 @@ import com.webzy.jwt.service.UserServiceImpl;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 
-@CrossOrigin(origins = "http://localhost:5713")
+@CrossOrigin(origins = "http://localhost:5713/")
 @RestController
 @RequiredArgsConstructor
 public class UserController {

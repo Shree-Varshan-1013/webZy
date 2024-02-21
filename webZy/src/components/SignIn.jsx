@@ -21,7 +21,7 @@ const SignIn = () => {
         "userPassword": "",
     }
 
-    const { values, errors, handleBlur, handleChange, handleSubmit } =
+    const { values, handleBlur, handleChange, handleSubmit } =
         useFormik({
             initialValues: initialState,
             validationSchema: signInSchema,
@@ -33,35 +33,46 @@ const SignIn = () => {
         });
 
     const eventLogin = async () => {
-        toast.loading('Validating.....');
         try {
+            toast.loading('Validating.....');
             const response = await Authentication.login(values.userName, values.userPassword);
-            
+
+            console.log('Authentication response:', response); // Log the authentication response
+
             const user = response.data.user;
             const token = response.data.jwtToken;
             const role = response.data.user.role[0].roleName;
-    
+
+            console.log('User:', user);
+            console.log('Token:', token);
+            console.log('Role:', role);
 
             setTimeout(() => {
+                if (role === "ADMIN") {
+                    toast.success("Successfully Signed In as ADMIN!")
+                }
+                else {
+                    toast.success("Successfully Signed In !")
+                }
+
                 dispatch(addUserDetails(user));
                 dispatch(toggleLogin());
                 dispatch(addRole(role));
                 dispatch(addToken(token));
-                
-                if (role === "ADMIN") {
-                    toast.success("Successfully Signed In as ADMIN!")
-                    navigate("/admin-dash");
-                }
-                else {
-                    toast.success("Successfully Signed In !")
-                    navigate("/");
-                }
-            }, 1500);
+
+                setTimeout(() => {
+                    if (role === "ADMIN") {
+                        navigate("/admin-dash");
+                    } else {
+                        navigate("/");
+                    }
+                }, 2000);
+            }, 2000);
         } catch (error) {
             console.log(error);
             setTimeout(() => {
                 toast.error('Invalid Credentials');
-            }, 1500);
+            }, 2000);
         }
     };
 
@@ -74,7 +85,7 @@ const SignIn = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 1 }}
         >
-            <Toaster position="top-center" theme="light" visibleToasts={2} richColors style={{zIndex:9999, marginTop:"50px"}}/>
+            <Toaster position="top-center" theme="light" visibleToasts={2} richColors style={{ zIndex: 9999, marginTop: "50px" }} />
             <div className='block dark:bg-slate-900 sm:h-screen backdrop-blur-lg'>
                 <div className='flex lg:justify-between w-full overflow-hidden bg-white dark:bg-slate-900 border-none backdrop-blur-lg pt-10' style={{ backgroundImage: `url(${imageUrl})`, backgroundSize: "cover" }}>
                     <div className="items-center hidden lg:flex lg:w-[40%] justify-center">
@@ -100,6 +111,7 @@ const SignIn = () => {
                                             className='dark:bg-slate-900 dark:text-white font-anuphan w-full py-2 rounded-lg border border-grey-200 text-grey-darker focus:outline-none focus:border-purple3 focus:ring focus:ring-purple3 focus:ring-opacity-20 pl-4'
                                         />
                                     </div>
+                                    {/* {errors.userName && touched.userName ? (<p>{errors.userName}</p>) : null} */}
                                     <div className='block mt-3'>
                                         <label className="block text-md mb-2 text-gray-700 font-anuphan dark:text-white">
                                             Password
@@ -123,7 +135,7 @@ const SignIn = () => {
                                     </button>
                                     <div className='flex items-center justify-between mt-4'>
                                         <span className='w-1/5 border'></span>
-                                        <a className='text-sm font-medium text-gray-500 font-anuphan dark:text-white cursor-pointer' onClick={() => navigate("/sign-up ")}>CREATE ACCOUNT</a>
+                                        <a className='text-sm font-medium text-gray-500 font-anuphan dark:text-white cursor-pointer' onClick={() => navigate("/webzy/sign-up ")}>CREATE ACCOUNT</a>
                                         <span className='w-1/5 border'></span>
                                     </div>
                                 </div>

@@ -1,4 +1,4 @@
-const Content = () => {
+const Content = ({ openModal }) => {
     return (
         <div className="select-none">
             <section className="text-gray-600 body-font dark:bg-slate-900" style={{ backgroundImage: "url(/img/bottom3.svg)", backgroundSize: "cover" }} name="services">
@@ -47,7 +47,7 @@ const Content = () => {
                         </div>
                     </div>
                     <div className='flex justify-center mt-8'>
-                        <a href="#_" className="relative rounded px-5 py-2.5 overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300">
+                        <a onClick={openModal} className="relative rounded px-5 py-2.5 overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300">
                             <span className="relative">Explore Now</span>
                         </a>
                     </div>

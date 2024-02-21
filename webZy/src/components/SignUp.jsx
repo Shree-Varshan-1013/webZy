@@ -48,7 +48,7 @@ const SignUp = () => {
                     icon: <FaCheck style={{ color: "green", fontSize: "1rem" }} />
                 });
                 setTimeout(() => {
-                    navigate('/sign-in');
+                    navigate('/webzy/sign-in');
                 }, 2000);
             }, 2000);
         }
@@ -150,7 +150,7 @@ const SignUp = () => {
                                     </button>
                                     <div className='flex items-center justify-between mt-4'>
                                         <span className='w-1/5 border'></span>
-                                        <a className='text-sm font-medium text-gray-500 font-anuphan dark:text-white cursor-pointer' onClick={() => navigate("/sign-in")}>DO YOU HAVE AN ACCOUNT?</a>
+                                        <a className='text-sm font-medium text-gray-500 font-anuphan dark:text-white cursor-pointer' onClick={() => navigate("/webzy/sign-in")}>DO YOU HAVE AN ACCOUNT?</a>
                                         <span className='w-1/5 border'></span>
                                     </div>
                                 </div>

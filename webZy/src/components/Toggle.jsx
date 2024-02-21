@@ -1,32 +1,29 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toggleDarkMode } from '../config/GlobalSlice';
 
 const Toggle = () => {
-
     const dispatch = useDispatch();
-
-    const [isDarkmode, setIsDarkmode] = useState(true);
+    const [localDarkMode, setLocalDarkMode] = useState(true);
+    const globalDarkMode = useSelector(state => state.global.darkMode);
 
     useEffect(() => {
         const storedTheme = localStorage.getItem('isDarkmode');
-        setIsDarkmode(storedTheme === 'true');
+        setLocalDarkMode(storedTheme === 'true');
     }, []);
-    
+
     useEffect(() => {
-        localStorage.setItem('isDarkmode', isDarkmode.toString());
-        document.documentElement.classList.toggle("dark", isDarkmode);
-    }, [isDarkmode]);
-    
+        document.documentElement.classList.toggle("dark", localDarkMode);
+    }, [localDarkMode]);
+
     const toggleTheme = () => {
-        if(isDarkmode){
-            dispatch(toggleDarkMode(false));
-        }
-        else{
-            dispatch(toggleDarkMode(true));
-        }
-        setIsDarkmode(!isDarkmode);
+        const newMode = !localDarkMode;
+        setLocalDarkMode(newMode);
+        localStorage.setItem('isDarkmode', newMode.toString());
+        dispatch(toggleDarkMode(newMode));
     };
+
+    const isDarkmode = globalDarkMode || localDarkMode;
 
     const darkIcon = (
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">

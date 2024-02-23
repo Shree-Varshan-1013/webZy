@@ -1,6 +1,7 @@
 package com.webzy.jwt.service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.http.HttpStatus;
@@ -9,8 +10,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.webzy.jwt.dao.AppUserRepo;
+import com.webzy.jwt.dao.PlanRepo;
 import com.webzy.jwt.dao.RoleRepo;
 import com.webzy.jwt.entity.AppUser;
+import com.webzy.jwt.entity.Plan;
 import com.webzy.jwt.entity.Role;
 
 import lombok.RequiredArgsConstructor;
@@ -20,6 +23,8 @@ import lombok.RequiredArgsConstructor;
 public class UserServiceImpl implements UserService {
 
 	private final AppUserRepo userRepo;
+
+	private final PlanRepo planRepo;
 
 	private final RoleRepo roleRepo;
 
@@ -79,6 +84,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public AppUser findUserNameByEmail(String email) {
 		return userRepo.findByEmail(email);
+	}
+
+	@Override
+	public List<Plan> findPlansByOperator(String operatorName){
+		return planRepo.findByOperatorName(operatorName);
 	}
 
 }

@@ -5,7 +5,7 @@ import AdminService from '../../services/AdminService';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 
-const UserData = ({ userName }) => {
+const RechargeHistory = ({ userName }) => {
 
     const { accessToken } = useSelector(state => state.global);
 
@@ -68,7 +68,7 @@ const UserData = ({ userName }) => {
                                             <span className="text-gray-500 text-sm antialiased font-anuphan font-normal leading-normal mx-2 pointer-events-none select-none">/</span>
                                         </li>
                                         <li className="flex items-center text-white-900 antialiased font-sans text-sm font-normal leading-normal cursor-pointer transition-colors duration-300 hover:text-purple3">
-                                            <p className="block antialiased font-anuphan text-sm leading-normal text-black font-normal dark:text-white">User</p>
+                                            <p className="block antialiased font-anuphan text-sm leading-normal text-black font-normal dark:text-white">Recharge History</p>
                                         </li>
                                     </ol>
                                 </nav>
@@ -221,4 +221,9 @@ const UserData = ({ userName }) => {
     )
 }
 
-export default UserData;
+RechargeHistory.propTypes = {
+    userName: PropTypes.string.isRequired
+}
+
+
+export default RechargeHistory;

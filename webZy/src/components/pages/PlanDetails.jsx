@@ -32,6 +32,9 @@ const TabsComponent = ({ openTab, setOpenTab, operatorName, accessToken }) => {
                 { id: 1, name: "Record 1 for Add on" },
                 { id: 2, name: "Record 2 for Add on" },
                 { id: 3, name: "Record 3 for Add on" },
+                { id: 3, name: "Record 4 for Add on" },
+                { id: 3, name: "Record 5 for Add on" },
+                { id: 3, name: "Record 6 for Add on" },
             ]);
         } else if (openTab === 3) {
             setRecords([
@@ -71,30 +74,25 @@ const TabsComponent = ({ openTab, setOpenTab, operatorName, accessToken }) => {
                     <>
                         <div className="transition-all duration-300 bg-white p-4 rounded-lg shadow-md border-l-4 border-purple3 mb-2">
                             <div className="flex justify-between items-center">
-                                <div className='flex justify-between align-baseline items-center'>
-                                    <div className=''>
-                                        <div className="text-2xl font-semibold text-purple3">₹ {record.planPrice}</div>
-                                        <div className="text-gray-700">{record.planName}</div>
+                                <div className='flex'>
+                                    <div className='md:mr-40'>
+                                        <div className="text-2xl font-semibold text-purple3">₹ 199</div>
+                                        <div className="text-gray-700">Unlimited Calls</div>
                                     </div>
-                                    <div className=''>
-                                        <div className="text-2xl font-semibold text-purple3">{record.planValidity}</div>
+                                    <div className='md:mr-40'>
+                                        <div className="text-2xl font-semibold text-purple3">28</div>
                                         <div className="text-gray-700">Validity</div>
                                     </div>
-                                    <div className=''>
-                                        <div className="text-2xl font-semibold text-purple3">{record.planData}</div>
+                                    <div className='md:mr-10'>
+                                        <div className="text-2xl font-semibold text-purple3">3 GB/Day</div>
                                         <div className="text-gray-700">Data</div>
                                     </div>
                                 </div>
-                                <div className="flex items-center">
-                                    <button onClick={() => openModal(record)} className="text-gray-600 hover:text-gray-900 focus:outline-none focus:text-gray-900 transition duration-300">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16"><path fill="#B65FCF" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-6.5a6.5 6.5 0 1 0 0 13a6.5 6.5 0 0 0 0-13M6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75M8 6a1 1 0 1 1 0-2a1 1 0 0 1 0 2" /></svg>
-                                    </button>
-                                    <div className="ml-4">
-                                        <div className="flex justify-center items-center">
-                                            <a onClick={() => navigate('/mobile-recharge')} className="relative rounded px-5 py-2.5 overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300">
-                                                <span className="relative">Apply</span>
-                                            </a>
-                                        </div>
+                                <div>
+                                    <div className="flex justify-center items-center">
+                                        <a onClick={() => navigate('/mobile-recharge')} className="relative rounded px-5 py-2.5 overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300">
+                                            <span className="relative">Apply</span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -110,14 +108,15 @@ const TabsComponent = ({ openTab, setOpenTab, operatorName, accessToken }) => {
                             <div className="flex justify-between items-center">
                                 <div className='flex'>
                                     <div className='md:mr-40'>
-                                        <div className="text-2xl font-semibold text-purple3">₹ {record.planPrice}</div>
+                                        <div className="text-2xl font-semibold text-purple3">₹ 349</div>
+                                        <div className="text-gray-700">Unlimited Calls</div>
                                     </div>
                                     <div className='md:mr-40'>
-                                        <div className="text-2xl font-semibold text-purple3">{record.planValidity}</div>
+                                        <div className="text-2xl font-semibold text-purple3">30</div>
                                         <div className="text-gray-700">Validity</div>
                                     </div>
                                     <div className='md:mr-10'>
-                                        <div className="text-2xl font-semibold text-purple3">3 GB/Day</div>
+                                        <div className="text-2xl font-semibold text-purple3">1.5 GB/Day</div>
                                         <div className="text-gray-700">Data</div>
                                     </div>
                                 </div>
@@ -148,7 +147,7 @@ const TabsComponent = ({ openTab, setOpenTab, operatorName, accessToken }) => {
                                         <div className="text-gray-700">Validity</div>
                                     </div>
                                     <div className='md:mr-10'>
-                                        <div className="text-2xl font-semibold text-purple3">3 GB/Day</div>
+                                        <div className="text-2xl font-semibold text-purple3">2 GB/Day</div>
                                         <div className="text-gray-700">Data</div>
                                     </div>
                                 </div>

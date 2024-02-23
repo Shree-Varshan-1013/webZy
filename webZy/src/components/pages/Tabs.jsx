@@ -22,7 +22,7 @@ const TabsComponent = () => {
                 <div className="w- bg-white p-16 text-center mx-auto border">
                     {tabs.map((tab, index) => (
                         <div key={index} style={{ display: activeTab === index ? 'block' : 'none' }}>
-                            Content {index + 1}
+                            
                         </div>
                     ))}
                 </div>

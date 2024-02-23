@@ -2,22 +2,21 @@ import { useState } from "react";
 import AdminSideBar from "./AdminSideBar"
 import Unauthorize from '../Unauthorize';
 import AdminSideBarContent from "./AdminSideContent";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Toaster, toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
 import { deleteRole, toggleLogin } from "../../config/GlobalSlice";
 import { motion } from "framer-motion";
+import PropTypes from 'prop-types'
 const AdminDashboard = ({ role }) => {
 
     const navigate = useNavigate();
 
     const dispatch = useDispatch();
 
-    const [activeLink, setActiveLink] = useState("link1");
+    const { userDetails } = useSelector(state => state.global);
 
-    const handleLinkClick = (link) => {
-        setActiveLink(link);
-    };
+    const [activeLink, setActiveLink] = useState("link1");
 
     const getToast = () => {
         toast.loading("Logging you out !");
@@ -50,8 +49,8 @@ const AdminDashboard = ({ role }) => {
                 {
                     role === "ADMIN" ? (
                         <div className="flex flex-row dark:bg-slate-900" style={{ backgroundImage: "url(/img/bottom3.svg)", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>
-                            <AdminSideBar setActiveLink={setActiveLink} />
-                            <AdminSideBarContent activeLink={activeLink} eventLogout={eventLogout} />
+                            <AdminSideBar setActiveLink={setActiveLink} eventLogout={eventLogout} />
+                            <AdminSideBarContent activeLink={activeLink} userDetails={userDetails.userName} />
                         </div>
                     ) : (
                         <Unauthorize />
@@ -61,5 +60,10 @@ const AdminDashboard = ({ role }) => {
         </motion.div>
     )
 }
+
+AdminDashboard.propTypes = {
+    role: PropTypes.string.isRequired
+}
+
 
 export default AdminDashboard

@@ -3,71 +3,25 @@ import Pricing from "./Pricing"
 const Blogs = () => {
     return (
         <div>
-            <Pricing />
+            {/* <Pricing /> */}
             <section className="select-none text-gray-600 body-font overflow-hidden dark:bg-slate-900" style={{ backgroundImage: "url(/img/trio.svg)", backgroundSize: "cover", backgroundPositionY: "center" }} name="about">
                 <div className="container px-5 py-24 mx-auto backdrop-blur-lg">
                     <div className="flex flex-wrap -m-12">
                         <div className="p-12 md:w-1/2 flex flex-col items-start dark:text-caramel font-anuphan">
-                            <span className="inline-block py-1 px-2 rounded bg-purple-50 text-purple-500 text-xs font-medium tracking-widest">CATEGORY</span>
-                            <h2 className="sm:text-3xl text-2xl title-font text-gray-900 font-bold dark:text-caramel mt-4 mb-4">Roof party normcore before they sold out, cornhole vape</h2>
-                            <p className="leading-relaxed mb-8 dark:text-white">Live-edge letterpress cliche, salvia fanny pack humblebrag narwhal portland. VHS man braid palo santo hoodie brunch trust fund. Bitters hashtag waistcoat fashion axe chia unicorn. Plaid fixie chambray 90's, slow-carb etsy tumeric. Cray pug you probably haven't heard of them hexagon kickstarter craft beer pork chic.</p>
+                            <span className="py-1 px-2 rounded bg-purple-50 text-purple-500 text-2xl font-medium tracking-widest">Operators</span>
+                            <h2 className="sm:text-3xl text-2xl title-font text-gray-900 font-bold dark:text-caramel mt-4 mb-4">Power up with seamless connectivity recharge with ease, anytime, anywhere!</h2>
+                            <p className="leading-relaxed mb-8 dark:text-white">
+                                In the fast-paced world of telecommunications, mobile recharge operators serve as the backbone, ensuring uninterrupted connectivity for millions of users worldwide. These operators facilitate the essential process of adding credit to mobile accounts, enabling individuals to make calls, send messages, and access mobile data services.</p>
                             <div className="flex items-center flex-wrap pb-4 mb-4 border-b-2 border-gray-100 mt-auto w-full">
-                                <a className="text-purple-500 inline-flex items-center">Learn More
-                                    <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                        <path d="M5 12h14"></path>
-                                        <path d="M12 5l7 7-7 7"></path>
-                                    </svg>
-                                </a>
-                                <span className="text-gray-400 mr-3 inline-flex items-center ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
-                                    <svg className="w-4 h-4 mr-1" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                        <circle cx="12" cy="12" r="3"></circle>
-                                    </svg>1.2K
-                                </span>
-                                <span className="text-gray-400 inline-flex items-center leading-none text-sm">
-                                    <svg className="w-4 h-4 mr-1" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                                        <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
-                                    </svg>6
-                                </span>
                             </div>
-                            <a className="inline-flex items-center">
-                                <img alt="blog" src="https://dummyimage.com/104x104" className="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center" />
-                                <span className="flex-grow flex flex-col pl-4">
-                                    <span className="title-font font-medium text-gray-900">Holden Caulfield</span>
-                                    <span className="text-gray-400 text-xs tracking-widest mt-0.5">UI DEVELOPER</span>
-                                </span>
-                            </a>
                         </div>
                         <div className="p-12 md:w-1/2 flex flex-col items-start dark:text-white font-anuphan">
-                            <span className="inline-block py-1 px-2 rounded bg-purple-50 text-purple-500 text-xs font-medium tracking-widest">CATEGORY</span>
-                            <h2 className="sm:text-3xl text-2xl title-font text-gray-900 font-bold mt-4 mb-4 dark:text-caramel">Pinterest DIY dreamcatcher gentrify single-origin coffee</h2>
-                            <p className="leading-relaxed mb-8">Live-edge letterpress cliche, salvia fanny pack humblebrag narwhal portland. VHS man braid palo santo hoodie brunch trust fund. Bitters hashtag waistcoat fashion axe chia unicorn. Plaid fixie chambray 90's, slow-carb etsy tumeric.</p>
+                            <span className="inline-block py-1 px-2 rounded bg-purple-50 text-purple-500 text-2xl font-medium tracking-widest k">Plans</span>
+                            <h2 className="sm:text-3xl text-2xl title-font text-gray-900 font-bold mt-4 mb-4 dark:text-caramel">
+                                Connect with our diverse range of prepaid and postpaid mobile plans</h2>
+                            <p className="leading-relaxed mb-8">Encapsulates the idea of enhancing your ability to stay connected through our mobile recharge plans. Whether you opt for prepaid or postpaid, our plans are designed to meet your communication needs effectively. With prepaid plans, you have the flexibility to control your usage and expenses, while postpaid plans offer convenience with monthly billing cycles. </p>
                             <div className="flex items-center flex-wrap pb-4 mb-4 border-b-2 border-gray-100 mt-auto w-full">
-                                <a className="text-purple-500 inline-flex items-center">Learn More
-                                    <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                        <path d="M5 12h14"></path>
-                                        <path d="M12 5l7 7-7 7"></path>
-                                    </svg>
-                                </a>
-                                <span className="text-gray-400 mr-3 inline-flex items-center ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
-                                    <svg className="w-4 h-4 mr-1" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                        <circle cx="12" cy="12" r="3"></circle>
-                                    </svg>1.2K
-                                </span>
-                                <span className="text-gray-400 inline-flex items-center leading-none text-sm">
-                                    <svg className="w-4 h-4 mr-1" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-                                        <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
-                                    </svg>6
-                                </span>
                             </div>
-                            <a className="inline-flex items-center">
-                                <img alt="blog" src="https://dummyimage.com/103x103" className="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center" />
-                                <span className="flex-grow flex flex-col pl-4">
-                                    <span className="title-font font-medium text-gray-900">Alper Kamu</span>
-                                    <span className="text-gray-400 text-xs tracking-widest mt-0.5">DESIGNER</span>
-                                </span>
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -93,8 +47,8 @@ const Blogs = () => {
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" />
                                     </svg>
                                 </div>
-                                <dt className="mt-4 font-semibold text-white">Weekly articles</dt>
-                                <dd className="mt-2 leading-7 text-gray-400">Non laboris consequat cupidatat laborum magna. Eiusmod non irure cupidatat duis commodo amet.</dd>
+                                <dt className="mt-4 font-semibold text-white">Weekly Updates</dt>
+                                <dd className="mt-2 leading-7 text-gray-400">We will update the status on time or any other relevant updates or announcements</dd>
                             </div>
                             <div className="flex flex-col items-start">
                                 <div className="rounded-md bg-white/5 p-2 ring-1 ring-white/10">
@@ -103,7 +57,8 @@ const Blogs = () => {
                                     </svg>
                                 </div>
                                 <dt className="mt-4 font-semibold text-white">No spam</dt>
-                                <dd className="mt-2 leading-7 text-gray-400">Officia excepteur ullamco ut sint duis proident non adipisicing. Voluptate incididunt anim.</dd>
+                                <dd className="mt-2 leading-7 text-gray-400">
+                                    Avoiding spam involves refraining from sending unsolicited or irrelevant messages to recipients</dd>
                             </div>
                         </dl>
                     </div>

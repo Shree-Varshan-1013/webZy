@@ -1,8 +1,9 @@
+import React from 'react';
 import { useSelector } from 'react-redux'
 import { motion } from 'framer-motion'
 import { Toaster } from 'sonner';
 
-const Profile = () => {
+function ProfilePage() {
 
     const { userDetails } = useSelector((state) => state.global);
 
@@ -13,31 +14,82 @@ const Profile = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 1 }}
         >
-            <div className="flex flex-col justify-center items-center h-[100vh] dark:bg-slate-900" style={{ backgroundImage: "url(/img/circles.svg)", backgroundSize: "cover" }}>
+            <main className="profile-page lg:pt-[350px] dark:bg-slate-900 dark:text-white font-anuphan">
                 <Toaster position="top-center" theme="light" visibleToasts={2} richColors style={{ zIndex: 9999, marginTop: "50px" }} />
-                <div className="relative flex flex-col items-center rounded-[20px] w-[400px] mx-auto p-4 bg-white dark:bg-slate-800 border shadow-2xl dark:border-slate-800 bg-clip-border shadow-3xl shadow-shadow-500 dark:!bg-navy-800 dark:text-white dark:!shadow-none">
-                    <div className="relative flex h-32 w-full justify-center rounded-xl bg-cover" >
-                        <img src='https://horizon-tailwind-react-git-tailwind-components-horizon-ui.vercel.app/static/media/banner.ef572d78f29b0fee0a09.png' className="absolute flex h-32 w-full justify-center rounded-xl bg-cover" />
-                        <div className="absolute -bottom-12 flex h-[87px] w-[87px] items-center justify-center rounded-full border-[4px] border-white bg-purple3 dark:!border-navy-700">
-                            <span className="text-white text-4xl font-bold">{userDetails.userName ? userDetails.userName.charAt(0).toUpperCase() : ''}</span>
+                <section className="block h-500-px">
+                    <div className="absolute top-0 w-full h-full bg-center bg-cover" style={{ backgroundImage: "url(/img/hearts.svg)" }}>
+                        <span id="blackOverlay" className="w-full h-full absolute opacity-50 bg-black"></span>
+                    </div>
+                    <div className="top-auto bottom-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden h-70-px" style={{ transform: "translateZ(0px)" }}>
+                        <svg className="absolute bottom-0 overflow-hidden" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" version="1.1" viewBox="0 0 2560 100" x="0" y="0">
+                            <polygon className="text-blueGray-200 fill-current" points="2560 0 2560 100 0 100"></polygon>
+                        </svg>
+                    </div>
+                </section>
+                <section className="relative py-16 bg-blueGray-200">
+                    <div className="container mx-auto px-4">
+                        <div className="relative flex flex-col min-w-0 break-words bg-white w-full shadow-xl rounded-lg -mt-64">
+                            <div className="px-6 dark:bg-slate-800">
+                                <div className="flex flex-wrap justify-center">
+                                    <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
+                                        <div className="relative -bottom-12 flex h-[87px] w-[87px] items-center justify-center rounded-full border-[4px] border-gray-300 bg-purple3 dark:!border-navy-700">
+                                            <span className="text-white text-4xl font-bold">{userDetails.userName ? userDetails.userName.charAt(0).toUpperCase() : ''}</span>
+                                        </div>
+                                    </div>
+                                    <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
+                                        <div className="py-6 px-3 mt-32 sm:mt-0">
+                                            <button className="bg-purple2 active:bg-fuchsia-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150" type="button">
+                                                Edit
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div className="w-full lg:w-4/12 px-4 lg:order-1">
+                                        <div className="flex justify-center py-4 lg:pt-4 pt-8">
+                                            <div className="mr-4 p-3 text-center" style={{ width: "120px", whiteSpace: "nowrap" }}>
+                                                <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600 text-purple3">JIO</span><span className="text-sm text-blueGray-400">Sim</span>
+                                            </div>
+                                            <div className="mr-2 p-3 text-center" style={{ width: "120px", whiteSpace: "nowrap" }}>
+                                                <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600 text-purple3">Prepaid</span><span className="text-sm text-blueGray-400">Plan Type</span>
+                                            </div>
+                                            <div className="lg:mr-4 p-3 text-center" style={{ width: "160px", whiteSpace: "nowrap" }}>
+                                                <span className="text-lg font-bold font-anuphan block uppercase tracking-wide text-blueGray-600 text-purple3">2 GB/Day</span><span className="text-sm text-blueGray-400">Data</span>
+                                            </div>
+                                            <div className="lg:mr-4 p-3 text-center" style={{ width: "120px", whiteSpace: "nowrap" }}>
+                                                <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600 text-purple3">5 days</span><span className="text-sm text-blueGray-400">Expiring in</span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="text-center mt-12">
+                                    <h3 className="text-4xl font-semibold leading-normal text-blueGray-700 mb-2">
+                                        {userDetails.userName}
+                                    </h3>
+                                    <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
+                                        <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
+                                        Coimbatore, TamilNadu
+                                    </div>
+                                    <div className="mb-2 text-blueGray-600 mt-10">
+                                        <i className="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>Phone Number - 6369442740
+                                    </div>
+                                    <div className="mb-2 text-blueGray-600">
+                                        <i className="fas fa-university mr-2 text-lg text-blueGray-400"></i>University of Computer Science
+                                    </div>
+                                </div>
+                                <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
+                                    <div className="flex flex-wrap justify-center">
+                                        <div className="w-full lg:w-9/12 px-4">
+                                            <p className="text-xl text-purple3">Have a smile :)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div className="mt-16 flex flex-col items-center">
-                        <h4 className="text-xl font-bold text-navy-700 dark:text-white">
-                            {userDetails.userName}
-                        </h4>
-                        <p className="text-base font-normal text-gray-600">{userDetails.role[0].roleName}</p>
-                    </div>
-                    <div className="mt-6 mb-3 flex flex-col">
-                        <div className="flex flex-row items-center justify-center">
-                            <p className="text-lg font-normal text-gray-600 pr-5">Email </p>
-                            <p className="text-xl font-bold text-navy-700 dark:text-white">{userDetails.email}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                </section>
+            </main>
         </motion.div>
-    )
+    );
 }
 
-export default Profile
+export default ProfilePage;

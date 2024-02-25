@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import PlanSchema from '../../schemas/PlanSchema';
 
-const AddPlan = ({ userName }) => {
+const EditPlan = ({ userName }) => {
 
     const initialData = {
         planName: "",
@@ -139,7 +139,7 @@ const AddPlan = ({ userName }) => {
                             type="submit"
                             className="block w-1/2 text-sm font-medium rounded px-5 py-2.5 overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300"
                         >
-                            Add Plan
+                            Edit Plan
                         </button>
                     </div>
                 </form>
@@ -148,8 +148,8 @@ const AddPlan = ({ userName }) => {
     )
 }
 
-AddPlan.propTypes = {
+EditPlan.propTypes = {
     username: PropTypes.string.isRequired
 }
 
-export default AddPlan
+export default EditPlan

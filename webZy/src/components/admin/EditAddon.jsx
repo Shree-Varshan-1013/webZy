@@ -4,11 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import PlanSchema from '../../schemas/PlanSchema';
 
-const AddPlan = ({ userName }) => {
+const EditAddon = ({ userName }) => {
 
     const initialData = {
-        planName: "",
-        planType: "",
+        addonName: "",
         data: "",
         addonPrice: "",
         addonDetails: "",
@@ -30,10 +29,9 @@ const AddPlan = ({ userName }) => {
         console.log(values);
     }
 
-
     return (
-        <div className="dark:bg-slate-900" style={{ backgroundImage: "url(/img/bottom3.svg)", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>
-            <div className="w-full">
+        <div className=" dark:bg-slate-900 w-full h-screen" style={{ backgroundImage: "url(/img/bottom3.svg)", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>
+            <div className="">
                 <form onSubmit={handleSubmit} className="mb-0 space-y-4 rounded-lg p-4 shadow-2xl sm:p-6 lg:p-8">
                     <div className='grid grid-cols-2 gap-4'>
                         <div>
@@ -46,8 +44,9 @@ const AddPlan = ({ userName }) => {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
-                                    placeholder="Enter Plan Name"
+                                    placeholder="Enter Add on Name"
                                 />
+
                                 {errors.addonName && touched.addonName && <div className="text-red-600 text-xs">{errors.addonName}</div>}
                             </div>
                         </div>
@@ -63,6 +62,7 @@ const AddPlan = ({ userName }) => {
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
                                     placeholder="Enter the data"
                                 />
+
                                 {errors.data && touched.data && <div className="text-red-600 text-xs">{errors.data}</div>}
                             </div>
                         </div>
@@ -130,6 +130,7 @@ const AddPlan = ({ userName }) => {
                                     <option value="Jio">Jio</option>
                                     <option value="Vi">Vi</option>
                                 </select>
+
                                 {errors.operatorName && touched.operatorName && <div className="text-red-600 text-xs">{errors.operatorName}</div>}
                             </div>
                         </div>
@@ -139,7 +140,7 @@ const AddPlan = ({ userName }) => {
                             type="submit"
                             className="block w-1/2 text-sm font-medium rounded px-5 py-2.5 overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300"
                         >
-                            Add Plan
+                            Edit Addon
                         </button>
                     </div>
                 </form>
@@ -148,8 +149,8 @@ const AddPlan = ({ userName }) => {
     )
 }
 
-AddPlan.propTypes = {
+EditAddon.propTypes = {
     username: PropTypes.string.isRequired
 }
 
-export default AddPlan
+export default EditAddon

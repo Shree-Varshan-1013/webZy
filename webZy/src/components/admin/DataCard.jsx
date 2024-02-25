@@ -1,31 +1,12 @@
 import React from 'react'
 import Chart from "react-apexcharts";
 import { useSelector } from 'react-redux';
-import MyChart from '../MyChart';
 import { PropTypes } from 'prop-types';
+import Pie from './Pie';
 
 const DataCard = ({ userName }) => {
 
     const { isDark } = useSelector((state) => state.global);
-
-    const state = {
-        options: {
-            chart: {
-                id: "basic-bar",
-                background: isDark ? '#1a1a1a' : '#ffffff', // Set background color based on dark mode
-                foreColor: isDark ? '#ffffff' : '#373d3f', // Set text color based on dark mode
-            },
-            xaxis: {
-                categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
-            }
-        },
-        series: [
-            {
-                name: "series-1",
-                data: [30, 40, 45, 50, 49, 60, 70, 91]
-            }
-        ]
-    };
 
     return (
         <div className=" dark:bg-slate-900 w-full h-screen" style={{ backgroundImage: "url(/img/bottom3.svg)", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>
@@ -259,8 +240,8 @@ const DataCard = ({ userName }) => {
                 </div>
 
             </div >
-            <div className='h-120'>
-                <MyChart />
+            <div className='m-0'>
+                <Pie />
             </div>
         </div >
     )

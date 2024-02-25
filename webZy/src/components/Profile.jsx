@@ -73,7 +73,7 @@ function ProfilePage() {
                                         <i className="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>Phone Number - 6369442740
                                     </div>
                                     <div className="mb-2 text-blueGray-600">
-                                        <i className="fas fa-university mr-2 text-lg text-blueGray-400"></i>University of Computer Science
+                                        <i className="fas fa-university mr-2 text-lg text-blueGray-400"></i>Write Something
                                     </div>
                                 </div>
                                 <div className="mt-10 py-10 border-t border-blueGray-200 text-center">

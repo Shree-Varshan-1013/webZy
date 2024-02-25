@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import AddPlan from './AddPlan';
 import PaymentHistory from './RechargeHistory';
 import Addon from './Addon';
+import OverAll from './OverAll';
 
 const AdminSideBarContent = ({ activeLink, userName }) => {
     const [content, setContent] = useState(null);
@@ -15,8 +16,7 @@ const AdminSideBarContent = ({ activeLink, userName }) => {
     useEffect(() => {
         const contentMap = {
             link1: <DataCard userName={userName} />,
-            link2: <Addon userName={userName} />,
-            link3: <AddPlan userName={userName} />,
+            link2: <OverAll userName={userName} />,
             link4: <PaymentHistory userName={userName} />,
             link5: <UserData userName={userName} />,
         };

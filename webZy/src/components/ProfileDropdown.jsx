@@ -85,24 +85,24 @@ const ProfileDropdown = () => {
                                     </svg>
                                     <span>Profile</span>
                                 </a>
-                                <a href="#" className="flex items-center gap-3 rounded-md py-2 px-3 hover:bg-slate-800 dark:hover:bg-slate-900">
+                                {/* <a href="#" className="flex items-center gap-3 rounded-md py-2 px-3 hover:bg-slate-800 dark:hover:bg-slate-900">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-5 w-5">
                                         <path fill="currentColor" d="M22 20V7l-2-4H4L2 7.004V20a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1M5.236 5h13.528l1 2H4.237zM9 11h6v2H9z" />
                                     </svg>
                                     <span>Your Orders</span>
-                                </a>
-                                <a href="#" className="flex items-center gap-3 rounded-md py-2 px-3 hover:bg-slate-800 dark:hover:bg-slate-900">
+                                </a> */}
+                                <a onClick={() => navigate('/payment-history')} className="flex items-center gap-3 rounded-md py-2 px-3 hover:bg-slate-800 dark:hover:bg-slate-900">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14" className="h-5 w-5">
                                         <path fill="currentColor" fillRule="evenodd" d="M1.5 0A1.5 1.5 0 0 0 0 1.5v6A1.5 1.5 0 0 0 1.5 9h11A1.5 1.5 0 0 0 14 7.5v-6A1.5 1.5 0 0 0 12.5 0zm6.125 1.454a.625.625 0 1 0-1.25 0v.4a1.532 1.532 0 0 0-.15 3.018l1.197.261a.39.39 0 0 1-.084.773h-.676a.39.39 0 0 1-.369-.26a.625.625 0 0 0-1.178.416c.194.55.673.965 1.26 1.069v.415a.625.625 0 1 0 1.25 0V7.13a1.641 1.641 0 0 0 .064-3.219L6.492 3.65a.281.281 0 0 1 .06-.556h.786a.388.388 0 0 1 .369.26a.625.625 0 1 0 1.178-.416a1.64 1.64 0 0 0-1.26-1.069zM2.75 3.75a.75.75 0 1 1 0 1.5a.75.75 0 0 1 0-1.5m8.5 0a.75.75 0 1 1 0 1.5a.75.75 0 0 1 0-1.5M4.5 9.875c.345 0 .625.28.625.625v2a.625.625 0 1 1-1.25 0v-2c0-.345.28-.625.625-.625m5.625.625a.625.625 0 1 0-1.25 0v2a.625.625 0 1 0 1.25 0zm-2.5.75a.625.625 0 1 0-1.25 0v2a.625.625 0 1 0 1.25 0z" clipRule="evenodd" />
                                     </svg>
                                     <span>Payment History</span>
                                 </a>
-                                <a href="#" className="flex items-center gap-3 rounded-md py-2 px-3 hover:bg-slate-800 dark:hover:bg-slate-900">
+                                {/* <a href="#" className="flex items-center gap-3 rounded-md py-2 px-3 hover:bg-slate-800 dark:hover:bg-slate-900">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
                                         <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 01-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 01-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 01-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584zM12 18a.75.75 0 100-1.5.75.75 0 000 1.5z" clipRule="evenodd"></path>
                                     </svg>
                                     <span>Help Center</span>
-                                </a>
+                                </a> */}
                             </div>
                             <div className="border-t border-slate-500/30"></div>
                             <button className="flex justify-center gap-3 rounded-md bg-red-600 py-2 px-3 font-semibold hover:bg-red-500 focus:ring-2 focus:ring-red-400">

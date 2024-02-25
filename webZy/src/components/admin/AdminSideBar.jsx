@@ -28,11 +28,7 @@ const AdminSideBar = ({ setActiveLink, eventLogout }) => {
                     </a>
                     <a onClick={() => handleLinkClick("link2")} className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300" href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#B65FCF" d="m21.41 11.58l-9-9C12.04 2.21 11.53 2 11 2H4a2 2 0 0 0-2 2v7c0 .53.21 1.04.59 1.41l.41.4c.9-.54 1.94-.81 3-.81a6 6 0 0 1 6 6c0 1.06-.28 2.09-.82 3l.4.4c.37.38.89.6 1.42.6c.53 0 1.04-.21 1.41-.59l7-7c.38-.37.59-.88.59-1.41c0-.53-.21-1.04-.59-1.42M5.5 7A1.5 1.5 0 0 1 4 5.5A1.5 1.5 0 0 1 5.5 4A1.5 1.5 0 0 1 7 5.5A1.5 1.5 0 0 1 5.5 7M10 19H7v3H5v-3H2v-2h3v-3h2v3h3z" /></svg>
-                        <span className="ml-2 text-sm font-medium text-black dark:text-caramel">Add Addon</span>
-                    </a>
-                    <a onClick={() => handleLinkClick("link3")} className="flex items-center w-full h-12 px-3 mt-2 text-gray-200 hover:bg-gray-700 hover:text-white rounded" href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48"><defs><mask id="ipTAdd0"><g fill="none" stroke="#fff" strokeLinejoin="round" strokeWidth="4"><rect width="36" height="36" x="6" y="6" fill="#555" rx="3" /><path strokeLinecap="round" d="M24 16v16m-8-8h16" /></g></mask></defs><path fill="#B65FCF" d="M0 0h48v48H0z" mask="url(#ipTAdd0)" /></svg>
-                        <span className="ml-2 text-sm font-medium text-black dark:text-caramel ">Add Plan</span>
+                        <span className="ml-2 text-sm font-medium text-black dark:text-caramel">Details</span>
                     </a>
                     <a onClick={() => handleLinkClick("link4")} className="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300" href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none"><circle cx="12" cy="12" r="9" fill="#B65FCF" opacity="0.16" /><path stroke="#B65FCF" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.636 18.364A9 9 0 1 0 3 12.004V14" /><path stroke="#B65FCF" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 12l2 2l2-2m6-4v5h5" /></g></svg>

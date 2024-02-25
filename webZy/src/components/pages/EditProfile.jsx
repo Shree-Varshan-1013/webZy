@@ -2,9 +2,10 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useFormik } from 'formik';
 import { detailSchema } from '../../schemas/detailSchema';
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion'
 
-const DataEnter = () => {
+const EditProfile = () => {
+
     const navigate = useNavigate();
 
     const initialData = {
@@ -27,6 +28,7 @@ const DataEnter = () => {
         navigate(`/mobile-recharge/${values.operatorName}`);
     }
 
+
     return (
         <motion.div
             initial={{ opacity: 0 }}
@@ -34,9 +36,9 @@ const DataEnter = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 1 }}
         >
-            <div className="font-anuphan mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 dark:bg-slate-900" style={{ backgroundImage: "url(/img/bottom3.svg)", backgroundSize: "cover" }}>
+            <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 dark:bg-slate-900 font-anuphan" style={{ backgroundImage: "url(/img/bottom3.svg)", backgroundSize: "cover" }}>
                 <div className="mx-auto max-w-lg pt-10">
-                    <h1 className="text-center text-2xl font-bold font-anuphan dark:text-purple3 sm:text-3xl">Let's Get Your <br />Mobile Recharge Done! </h1>
+                    <h1 className="text-center text-2xl font-bold font-anuphan dark:text-purple3 sm:text-3xl">Edit your profile </h1>
 
                     <p className="mx-auto mt-4 max-w-md text-center text-gray-500 dark:text-white font-anuphan">
                         Please fill up the below details
@@ -45,8 +47,25 @@ const DataEnter = () => {
                     <form onSubmit={handleSubmit} className="mb-0 space-y-4 rounded-lg p-4 shadow-2xl sm:p-6 lg:p-8">
 
                         <div>
+                            <label className="sr-only font-anuphan">Email</label>
+                            <div className="relative">
+                                <input
+                                    name="email"
+                                    type="email"
+                                    value={values.email}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
+                                    placeholder="Enter the email"
+                                />
+                                <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#9ca3af" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m-.4 4.25l-7.07 4.42c-.32.2-.74.2-1.06 0L4.4 8.25a.85.85 0 1 1 .9-1.44L12 11l6.7-4.19a.85.85 0 1 1 .9 1.44" /></svg>
+                                </span>
+                                {errors.email && touched.email && <div className="text-red-600 text-xs">{errors.email}</div>}
+                            </div>
+                        </div>
+                        <div>
                             <label className="sr-only font-anuphan">Mobile Number</label>
-
                             <div className="relative">
                                 <input
                                     name="mobileNumber"
@@ -63,10 +82,8 @@ const DataEnter = () => {
                                 {errors.mobileNumber && touched.mobileNumber && <div className="text-red-600 text-xs">{errors.mobileNumber}</div>}
                             </div>
                         </div>
-
                         <div>
                             <label className="sr-only font-anuphan">Operator</label>
-
                             <div className="relative">
                                 <select
                                     name="operatorName"
@@ -87,10 +104,8 @@ const DataEnter = () => {
                                 {errors.operatorName && touched.operatorName && <div className="text-red-600 text-xs">{errors.operatorName}</div>}
                             </div>
                         </div>
-
                         <div>
                             <label className="sr-only">Location</label>
-
                             <div className="relative">
                                 <input
                                     name="location"
@@ -107,12 +122,29 @@ const DataEnter = () => {
                                 {errors.location && touched.location && <div className="text-red-600 text-xs">{errors.location}</div>}
                             </div>
                         </div>
-
+                        <div>
+                            <label className="sr-only">About</label>
+                            <div className="relative">
+                                <input
+                                    name="about"
+                                    value={values.about}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    type="text"
+                                    className="dark:bg-slate-900 w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan"
+                                    placeholder="Describe yourself"
+                                />
+                                <span className="absolute inset-y-0 end-0 grid place-content-center px-4 mb-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#9ca3af" d="M11.427 16.615v-6.042c0-.997-.444-1.669-1.541-1.669c-.906 0-1.754.614-2.159 1.228v6.483H5.704v-6.042c0-.997-.423-1.669-1.523-1.669c-.905 0-1.734.633-2.158 1.228v6.483H0V7.351h2.023v1.247C2.428 8.04 3.642 7.12 5.068 7.12c1.386 0 2.235.69 2.543 1.688c.52-.825 1.754-1.688 3.16-1.688c1.697 0 2.68.92 2.68 2.8v6.694zM24 12.163c0-2.925-1.788-5.042-4.604-5.042c-2.777 0-4.759 2.174-4.759 4.869c0 2.945 2.079 4.888 4.913 4.89c1.476 0 2.855-.482 3.807-1.368l-.932-1.328c-.68.673-1.747 1.04-2.68 1.04c-1.768 0-2.815-1.174-2.971-2.56H24zm-7.245-.943c.077-1.116.893-2.444 2.622-2.444c1.845 0 2.602 1.347 2.66 2.444z" /></svg>
+                                </span>
+                                {errors.about && touched.about && <div className="text-red-600 text-xs">{errors.about}</div>}
+                            </div>
+                        </div>
                         <button
                             type="submit"
                             className="block w-full text-sm font-medium rounded px-5 py-2.5 overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300"
                         >
-                            Next
+                            Confirm
                         </button>
                     </form>
                 </div>
@@ -121,4 +153,4 @@ const DataEnter = () => {
     )
 }
 
-export default DataEnter;
+export default EditProfile

@@ -27,10 +27,7 @@ export default {
       }
     },
   },
-  plugins: [
-  ],
+  plugins: [],
+
 }
-
-
-
 

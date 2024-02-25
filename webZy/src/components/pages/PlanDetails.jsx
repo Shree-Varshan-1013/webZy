@@ -201,7 +201,7 @@ const PlanDetails = () => {
                         <article className="rounded-xl bg-white w-full sm:p-6 lg:p-8 overflow-hidden dark:bg-slate-800">
                             <div className="flex items-start sm:gap-8">
                                 <div
-                                    className="hidden sm:grid sm:size-20 sm:shrink-0 sm:place-content-center sm:rounded-full sm:border-2 sm:border-indigo-500"
+                                    className="hidden sm:grid sm:size-20 sm:shrink-0 sm:place-content-center sm:rounded-full sm:border-2 sm:border-fuchsia-500"
                                     aria-hidden="true"
                                 >
                                     <div className="flex items-center gap-1">

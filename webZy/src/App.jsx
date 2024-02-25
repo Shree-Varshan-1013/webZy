@@ -15,9 +15,13 @@ const LazyDataEnter = React.lazy(() => import('./components/pages/DataEnter.jsx'
 const LazyPlanDetails = React.lazy(() => import('./components/pages/PlanDetails.jsx'));
 const LazyPayment = React.lazy(() => import('./components/pages/Payment.jsx'));
 const LazyUserPaymentHistory = React.lazy(() => import('./components/pages/UserPaymentHistory.jsx'));
+const LazyVerifyRecharge = React.lazy(() => import('./components/VerifyRecharge.jsx'));
+const LazyEditProfile = React.lazy(() => import('./components/pages/EditProfile.jsx'));
+
 import AuthLayout from './layouts/AuthLayout.jsx';
 import UserLayout from './layouts/UserLayout.jsx';
 import './App.css';
+import Speedometer from './components/Speedometer.jsx';
 
 function App() {
 
@@ -31,6 +35,7 @@ function App() {
           <Route path="/webzy" element={<UserLayout component={LazyHome} />} />
           <Route path="/contact" element={<UserLayout component={LazyContact} />} />
           <Route path="/profile" element={<UserLayout component={LazyProfile} />} />
+          <Route path="/edit-profile" element={<UserLayout component={LazyEditProfile} />} />
           <Route path="/payment-history" element={<UserLayout component={LazyUserPaymentHistory} />} />
           <Route path="/mobile-recharge" element={<UserLayout component={LazyDataEnter} />} />
           <Route path="/mobile-recharge/:operatorName" element={<UserLayout component={LazyPlanDetails} />} />
@@ -40,6 +45,8 @@ function App() {
           <Route path="/webzy/sign-up" element={<AuthLayout component={LazySignUp} />} />
           <Route path="/unauthorize" element={<LazyUnauthorize />} />
           <Route path="*" element={<UserLayout component={LazyPageNotFound} />} />
+          <Route path="/who" element={<UserLayout component={LazyVerifyRecharge} />} />
+          <Route path="/speed" element={<Speedometer/>} />
         </Routes>
       </Suspense>
     </AnimatePresence>

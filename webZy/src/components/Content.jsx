@@ -33,7 +33,7 @@ const Content = () => {
                         </div>
                     </div>
                     <div className='flex justify-center mt-8'>
-                        <a onClick={() => navigate('/mobile-recharge')} className="relative rounded px-5 py-2.5 overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300">
+                        <a onClick={() => navigate('/who')} className="relative rounded px-5 py-2.5 overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300">
                             <span className="relative">Recharge Now</span>
                         </a>
                     </div>

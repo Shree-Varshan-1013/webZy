@@ -26,7 +26,7 @@ const Pie = () => {
                 subtext: 'Statistics',
                 left: 'center',
                 textStyle: {
-                    color: isDark ? '#fff' : '#000' // Adjust title text color based on theme
+                    color: "#B65FCF"
                 }
             },
             tooltip: {
@@ -34,7 +34,10 @@ const Pie = () => {
             },
             legend: {
                 orient: 'vertical',
-                left: 'right'
+                left: 'left',
+                textStyle: {
+                    color: "#B65FCF"
+                }
             },
             series: [
                 {
@@ -55,7 +58,7 @@ const Pie = () => {
                         }
                     },
                     label: {
-                        color: isDark ? '#fff' : '#000' 
+                        color: '#B65FCF',
                     }
                 }
             ],

@@ -30,7 +30,7 @@ const Addon = ({ userName }) => {
     }
 
     return (
-        <div className=" dark:bg-slate-900 w-full h-screen" style={{ backgroundImage: "url(/img/bottom3.svg)", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>
+        <div className=" dark:bg-slate-900 w-full" style={{ backgroundImage: "url(/img/bottom3.svg)", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>
             <div className="">
                 <form onSubmit={handleSubmit} className="mb-0 space-y-4 rounded-lg p-4 shadow-2xl sm:p-6 lg:p-8">
                     <div className='grid grid-cols-2 gap-4'>

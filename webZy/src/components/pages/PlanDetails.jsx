@@ -9,7 +9,61 @@ const TabsComponent = ({ openTab, setOpenTab, operatorName, accessToken }) => {
 
     const [records, setRecords] = useState([]);
 
+    const { userDetails } = useSelector(state => state.global);
+
     const navigate = useNavigate();
+
+    var orderDetails = {
+        "userId": 1,
+        "price": 599 - 100,
+        "providerId": 0,
+        "providerFirstName": "",
+        "providerLastName": "",
+        "providerEmail": "",
+        "providerExperience": 0,
+        "providerAddress": "",
+        "providerGender": "",
+        "providerPhoneNumber": 0
+    }
+
+    const onPay = () => {
+
+        // dispatch(setPaymentSuccess("true"));
+        var options = {
+            key: "rzp_test_ErrHDhVpplAsdS",
+            key_secret: "DUulYAw3CJ05Of3wiSW2jEaQ",
+            amount: (599 - 100) * 100,
+            currency: "INR",
+            name: "Webzy",
+            description: "Sample",
+            prefill: {
+                name: userDetails.userName,
+                email: userDetails.email,
+                contact: 6369442740,
+            },
+            handler: function (response) {
+                console.log(response);
+                // dispatch(setPaymentSuccess(true));
+
+                Swal.fire({
+                    position: "top-center",
+                    icon: "success",
+                    title: "Payment Done",
+                    showConfirmButton: false,
+                    timer: 3000,
+                }).then(navigate("/payment-success"));
+            },
+            notes: {
+                address: "Razorpay Corporate office",
+            },
+            theme: {
+                color: "#AC61BD",
+            },
+        };
+
+        var pay = new window.Razorpay(options);
+        pay.open();
+    };
 
     useEffect(() => {
 
@@ -102,7 +156,7 @@ const TabsComponent = ({ openTab, setOpenTab, operatorName, accessToken }) => {
                                 </div>
                                 <div>
                                     <div className="flex justify-center items-center">
-                                        <a onClick={() => navigate(`/mobile-recharge/${operatorName}/payment`)} className="relative rounded px-5 py-2.5 overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300">
+                                        <a onClick={onPay} className="relative rounded px-5 py-2.5 overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300">
                                             <span className="relative">Apply</span>
                                         </a>
                                     </div>
@@ -204,8 +258,19 @@ const PlanDetails = () => {
                                     className="hidden sm:grid sm:size-20 sm:shrink-0 sm:place-content-center sm:rounded-full sm:border-2 sm:border-fuchsia-500"
                                     aria-hidden="true"
                                 >
-                                    <div className="flex items-center gap-1">
-                                        <img src="/img/jio.png" />
+                                    <div className="flex items-center">
+                                        {
+                                            operatorName === "Airtel" && <img src="/img/airtel.png" className="rounded-full" />
+                                        }
+                                        {
+                                            operatorName === "Jio" && <img src="/img/jio.png" className="rounded-full" />
+                                        }
+                                        {
+                                            operatorName === "BSNL" && <img src="/img/bsnl.png" className="rounded-full" />
+                                        }
+                                        {
+                                            operatorName === "Vi" && <img src="/img/vi.png" height={100} className="rounded-full bg-cover" />
+                                        }
                                     </div>
                                 </div>
                                 <div>
@@ -215,12 +280,12 @@ const PlanDetails = () => {
                                         6369442740
                                     </strong>
 
-                                    <h3 className="mt-4 text-lg font-medium sm:text-xl">
-                                        <p className="font-poppins"> Jio</p>
+                                    <h3 className="mt-4 text-lg font-medium sm:text-xl dark:text-white">
+                                        <p className="font-poppins">{operatorName}</p>
                                     </h3>
 
-                                    <p className="mt-1 text-sm text-gray-700 font-anuphan">
-                                        Airtel Prepaid | Tamil Nadu
+                                    <p className="mt-1 text-sm text-gray-700 font-anuphan dark:text-white">
+                                        {operatorName} Prepaid | Tamil Nadu
                                     </p>
                                 </div>
                             </div>

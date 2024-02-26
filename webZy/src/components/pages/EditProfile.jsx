@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useFormik } from 'formik';
 import { detailSchema } from '../../schemas/detailSchema';
 import { motion } from 'framer-motion'
+import Toaster from 'sonner';
 
 const EditProfile = () => {
 
@@ -36,16 +37,14 @@ const EditProfile = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 1 }}
         >
+             <Toaster position="top-center" theme="light" visibleToasts={2} richColors />
             <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 dark:bg-slate-900 font-anuphan" style={{ backgroundImage: "url(/img/bottom3.svg)", backgroundSize: "cover" }}>
                 <div className="mx-auto max-w-lg pt-10">
                     <h1 className="text-center text-2xl font-bold font-anuphan dark:text-purple3 sm:text-3xl">Edit your profile </h1>
-
                     <p className="mx-auto mt-4 max-w-md text-center text-gray-500 dark:text-white font-anuphan">
                         Please fill up the below details
                     </p>
-
                     <form onSubmit={handleSubmit} className="mb-0 space-y-4 rounded-lg p-4 shadow-2xl sm:p-6 lg:p-8">
-
                         <div>
                             <label className="sr-only font-anuphan">Email</label>
                             <div className="relative">

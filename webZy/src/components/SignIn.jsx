@@ -28,7 +28,7 @@ const SignIn = () => {
             onSubmit: (values, action) => {
                 console.log(values);
                 eventLogin();
-                action.resetForm();
+                // action.resetForm();
             },
         });
 
@@ -64,7 +64,7 @@ const SignIn = () => {
                     if (role === "ADMIN") {
                         navigate("/admin-dash");
                     } else {
-                        navigate("/");
+                        // navigate("/");
                     }
                 }, 2000);
             }, 2000);

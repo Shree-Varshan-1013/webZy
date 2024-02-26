@@ -17,7 +17,7 @@ const LazyPayment = React.lazy(() => import('./components/pages/Payment.jsx'));
 const LazyUserPaymentHistory = React.lazy(() => import('./components/pages/UserPaymentHistory.jsx'));
 const LazyVerifyRecharge = React.lazy(() => import('./components/VerifyRecharge.jsx'));
 const LazyEditProfile = React.lazy(() => import('./components/pages/EditProfile.jsx'));
-
+const LazyPaymentSuccess = React.lazy(() => import('./components/pages/PaymentSuccess.jsx'));
 import AuthLayout from './layouts/AuthLayout.jsx';
 import UserLayout from './layouts/UserLayout.jsx';
 import './App.css';
@@ -35,6 +35,7 @@ function App() {
           <Route path="/webzy" element={<UserLayout component={LazyHome} />} />
           <Route path="/contact" element={<UserLayout component={LazyContact} />} />
           <Route path="/profile" element={<UserLayout component={LazyProfile} />} />
+          <Route path="/payment-success" element={<UserLayout component={LazyPaymentSuccess} />} />
           <Route path="/edit-profile" element={<UserLayout component={LazyEditProfile} />} />
           <Route path="/payment-history" element={<UserLayout component={LazyUserPaymentHistory} />} />
           <Route path="/mobile-recharge" element={<UserLayout component={LazyDataEnter} />} />

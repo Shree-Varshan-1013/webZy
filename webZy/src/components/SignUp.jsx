@@ -15,6 +15,7 @@ const SignUp = () => {
     const initialState = {
         "userName": "",
         "email": "",
+        "mobileNumber": "",
         "userPassword": "",
         "confirmPassword": ""
     };
@@ -111,6 +112,23 @@ const SignUp = () => {
                                             />
                                         </div>
                                         {errors.email && touched.email ? (<div className='text-red-500 text-sm font-anuphan'>{errors.email}</div>) : null}
+                                    </div>
+                                    <div className='block mt-3'>
+                                        <label className="block text-md mb-2 text-gray-700 dark:text-white font-anuphan">
+                                            Mobile Number
+                                        </label>
+                                        <div className='mb-1'>
+                                            <input
+                                                id="mobileNumber"
+                                                type="text"
+                                                name="mobileNumber"
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                value={values.mobileNumber}
+                                                className='dark:bg-slate-900 dark:text-white font-anuphan w-full py-2 rounded-lg border border-grey-200 text-grey-darker focus:outline-none focus:border-purple3 focus:ring focus:ring-purple3 focus:ring-opacity-20 pl-4'
+                                            />
+                                        </div>
+                                        {errors.mobileNumber && touched.mobileNumber ? (<div className='text-red-500 text-sm font-anuphan'>{errors.mobileNumber}</div>) : null}
                                     </div>
                                     <div className='block mt-3'>
                                         <label className="block text-md mb-2 text-gray-700 dark:text-white font-anuphan">

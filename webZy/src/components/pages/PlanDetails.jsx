@@ -69,27 +69,37 @@ const TabsComponent = ({ openTab, setOpenTab, operatorName, accessToken }) => {
 
         if (openTab === 1) {
 
-            // const fetchData = async () => {
-            //     try {
-            //         const data = await fetchPlans();
-            //         console.log(data);
-            //         setRecords(data);
-            //     } catch (error) {
-            //         console.error('Error fetching plans:', error);
-            //     }
-            // };
+            const fetchData = async () => {
+                try {
+                    const data = await fetchPlans();
+                    console.log(data);
+                    setRecords(data);
+                } catch (error) {
+                    console.error('Error fetching plans:', error);
+                }
+            };
 
-            // fetchData();
-            setRecords([
-                { id: 1, name: "Record 1 for Add on" },
-                { id: 2, name: "Record 2 for Add on" },
-                { id: 3, name: "Record 3 for Add on" },
-                { id: 3, name: "Record 4 for Add on" },
-                { id: 3, name: "Record 5 for Add on" },
-                { id: 3, name: "Record 6 for Add on" },
-            ]);
-
+            fetchData();
+            // setRecords([
+                //     { id: 1, name: "Record 1 for Add on" },
+                //     { id: 2, name: "Record 2 for Add on" },
+            //     { id: 3, name: "Record 3 for Add on" },
+            //     { id: 3, name: "Record 4 for Add on" },
+            //     { id: 3, name: "Record 5 for Add on" },
+            //     { id: 3, name: "Record 6 for Add on" },
+            // ]);
         } else if (openTab === 2) {
+            const fetchData1 = async () => {
+                try {
+                    const data = await fetchAddon();
+                    console.log(data);
+                    setRecords(data);
+                } catch (error) {
+                    console.error('Error fetching plans:', error);
+                }
+            };
+
+            fetchData1();
             setRecords([
                 { id: 1, name: "Record 1 for Add on" },
                 { id: 2, name: "Record 2 for Add on" },
@@ -110,6 +120,13 @@ const TabsComponent = ({ openTab, setOpenTab, operatorName, accessToken }) => {
     const fetchPlans = async () => {
         console.log(operatorName, accessToken)
         const res = await CustomerService.getPlans(operatorName, accessToken);
+        console.log(res.data);
+        return res.data;
+    }
+
+    const fetchAddon = async () => {
+        console.log(operatorName, accessToken)
+        const res = await CustomerService.getAddon(operatorName, accessToken);
         console.log(res.data);
         return res.data;
     }
@@ -138,19 +155,19 @@ const TabsComponent = ({ openTab, setOpenTab, operatorName, accessToken }) => {
                             <div className="flex justify-between items-center">
                                 <div className='flex'>
                                     <div className='md:mr-20'>
-                                        <div className="text-2xl font-semibold text-purple3">₹ 199</div>
+                                        <div className="text-2xl font-semibold text-purple3">₹ {record.planPrice}</div>
                                         <div className="text-gray-700">Unlimited Calls</div>
                                     </div>
                                     <div className='md:mr-20'>
-                                        <div className="text-2xl font-semibold text-purple3">28</div>
+                                        <div className="text-2xl font-semibold text-purple3">{record.planValidity}</div>
                                         <div className="text-gray-700">Validity</div>
                                     </div>
                                     <div className='md:mr-10'>
-                                        <div className="text-2xl font-semibold text-purple3">3 GB/Day</div>
+                                        <div className="text-2xl font-semibold text-purple3">{record.planData}</div>
                                         <div className="text-gray-700">Data</div>
                                     </div>
                                     <div className='md:mr-10'>
-                                        <div className="text-2xl font-semibold text-purple3">PREPAID</div>
+                                        <div className="text-2xl font-semibold text-purple3 uppercase">{record.planType}</div>
                                         <div className="text-gray-700">Plan Type</div>
                                     </div>
                                 </div>

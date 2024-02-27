@@ -53,4 +53,6 @@ public class PlanController {
     public void deletePlan(@PathVariable Long id) {
         planService.deletePlan(id);
     }
+
+
 }

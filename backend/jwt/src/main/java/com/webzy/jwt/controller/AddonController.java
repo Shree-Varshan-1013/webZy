@@ -32,6 +32,11 @@ public class AddonController {
         return addonService.getAddonById(id);
     }
 
+    @GetMapping("getAddOns/{operatorName}")
+    public List<Addon> getAddonByOperator(@PathVariable String operatorName) {
+        return addonService.getAddOnByOperatorName(operatorName);
+    }
+    
     @PostMapping("/")
     public Addon createAddon(@RequestBody Addon addon) {
         return addonService.createAddon(addon);

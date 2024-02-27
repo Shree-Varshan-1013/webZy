@@ -64,7 +64,7 @@ const SignIn = () => {
                     if (role === "ADMIN") {
                         navigate("/admin-dash");
                     } else {
-                        // navigate("/");
+                        navigate("/");
                     }
                 }, 2000);
             }, 2000);

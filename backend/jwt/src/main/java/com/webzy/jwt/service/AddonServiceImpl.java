@@ -82,4 +82,9 @@ public class AddonServiceImpl implements AddonService {
         addonRepository.deleteById(id);
     }
 
+    @Override
+    public List<Addon> getAddOnByOperatorName(String operatorName){
+        return addonRepository.findByOperatorName(operatorName);
+    }
+
 }

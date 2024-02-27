@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.webzy.jwt.entity.Addon;
 import com.webzy.jwt.entity.Plan;
+import com.webzy.jwt.service.AddonServiceImpl;
 import com.webzy.jwt.service.UserServiceImpl;
 
 import jakarta.annotation.PostConstruct;
@@ -22,6 +24,8 @@ import lombok.RequiredArgsConstructor;
 public class UserController {
 	
 	private final UserServiceImpl userService;
+
+	private final AddonServiceImpl  addonService;
 	
 	@PostConstruct
 	public void initRolesAndUSer() {
@@ -39,4 +43,10 @@ public class UserController {
 	public List<Plan> viewPlan(@PathVariable String operatorName) {
 		return userService.findPlansByOperator(operatorName);
 	}
+
+	@GetMapping("/getAddons/{operatorName}")
+	public List<Addon> getAddons(@PathVariable String operatorName) {
+		return addonService.getAddOnByOperatorName(operatorName);
+	}
+
 }

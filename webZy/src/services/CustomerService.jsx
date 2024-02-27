@@ -11,6 +11,14 @@ class CustomerService {
       },
     });
   }
+  
+  getAddon(operatorName, token) {
+    return axios.get(CUSTOMER_API_BASE_URL + "getAddons/" + operatorName, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
 
   //Public Route
   loginUserWithEmailAndPassword(user) {

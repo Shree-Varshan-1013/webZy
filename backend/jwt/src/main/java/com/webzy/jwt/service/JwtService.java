@@ -59,30 +59,23 @@ public class JwtService implements UserDetailsService {
 	}
 
 	public JwtResponse createJwtToken(JwtRequest jwtRequest) throws Exception {
-
 		String userName = jwtRequest.getUserName();
 		String userPassword = jwtRequest.getUserPassword();
 
 		boolean isEmail = userName.contains("@");
+		String newUserName = isEmail ? userRepo.findByEmail(userName).getUserName() : userName;
 
-		String newUserName = null;
+		try {
+			authenticate(newUserName, userPassword);
+			final UserDetails userDetails = loadUserByUsername(newUserName);
 
-		if (isEmail) {
-			newUserName = userRepo.findByEmail(userName).getUserName();
-		} else {
-			newUserName = userName;
-		}
-
-		authenticate(newUserName, userPassword);
-
-		final UserDetails userDetails = loadUserByUsername(newUserName);
-
-		if (userDetails != null && passwordEncoder().matches(userPassword, userDetails.getPassword())) {
-			String newGeneratedToken = jwtUtil.generateToken(userDetails);
-
-			AppUser user = userRepo.findById(newUserName).get();
-
-			return new JwtResponse(user, newGeneratedToken);
+			if (userDetails != null && passwordEncoder().matches(userPassword, userDetails.getPassword())) {
+				String newGeneratedToken = jwtUtil.generateToken(userDetails);
+				AppUser user = userRepo.findById(newUserName).get();
+				return new JwtResponse(user, newGeneratedToken);
+			}
+		} catch (Exception ex) {
+			return new JwtResponse("Invalid Credentials !");
 		}
 
 		return new JwtResponse("Invalid Credentials !");

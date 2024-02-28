@@ -40,8 +40,8 @@ public class UserServiceImpl implements UserService {
 
 
 		if (existingUser != null || existingUserEmail != null) {
-			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).header("message", "User already exists with this email")
-					.build();
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body("User already exists with this email or username");
 		}
 
 		Role role = roleRepo.findById("CUSTOMER").orElseThrow(() -> new RuntimeException("Role 'USER' not found"));

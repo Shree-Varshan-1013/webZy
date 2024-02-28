@@ -21,7 +21,7 @@ public class RechargeController {
 
     @Autowired
     private RechargeServiceImpl rechargeService;
-
+    
     @GetMapping("/")
     public List<Recharge> getAllRecharges() {
         return rechargeService.getAllRecharges();

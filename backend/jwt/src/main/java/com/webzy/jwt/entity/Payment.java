@@ -2,7 +2,9 @@ package com.webzy.jwt.entity;
 
 import java.util.Date;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -26,11 +28,7 @@ public class Payment {
 
     private String modeOfPayment;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private AppUser user;
-
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "recharge_id")
     private Recharge recharge;
     

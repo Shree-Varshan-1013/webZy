@@ -15,19 +15,19 @@ class AdminService {
   }
   registerNewAdmin(token, data) {
     return axios.post(
-        ADMIN_API_BASE_URL + "/register-new-admin",
-        data,
-        {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
+      ADMIN_API_BASE_URL + "/register-new-admin",
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
         }
+      }
     );
-}
-  
+  }
+
   getParticularProviderById(token, username) {
     return axios.get(
-      ADMIN_API_BASE_URL + "/search/" + username ,
+      ADMIN_API_BASE_URL + "/search/" + username,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -42,6 +42,38 @@ class AdminService {
       },
     });
   }
+
+  getPlans(token) {
+    return axios.get(ADMIN_API_BASE_URL + "/plan", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+  getPlanById(id, token) {
+    return axios.get(ADMIN_API_BASE_URL + "/plan/" + id, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  getAddon(token) {
+    return axios.get(ADMIN_API_BASE_URL + "/getAddons", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  getAddOnById(id, token) {
+    return axios.get(ADMIN_API_BASE_URL + "/addon/" + id, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
 
 }
 

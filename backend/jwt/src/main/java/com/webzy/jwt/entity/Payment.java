@@ -27,8 +27,8 @@ public class Payment {
     private String modeOfPayment;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
+    @JoinColumn(name = "user_id")
+    private AppUser user;
 
     @OneToOne
     @JoinColumn(name = "recharge_id")

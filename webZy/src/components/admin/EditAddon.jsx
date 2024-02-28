@@ -1,11 +1,26 @@
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
-
 import PropTypes from 'prop-types';
 import PlanSchema from '../../schemas/PlanSchema';
+import { useEffect, useState } from 'react';
+import AdminService from '../../services/AdminService';
 
-const EditAddon = ({ userName }) => {
+const EditAddon = ({ AddonId, accessToken }) => {
 
+    const [tar, setTar] = useState({});
+
+    console.log(AddonId);
+
+    useEffect(() => {
+        fetchAddOn();
+    }, []);
+
+    const fetchAddOn = async () => {
+        const res = await AdminService.getAddOnById(AddonId, accessToken);
+        console.log(res);
+        setTar(res.data);
+    }
+    
     const initialData = {
         addonName: "",
         data: "",

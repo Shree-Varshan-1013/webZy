@@ -68,7 +68,6 @@ const TabsComponent = ({ openTab, setOpenTab, operatorName, accessToken }) => {
     useEffect(() => {
 
         if (openTab === 1) {
-
             const fetchData = async () => {
                 try {
                     const data = await fetchPlans();
@@ -81,8 +80,8 @@ const TabsComponent = ({ openTab, setOpenTab, operatorName, accessToken }) => {
 
             fetchData();
             // setRecords([
-                //     { id: 1, name: "Record 1 for Add on" },
-                //     { id: 2, name: "Record 2 for Add on" },
+            //     { id: 1, name: "Record 1 for Add on" },
+            //     { id: 2, name: "Record 2 for Add on" },
             //     { id: 3, name: "Record 3 for Add on" },
             //     { id: 3, name: "Record 4 for Add on" },
             //     { id: 3, name: "Record 5 for Add on" },
@@ -98,16 +97,7 @@ const TabsComponent = ({ openTab, setOpenTab, operatorName, accessToken }) => {
                     console.error('Error fetching plans:', error);
                 }
             };
-
             fetchData1();
-            setRecords([
-                { id: 1, name: "Record 1 for Add on" },
-                { id: 2, name: "Record 2 for Add on" },
-                { id: 3, name: "Record 3 for Add on" },
-                { id: 3, name: "Record 4 for Add on" },
-                { id: 3, name: "Record 5 for Add on" },
-                { id: 3, name: "Record 6 for Add on" },
-            ]);
         } else if (openTab === 3) {
             setRecords([
                 { id: 1, name: "Record 1 for Exclusive" },
@@ -153,24 +143,25 @@ const TabsComponent = ({ openTab, setOpenTab, operatorName, accessToken }) => {
                     <>
                         <div className="transition-all duration-300 bg-white p-4 rounded-lg shadow-md border-l-4 border-purple3 mb-2">
                             <div className="flex justify-between items-center">
-                                <div className='flex'>
-                                    <div className='md:mr-20'>
+                                <div className='flex flex-row justify-center'>
+                                    <div className='w-36'> {/* Adjust the width as needed */}
                                         <div className="text-2xl font-semibold text-purple3">₹ {record.planPrice}</div>
-                                        <div className="text-gray-700">Unlimited Calls</div>
+                                        <div className="text-gray-700">{record.planName}</div>
                                     </div>
-                                    <div className='md:mr-20'>
+                                    <div className='w-36'> {/* Adjust the width as needed */}
                                         <div className="text-2xl font-semibold text-purple3">{record.planValidity}</div>
                                         <div className="text-gray-700">Validity</div>
                                     </div>
-                                    <div className='md:mr-10'>
+                                    <div className='w-36'> {/* Adjust the width as needed */}
                                         <div className="text-2xl font-semibold text-purple3">{record.planData}</div>
                                         <div className="text-gray-700">Data</div>
                                     </div>
-                                    <div className='md:mr-10'>
+                                    <div className='w-36'> {/* Adjust the width as needed */}
                                         <div className="text-2xl font-semibold text-purple3 uppercase">{record.planType}</div>
                                         <div className="text-gray-700">Plan Type</div>
                                     </div>
                                 </div>
+
                                 <div>
                                     <div className="flex justify-center items-center">
                                         <a onClick={onPay} className="relative rounded px-5 py-2.5 overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300">
@@ -179,6 +170,7 @@ const TabsComponent = ({ openTab, setOpenTab, operatorName, accessToken }) => {
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </>
                 ))}
@@ -190,16 +182,12 @@ const TabsComponent = ({ openTab, setOpenTab, operatorName, accessToken }) => {
                         <div className="transition-all duration-300 bg-white p-4 rounded-lg shadow-md border-l-4 border-purple3 mb-2">
                             <div className="flex justify-between items-center">
                                 <div className='flex'>
-                                    <div className='md:mr-20'>
-                                        <div className="text-2xl font-semibold text-purple3">₹ 349</div>
-                                        <div className="text-gray-700">Unlimited Calls</div>
+                                    <div className='md:mr-20 w-40'> {/* Adjust the width as needed */}
+                                        <div className="text-2xl font-semibold text-purple3">₹ {record.addonPrice}</div>
+                                        <div className="text-gray-700">{record.addonName}</div>
                                     </div>
-                                    <div className='md:mr-20'>
-                                        <div className="text-2xl font-semibold text-purple3">30</div>
-                                        <div className="text-gray-700">Validity</div>
-                                    </div>
-                                    <div className='md:mr-20'>
-                                        <div className="text-2xl font-semibold text-purple3">1.5 GB/Day</div>
+                                    <div className='md:mr-20 w-40'> {/* Adjust the width as needed */}
+                                        <div className="text-2xl font-semibold text-purple3">{record.data}</div>
                                         <div className="text-gray-700">Data</div>
                                     </div>
                                 </div>

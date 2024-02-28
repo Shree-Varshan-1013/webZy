@@ -1,5 +1,6 @@
 package com.webzy.jwt.entity;
 
+import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
@@ -20,6 +21,7 @@ public class AppUser {
 	private String email;
 	private String userPassword;
 	private Long mobileNumber;
+	private String location;
 
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "APP_USER_ROLE", joinColumns = {
@@ -28,4 +30,12 @@ public class AppUser {
 			@JoinColumn(name = "ROLE_ID")
 	})
 	private Set<Role> role;
+
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "APP_USER_PAYMENT", joinColumns = {
+			@JoinColumn(name = "APP_USER_ID")
+	}, inverseJoinColumns = {
+			@JoinColumn(name = "PAYMENT_ID")
+	})
+	private List<Payment> payments;
 }

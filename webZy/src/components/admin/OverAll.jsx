@@ -1,23 +1,77 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AddPlan from './AddPlan';
 import Addon from './Addon';
 import EditPlan from './EditPlan';
 import EditAddon from './EditAddon';
+import { useSelector } from 'react-redux';
+import AdminService from '../../services/AdminService';
 
 const OverAll = () => {
+
     const [selectedTab, setSelectedTab] = useState('plans');
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [recordsPerPage] = useState(5);
+    const [records, setRecords] = useState([]);
+
+    // Pagination logic
+    const indexOfLastRecord = currentPage * recordsPerPage;
+    const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+    const currentRecords = records.slice(indexOfFirstRecord, indexOfLastRecord);
+
+    const nextPage = () => {
+        setCurrentPage(currentPage + 1);
+    };
+
+    const prevPage = () => {
+        setCurrentPage(currentPage - 1);
+    };
+
+    const { accessToken } = useSelector(state => state.global);
+
     const [showForm, setShowForm] = useState(false);
 
     const [showEditForm, setShowEditForm] = useState(false);
 
     const [showEditPlanForm, setShowEditPlanForm] = useState(false);
 
+    const [id, setId] = useState(null);
+
+    useEffect(() => {
+        if (selectedTab === "plans") {
+            const fetchData = async () => {
+                try {
+                    const data = await fetchPlans();
+                    console.log(data);
+                    setRecords(data);
+                } catch (error) {
+                    console.error('Error fetching plans:', error);
+                }
+            };
+
+            fetchData();
+        } else if (selectedTab === "addon") {
+            const fetchData1 = async () => {
+                try {
+                    const data = await fetchAddon();
+                    console.log(data);
+                    setRecords(data);
+                } catch (error) {
+                    console.error('Error fetching plans:', error);
+                }
+            };
+            fetchData1();
+        }
+    }, [currentPage, selectedTab]);
+
     const handleEditButtonClick = () => {
         setShowEditForm(true);
         setSelectedTab(null);
     };
-    
-    const handleEditPlanButtonClick = () => {
+
+    const handleEditPlanButtonClick = (item) => {
+        console.log(item);
+        setId(item);
         setShowEditPlanForm(true);
         setSelectedTab(null);
     }
@@ -28,7 +82,7 @@ const OverAll = () => {
         setShowEditPlanForm(false); // Reset edit plan form state
         setShowForm(false);
     };
-    
+
     const handleAddButtonClick = (tab) => {
         setSelectedTab(tab);
         setShowForm(true);
@@ -38,11 +92,25 @@ const OverAll = () => {
 
     const renderEditContent = () => {
         if (showEditPlanForm) {
-            return <EditPlan />;
+            return <EditPlan PlanId={id} accessToken={accessToken}/>;
         }
         if (showEditForm) {
-            return <EditAddon />;
+            return <EditAddon AddonId={id} accessToken={accessToken}/>;
         }
+    }
+
+    const fetchPlans = async () => {
+        const res = await AdminService.getPlans(accessToken);
+        return res.data;
+    }
+
+    const fetchAddon = async () => {
+        const res = await AdminService.getAddon(accessToken);
+        return res.data;
+    }
+
+    const handleDeleteButtonClick = () => {
+
     }
 
     const renderContent = () => {
@@ -58,70 +126,89 @@ const OverAll = () => {
 
         if (selectedTab === 'plans') {
             return (
-                <table className="w-full whitespace-nowrap">
-                    <thead>
-                        <tr className='dark:text-fuchsia-400'>
-                            <th className="px-4 py-2 text-left">Name</th>
-                            <th className="px-4 py-2 text-left">Data</th>
-                            <th className="px-4 py-2 text-left">Price</th>
-                            <th className="px-4 py-2 text-left">Validity</th>
-                            <th className="px-4 py-2 text-left">Plan Type</th>
-                            <th className="px-4 py-2 text-left">Operator</th>
-                            <th className="px-4 py-2 text-left">Description</th>
-                            <th className="px-4 py-2 text-left">Actions</th> {/* Add Actions column header */}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr tabIndex="0" className="focus:outline-none h-16 rounded">
-                            <td className="px-4 py-2">
-                                <div className="flex items-center">
-                                    <p className="text-base font-medium leading-none text-gray-700 dark:text-white">Marketing Keynote Presentation</p>
-                                </div>
-                            </td>
-                            <td className="px-4 py-2">
-                                <div className="flex items-center">
-                                    <p className="text-sm leading-none text-gray-600 dark:text-white">2 GB/Day</p>
-                                </div>
-                            </td>
-                            <td className="px-4 py-2">
-                                <div className="flex items-center">
-                                    <p className="text-sm leading-none text-gray-600 dark:text-white">₹ 499</p>
-                                </div>
-                            </td>
-                            <td className="px-4 py-2">
-                                <div className="flex items-center">
-                                    <p className="text-sm leading-none text-gray-600 dark:text-white">30 Days</p>
-                                </div>
-                            </td>
-                            <td className="px-4 py-2">
-                                <button className="py-3 px-3 text-sm focus:outline-none leading-none text-purple3 bg-fuchsia-200 rounded">Prepaid</button>
-                            </td>
-                            <td className="px-4 py-2">
-                                <button className="py-3 px-3 text-sm focus:outline-none leading-none text-red-700 bg-red-100 rounded">Airtel</button>
-                            </td>
-                            <td className="px-4 py-2 max-w-md">
-                                <div className="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256"><path fill="#B65FCF" d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24m-4 48a12 12 0 1 1-12 12a12 12 0 0 1 12-12m12 112a16 16 0 0 1-16-16v-40a8 8 0 0 1 0-16a16 16 0 0 1 16 16v40a8 8 0 0 1 0 16" /></svg>
-                                </div>
-                            </td>
-                            <td className="px-4 py-2">
-                                <div className="flex items-center">
-                                    <button className="mr-2" onClick={handleEditPlanButtonClick}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="#B65FCF" fillRule="evenodd" clipRule="evenodd"><path d="M11.3 6.2H5a2 2 0 0 0-2 2V19a2 2 0 0 0 2 2h11c1.1 0 2-1 2-2.1V11l-4 4.2c-.3.3-.7.6-1.2.7l-2.7.6c-1.7.3-3.3-1.3-3-3.1l.6-2.9c.1-.5.4-1 .7-1.3l3-3.1Z" /><path d="M19.8 4.3a2.1 2.1 0 0 0-1-1.1a2 2 0 0 0-2.2.4l-.6.6l2.9 3l.5-.6a2.1 2.1 0 0 0 .6-1.5c0-.2 0-.5-.2-.8m-2.4 4.4l-2.8-3l-4.8 5l-.1.3l-.7 3c0 .3.3.7.6.6l2.7-.6l.3-.1l4.7-5Z" /></g></svg>
-                                    </button>
-                                    <button>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#B65FCF" d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6zM19 4h-3.5l-1-1h-5l-1 1H5v2h14z" /></svg>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr className="h-3"></tr> {/* Spacer row */}
-                    </tbody>
-                </table>
+                <div>
+                    <table className="w-full whitespace-nowrap">
+                        <thead>
+                            <tr className='dark:text-fuchsia-400'>
+                                <th className="px-4 py-2 text-left">Name</th>
+                                <th className="px-4 py-2 text-left">Data</th>
+                                <th className="px-4 py-2 text-left">Price</th>
+                                <th className="px-4 py-2 text-left">Validity</th>
+                                <th className="px-4 py-2 text-left">Plan Type</th>
+                                <th className="px-4 py-2 text-left">Operator</th>
+                                <th className="px-4 py-2 text-left">Description</th>
+                                <th className="px-4 py-2 text-left">Actions</th> {/* Add Actions column header */}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                currentRecords.map((record) => {
+                                    return (
+                                        <>
+                                            <tr tabIndex="0" className="focus:outline-none h-16 rounded">
+                                                <td className="px-4 py-2">
+                                                    <div className="flex items-center">
+                                                        <p className="text-base font-medium leading-none text-gray-700 dark:text-white">{record.planName}</p>
+                                                    </div>
+                                                </td>
+                                                <td className="px-4 py-2">
+                                                    <div className="flex items-center">
+                                                        <p className="text-sm leading-none text-gray-600 dark:text-white">{record.planData}</p>
+                                                    </div>
+                                                </td>
+                                                <td className="px-4 py-2">
+                                                    <div className="flex items-center">
+                                                        <p className="text-sm leading-none text-gray-600 dark:text-white">₹ {record.planPrice}</p>
+                                                    </div>
+                                                </td>
+                                                <td className="px-4 py-2">
+                                                    <div className="flex items-center">
+                                                        <p className="text-sm leading-none text-gray-600 dark:text-white">{record.planValidity}</p>
+                                                    </div>
+                                                </td>
+                                                <td className="px-4 py-2">
+                                                    <button className="py-3 px-3 text-sm focus:outline-none leading-none text-purple3 bg-fuchsia-200 rounded">{record.planType}</button>
+                                                </td>
+                                                <td className="px-4 py-2">
+                                                    <button className="py-3 px-3 text-sm focus:outline-none leading-none text-red-700 bg-red-100 rounded">{record.operatorName}</button>
+                                                </td>
+                                                <td className="px-4 py-2 max-w-md">
+                                                    <div className="flex items-center">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256"><path fill="#B65FCF" d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24m-4 48a12 12 0 1 1-12 12a12 12 0 0 1 12-12m12 112a16 16 0 0 1-16-16v-40a8 8 0 0 1 0-16a16 16 0 0 1 16 16v40a8 8 0 0 1 0 16" /></svg>
+                                                    </div>
+                                                </td>
+                                                <td className="px-4 py-2">
+                                                    <div className="flex items-center">
+                                                        <button className="mr-2" onClick={() => handleEditPlanButtonClick(record.planId)}>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="#B65FCF" fillRule="evenodd" clipRule="evenodd"><path d="M11.3 6.2H5a2 2 0 0 0-2 2V19a2 2 0 0 0 2 2h11c1.1 0 2-1 2-2.1V11l-4 4.2c-.3.3-.7.6-1.2.7l-2.7.6c-1.7.3-3.3-1.3-3-3.1l.6-2.9c.1-.5.4-1 .7-1.3l3-3.1Z" /><path d="M19.8 4.3a2.1 2.1 0 0 0-1-1.1a2 2 0 0 0-2.2.4l-.6.6l2.9 3l.5-.6a2.1 2.1 0 0 0 .6-1.5c0-.2 0-.5-.2-.8m-2.4 4.4l-2.8-3l-4.8 5l-.1.3l-.7 3c0 .3.3.7.6.6l2.7-.6l.3-.1l4.7-5Z" /></g></svg>
+                                                        </button>
+                                                        <button  onClick={() => handleDeleteButtonClick(record.planId)}>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#B65FCF" d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6zM19 4h-3.5l-1-1h-5l-1 1H5v2h14z" /></svg>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr className="h-3"></tr>
+                                        </>
+                                    );
+                                })
+                            }
+                        </tbody>
+                    </table>
+                    <div className='flex justify-center'>
+                        <button onClick={prevPage} disabled={currentPage === 1} className="relative rounded px-3 overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300 mr-4">
+                            <span className="relative">Previous</span>
+                        </button>
+                        <button onClick={nextPage} disabled={indexOfLastRecord >= records.length} className="relative rounded px-5 py-2.5 overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300">
+                            <span className="relative">Next</span>
+                        </button>
+                    </div>
+                </div>
             );
         }
         else if (selectedTab === 'addon') {
             return (
+            <div>
                 <table className="w-full whitespace-nowrap">
                     <thead>
                         <tr className='dark:text-fuchsia-400'>
@@ -129,45 +216,66 @@ const OverAll = () => {
                             <th className="px-4 py-2 text-left">Data</th>
                             <th className="px-4 py-2 text-left">Price</th>
                             <th className="px-4 py-2 text-left">Operator</th>
+                            <th className="px-4 py-2 text-left">Description</th>
                             <th className="px-4 py-2 text-left">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr tabIndex="0" className="focus:outline-none h-16 rounded">
-                            <td className="px-4 py-2">
-                                <div className="flex items-center">
-                                    <p className="text-base font-medium leading-none text-gray-700 dark:text-white">Marketing Keynote Presentation</p>
-                                </div>
-                            </td>
-                            <td className="px-4 py-2">
-                                <div className="flex items-center">
-                                    <p className="text-sm leading-none text-gray-600 dark:text-white">2 GB/Day</p>
-                                </div>
-                            </td>
-                            <td className="px-4 py-2">
-                                <div className="flex items-center">
-                                    <p className="text-sm leading-none text-gray-600 dark:text-white">₹ 499</p>
-                                </div>
-                            </td>
-                            <td className="px-4 py-2">
-                                <div className="flex items-center">
-                                    <button className="py-3 px-3 text-sm focus:outline-none leading-none text-red-700 bg-red-100 rounded">Airtel</button>
-                                </div>
-                            </td>
-                            <td className="px-4 py-2">
-                                <div className="flex items-center">
-                                    <button className="mr-2" onClick={handleEditButtonClick}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="#B65FCF" fillRule="evenodd" clipRule="evenodd"><path d="M11.3 6.2H5a2 2 0 0 0-2 2V19a2 2 0 0 0 2 2h11c1.1 0 2-1 2-2.1V11l-4 4.2c-.3.3-.7.6-1.2.7l-2.7.6c-1.7.3-3.3-1.3-3-3.1l.6-2.9c.1-.5.4-1 .7-1.3l3-3.1Z" /><path d="M19.8 4.3a2.1 2.1 0 0 0-1-1.1a2 2 0 0 0-2.2.4l-.6.6l2.9 3l.5-.6a2.1 2.1 0 0 0 .6-1.5c0-.2 0-.5-.2-.8m-2.4 4.4l-2.8-3l-4.8 5l-.1.3l-.7 3c0 .3.3.7.6.6l2.7-.6l.3-.1l4.7-5Z" /></g></svg>
-                                    </button>
-                                    <button>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#B65FCF" d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6zM19 4h-3.5l-1-1h-5l-1 1H5v2h14z" /></svg>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr className="h-3"></tr>
+                        {
+                            currentRecords.map((record) => {
+                                return (
+                                    <>
+                                        <tr tabIndex="0" className="focus:outline-none h-16 rounded">
+                                            <td className="px-4 py-2">
+                                                <div className="flex items-center">
+                                                    <p className="text-base font-medium leading-none text-gray-700 dark:text-white">{record.addonName}</p>
+                                                </div>
+                                            </td>
+                                            <td className="px-4 py-2">
+                                                <div className="flex items-center">
+                                                    <p className="text-sm leading-none text-gray-600 dark:text-white">{record.data}</p>
+                                                </div>
+                                            </td>
+                                            <td className="px-4 py-2">
+                                                <div className="flex items-center">
+                                                    <p className="text-sm leading-none text-gray-600 dark:text-white">₹ {record.addonPrice}</p>
+                                                </div>
+                                            </td>
+                                            <td className="px-4 py-2">
+                                                <button className="py-3 px-3 text-sm focus:outline-none leading-none text-purple3 bg-fuchsia-200 rounded">{record.operatorName}</button>
+                                            </td>
+                                            <td className="px-4 py-2 max-w-md">
+                                                <div className="flex items-center">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256"><path fill="#B65FCF" d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24m-4 48a12 12 0 1 1-12 12a12 12 0 0 1 12-12m12 112a16 16 0 0 1-16-16v-40a8 8 0 0 1 0-16a16 16 0 0 1 16 16v40a8 8 0 0 1 0 16" /></svg>
+                                                </div>
+                                            </td>
+                                            <td className="px-4 py-2">
+                                                <div className="flex items-center">
+                                                    <button className="mr-2" onClick={() => handleEditPlanButtonClick(record.addonId)}>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="#B65FCF" fillRule="evenodd" clipRule="evenodd"><path d="M11.3 6.2H5a2 2 0 0 0-2 2V19a2 2 0 0 0 2 2h11c1.1 0 2-1 2-2.1V11l-4 4.2c-.3.3-.7.6-1.2.7l-2.7.6c-1.7.3-3.3-1.3-3-3.1l.6-2.9c.1-.5.4-1 .7-1.3l3-3.1Z" /><path d="M19.8 4.3a2.1 2.1 0 0 0-1-1.1a2 2 0 0 0-2.2.4l-.6.6l2.9 3l.5-.6a2.1 2.1 0 0 0 .6-1.5c0-.2 0-.5-.2-.8m-2.4 4.4l-2.8-3l-4.8 5l-.1.3l-.7 3c0 .3.3.7.6.6l2.7-.6l.3-.1l4.7-5Z" /></g></svg>
+                                                    </button>
+                                                    <button>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#B65FCF" d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6zM19 4h-3.5l-1-1h-5l-1 1H5v2h14z" /></svg>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr className="h-3"></tr>
+                                    </>
+                                );
+                            })
+                        }
                     </tbody>
                 </table>
+                <div className='flex justify-center'>
+                <button onClick={prevPage} disabled={currentPage === 1} className="relative rounded px-3 overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300 mr-4">
+                    <span className="relative">Previous</span>
+                </button>
+                <button onClick={nextPage} disabled={indexOfLastRecord >= records.length} className="relative rounded px-5 py-2.5 overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300">
+                    <span className="relative">Next</span>
+                </button>
+                </div>
+            </div>
             );
         }
         return null;
@@ -201,7 +309,7 @@ const OverAll = () => {
                     </div>
                 </nav>
             </div >
-            <div className="bg-white dark:bg-slate-900 py-4 md:py-7 px-4 md:px-8 xl:px-10" style={{ backgroundImage: "inherit", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>
+            <div className="bg-white dark:bg-slate-900 py-4 md:py-0 px-4 md:px-8 xl:px-10" style={{ backgroundImage: "inherit", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>
                 {/* Tab buttons */}
                 <div className="sm:flex items-center justify-between">
                     <div className="flex items-center">
@@ -216,13 +324,13 @@ const OverAll = () => {
                         </div>
                     </div>
                     {selectedTab === 'plans' && !showForm && (
-                        <button onClick={() => handleAddButtonClick("plans")} className="focus:ring-2 focus:ring-offset-2 focus:ring-fuchsia-600 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-fuchsia-700 hover:bg-fuchsia-600 focus:outline-none rounded">
-                            <p className="text-sm font-medium leading-none text-white">Add</p>
+                        <button onClick={() => handleAddButtonClick("plans")} className="relative rounded px-5 py-1.5 overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300">
+                            <span className="relative">Add</span>
                         </button>
                     )}
                     {selectedTab === 'addon' && !showForm && (
-                        <button onClick={() => handleAddButtonClick("addon")} className="focus:ring-2 focus:ring-offset-2 focus:ring-fuchsia-600 mt-4 sm:mt-0 inline-flex items-start justify-start px-6 py-3 bg-fuchsia-700 hover:bg-fuchsia-600 focus:outline-none rounded">
-                            <p className="text-sm font-medium leading-none text-white">Add</p>
+                        <button onClick={() => handleAddButtonClick("addon")} className="relative rounded px-5 py-1.5 overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300">
+                            <span className="relative">Add</span>
                         </button>
                     )}
                 </div>

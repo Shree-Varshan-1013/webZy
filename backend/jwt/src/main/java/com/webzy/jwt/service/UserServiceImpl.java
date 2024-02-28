@@ -55,6 +55,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public void initRolesAndUser() {
+		
 		Role adminRole = new Role();
 		adminRole.setRoleName("ADMIN");
 		adminRole.setRoleDescription("Admin Role");
@@ -70,6 +71,7 @@ public class UserServiceImpl implements UserService {
 		admin.setUserPassword(getEncodedPassword("shree12345"));
 		admin.setMobileNumber(6369442740L);
 		admin.setEmail("shree@gmail.com");
+		admin.setLocation("Coimbatore");
 		Set<Role> roles = new HashSet<>();
 		roles.add(adminRole);
 		admin.setRole(roles);

@@ -3,33 +3,51 @@ import { useNavigate } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 import PlanSchema from '../../schemas/PlanSchema';
+import { useEffect, useState } from 'react';
+import AdminService from '../../services/AdminService';
 
-const EditPlan = ({ userName }) => {
+const EditPlan = ({ PlanId, accessToken }) => {
+    const [tar, setTar] = useState({});
+    const [initialData, setInitialData] = useState({});
 
-    const initialData = {
-        planName: "",
-        planType: "",
-        data: "",
-        addonPrice: "",
-        addonDetails: "",
-        addonValidity: "",
-        operatorName: ""
+    useEffect(() => {
+        fetchPlan();
+    }, [PlanId, accessToken]);
+
+    const fetchPlan = async () => {
+        try {
+            const res = await AdminService.getPlanById(PlanId, accessToken);
+            console.log(res);
+            setTar(res.data);
+            setInitialData({
+                planName: res.data.planName,
+                planType: res.data.planType,
+                planData: res.data.planData,
+                planPrice: res.data.planPrice,
+                planDetails: res.data.planDetails,
+                planValidity: res.data.planValidity,
+                operatorName: res.data.operatorName
+            });
+        } catch (error) {
+            console.error('Error fetching plan:', error);
+        }
     }
 
+    console.log(tar);
+
     const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
-        initialValues: initialData,
+        initialValues: () => initialData,
         validationSchema: PlanSchema,
         onSubmit: (values, action) => {
             console.log(values);
             eventAction();
-            action.resetForm();
+            // action.resetForm();
         },
     });
 
     const eventAction = () => {
         console.log(values);
     }
-
 
     return (
         <div className="dark:bg-slate-900" style={{ backgroundImage: "url(/img/bottom3.svg)", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>
@@ -41,78 +59,70 @@ const EditPlan = ({ userName }) => {
                             <label className="sr-only font-anuphan">Name</label>
                             <div className="relative">
                                 <input
-                                    name="addonName"
+                                    name="planName"
                                     type="text"
-                                    value={values.addonName}
+                                    value={values.planName}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
-                                    placeholder="Enter Plan Name"
                                 />
-                                {errors.addonName && touched.addonName && <div className="text-red-600 text-xs">{errors.addonName}</div>}
+                                {errors.planName && touched.planName && <div className="text-red-600 text-xs">{errors.planName}</div>}
                             </div>
                         </div>
                         <div>
                             <label className="sr-only font-anuphan">Data</label>
                             <div className="relative">
                                 <input
-                                    name="data"
+                                    name="planData"
                                     type="text"
-                                    value={values.data}
+                                    value={values.planData}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
-                                    placeholder="Enter the data"
                                 />
-                                {errors.data && touched.data && <div className="text-red-600 text-xs">{errors.data}</div>}
+                                {errors.planData && touched.planData && <div className="text-red-600 text-xs">{errors.planData}</div>}
                             </div>
                         </div>
                         <div>
                             <label className="sr-only font-anuphan">Price</label>
                             <div className="relative">
                                 <input
-                                    name="addonPrice"
+                                    name="planPrice"
                                     type="text"
-                                    value={values.addonPrice}
+                                    value={values.planPrice}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
-                                    placeholder="Enter the price"
                                 />
-
-                                {errors.addonPrice && touched.addonPrice && <div className="text-red-600 text-xs">{errors.addonPrice}</div>}
+                                {errors.planPrice && touched.planPrice && <div className="text-red-600 text-xs">{errors.planPrice}</div>}
                             </div>
                         </div>
                         <div>
                             <label className="sr-only font-anuphan">Details</label>
                             <div className="relative">
                                 <input
-                                    name="addonDetails"
+                                    name="planDetails"
                                     type="text"
-                                    value={values.addonDetails}
+                                    value={values.planDetails}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
-                                    placeholder="Enter description"
                                 />
-
-                                {errors.addonDetails && touched.addonDetails && <div className="text-red-600 text-xs">{errors.addonDetails}</div>}
+                                {errors.planDetails && touched.planDetails && <div className="text-red-600 text-xs">{errors.planDetails}</div>}
                             </div>
                         </div>
                         <div>
                             <label className="sr-only font-anuphan">Validity</label>
                             <div className="relative">
                                 <input
-                                    name="addonValidity"
+                                    name="planValidity"
                                     type="text"
-                                    value={values.addonValidity}
+                                    value={values.planValidity}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
-                                    placeholder="Enter the Validity"
                                 />
-
-                                {errors.addonValidity && touched.addonValidity && <div className="text-red-600 text-xs">{errors.addonValidity}</div>}
+                                {errors.planValidity && touched.planValidity && <div className="text-red-600 text-xs">{errors.planValidity}</div>}
                             </div>
                         </div>
                         <div>

@@ -3,14 +3,13 @@ import { useState } from 'react';
 import { useFormik } from 'formik';
 import { detailSchema } from '../../schemas/detailSchema';
 import { motion } from 'framer-motion'
-import Toaster from 'sonner';
+import { Toaster } from 'sonner';
 
 const EditProfile = () => {
 
     const navigate = useNavigate();
 
     const initialData = {
-        mobileNumber: "",
         operatorName: "",
         location: ""
     }
@@ -37,7 +36,7 @@ const EditProfile = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 1 }}
         >
-             <Toaster position="top-center" theme="light" visibleToasts={2} richColors />
+            <Toaster position="top-center" theme="light" visibleToasts={2} richColors />
             <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 dark:bg-slate-900 font-anuphan" style={{ backgroundImage: "url(/img/bottom3.svg)", backgroundSize: "cover" }}>
                 <div className="mx-auto max-w-lg pt-10">
                     <h1 className="text-center text-2xl font-bold font-anuphan dark:text-purple3 sm:text-3xl">Edit your profile </h1>

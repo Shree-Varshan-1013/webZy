@@ -17,7 +17,8 @@ const SignUp = () => {
         "email": "",
         "mobileNumber": "",
         "userPassword": "",
-        "confirmPassword": ""
+        "confirmPassword": "",
+        "location": "",
     };
 
 
@@ -37,7 +38,9 @@ const SignUp = () => {
             const data = {
                 userName: values.userName,
                 email: values.email,
-                userPassword: values.userPassword
+                userPassword: values.userPassword,
+                mobileNumber: values.mobileNumber,
+                location: values.location,
             }
             console.log(values);
             const res = await Authentication.register(data);
@@ -54,6 +57,7 @@ const SignUp = () => {
             }, 2000);
         }
         catch (err) {
+            console.log(err);
             toast.loading('Registering Please wait !');
             setTimeout(() => {
                 toast.error('Email or Username already Exists !');
@@ -163,6 +167,23 @@ const SignUp = () => {
                                             />
                                         </div>
                                         {errors.confirmPassword && touched.confirmPassword ? (<div className='text-red-500 text-sm font-anuphan'>{errors.confirmPassword}</div>) : null}
+                                    </div>
+                                    <div className='block mt-3 mb-5'>
+                                        <label className="block text-md mb-2 text-gray-700 dark:text-white font-anuphan">
+                                            Location
+                                        </label>
+                                        <div className='mb-1'>
+                                            <input
+                                                id="location"
+                                                type="text"
+                                                name="location"
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                value={values.location}
+                                                className='dark:bg-slate-900 dark:text-white font-anuphan w-full py-2 rounded-lg border border-grey-200 text-grey-darker focus:outline-none focus:border-purple3 focus:ring focus:ring-purple3 focus:ring-opacity-20 pl-4'
+                                            />
+                                        </div>
+                                        {errors.location && touched.location ? (<div className='text-red-500 text-sm font-anuphan'>{errors.location}</div>) : null}
                                     </div>
                                     <button type='submit' className="flex items-center justify-center mt-auto rounded w-full py-2.5 text-center overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300 font-anuphan dark:text-white">Sign Up
                                     </button>

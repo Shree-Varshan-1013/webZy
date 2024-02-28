@@ -9,9 +9,13 @@ import java.util.Set;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.webzy.jwt.dao.AddonRepo;
 import com.webzy.jwt.dao.AppUserRepo;
+import com.webzy.jwt.dao.PlanRepo;
 import com.webzy.jwt.dao.RoleRepo;
+import com.webzy.jwt.entity.Addon;
 import com.webzy.jwt.entity.AppUser;
+import com.webzy.jwt.entity.Plan;
 import com.webzy.jwt.entity.Role;
 
 import lombok.RequiredArgsConstructor;
@@ -23,6 +27,10 @@ public class AdminServiceImpl implements AdminService {
     private final AppUserRepo appUserRepo;
 
     private final RoleRepo roleRepo;
+
+    private final PlanRepo planRepo;
+
+    private final AddonRepo addonRepo;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -74,5 +82,24 @@ public class AdminServiceImpl implements AdminService {
             }
         }
         return appUserRepo.findAll();
+    }
+
+    @Override
+    public List<Plan> findPlans() {
+        return planRepo.findAll();
+    }
+    
+    @Override
+    public List<Addon> getAddOn() {
+        return addonRepo.findAll();
+        
+    }
+
+    public Addon getAddonById(Long id) {
+        return addonRepo.findById(id).get();
+    }
+
+    public Plan getPlanById(Long id) {
+        return planRepo.findById(id).get();
     }
 }

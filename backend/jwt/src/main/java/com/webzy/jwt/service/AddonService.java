@@ -16,6 +16,6 @@ public interface AddonService {
 
     void deleteAddon(Long id);
 
-    List<Addon> getAddOnByOperatorName(String operatorName)
+    List<Addon> getAddOnByOperatorName(String operatorName);
 
 }

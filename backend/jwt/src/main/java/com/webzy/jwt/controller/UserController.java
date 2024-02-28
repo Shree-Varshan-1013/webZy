@@ -22,28 +22,29 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/customer")
 @RequiredArgsConstructor
 public class UserController {
-	
+
 	private final UserServiceImpl userService;
 
-	private final AddonServiceImpl  addonService;
-	
+	private final AddonServiceImpl addonService;
+
 	@PostConstruct
 	public void initRolesAndUSer() {
 		userService.initRolesAndUser();
 	}
-	
+
 	@GetMapping("/forAdmin")
 	@PreAuthorize("hasRole('ADMIN')")
 	public String adminRoute() {
 		return "Admin Routes";
 	}
-	
-	@PreAuthorize("hasRole('CUSTOMER')")
+
+	@PreAuthorize("hasRole('CUSTOMER') or hasRole('ADMIN')")
 	@GetMapping("/plan/{operatorName}")
 	public List<Plan> viewPlan(@PathVariable String operatorName) {
 		return userService.findPlansByOperator(operatorName);
 	}
 
+	@PreAuthorize("hasRole('CUSTOMER') or hasRole('ADMIN')")
 	@GetMapping("/getAddons/{operatorName}")
 	public List<Addon> getAddons(@PathVariable String operatorName) {
 		return addonService.getAddOnByOperatorName(operatorName);

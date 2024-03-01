@@ -18,4 +18,6 @@ public interface AddonService {
 
     List<Addon> getAddOnByOperatorName(String operatorName);
 
+    Addon patchUpdateAddon(Long id, Addon updatedAddon);
+
 }

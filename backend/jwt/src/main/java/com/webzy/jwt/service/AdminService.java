@@ -11,11 +11,15 @@ public interface AdminService {
     List<AppUser> getAllUsers();
 
     AppUser registerNewAdmin(AppUser user);
-    
+
     List<AppUser> searchUsers(String searchTerm);
 
-    public List<Plan> findPlans();
+    List<Plan> findPlans();
 
-    public List<Addon> getAddOn();
+    List<Addon> getAddOn();
+
+    boolean addPlan(Plan plan);
+
+    boolean addAddon(Addon addon);
 
 }

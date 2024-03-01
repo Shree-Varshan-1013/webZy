@@ -13,7 +13,7 @@ import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/customer")
+@RequestMapping("/api/v1/customer")
 @RequiredArgsConstructor
 public class UserController {
 
@@ -26,7 +26,7 @@ public class UserController {
 	// }
 
 	@Operation(summary = "Admin route", description = "Accessible only by admin roles.")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@GetMapping("/forAdmin")
 	public String adminRoute() {
 		return "Admin Routes";

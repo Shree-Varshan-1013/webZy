@@ -47,12 +47,4 @@ public class AppUser {
 	@Schema(description = "The roles assigned to the user")
 	private Set<Role> role;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name = "APP_USER_PAYMENT", joinColumns = {
-			@JoinColumn(name = "APP_USER_ID")
-	}, inverseJoinColumns = {
-			@JoinColumn(name = "PAYMENT_ID", nullable = true) // Set nullable to true
-	})
-	@Schema(description = "The payments made by the user (optional)", required = false)
-	private List<Payment> payments;
 }

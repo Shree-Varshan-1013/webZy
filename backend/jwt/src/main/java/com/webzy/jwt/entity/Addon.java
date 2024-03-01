@@ -25,7 +25,4 @@ public class Addon {
     private String addonValidity;
 	private String OperatorName;
 
-    @OneToMany(mappedBy = "addon", cascade = CascadeType.ALL)
-    private List<Recharge> recharges;
-
 }

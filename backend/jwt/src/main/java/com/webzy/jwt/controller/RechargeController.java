@@ -1,6 +1,5 @@
 package com.webzy.jwt.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,14 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.webzy.jwt.entity.Recharge;
 import com.webzy.jwt.service.RechargeServiceImpl;
 
+import lombok.RequiredArgsConstructor;
+
 import java.util.List;
 
 @RestController
-@RequestMapping("/recharges")
+@RequiredArgsConstructor
+@RequestMapping("/api/v1/recharges")
 public class RechargeController {
 
-    @Autowired
-    private RechargeServiceImpl rechargeService;
+    private final RechargeServiceImpl rechargeService;
     
     @GetMapping("/")
     public List<Recharge> getAllRecharges() {

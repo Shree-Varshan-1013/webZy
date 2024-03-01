@@ -25,22 +25,13 @@ class AdminService {
     );
   }
 
-  getParticularProviderById(token, username) {
-    return axios.get(
-      ADMIN_API_BASE_URL + "/search/" + username,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-  }
-  updateProviderByEmail(token, email, data) {
-    return axios.put(ADMIN_API_BASE_URL + "/update/" + email, data, {
+
+  addPlan(plan, token) {
+    return axios.post(ADMIN_API_BASE_URL + "/plan", plan, {
       headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+        Authorization: `Bearer ${token}`
+      }
+    })
   }
 
   getPlans(token) {
@@ -52,6 +43,13 @@ class AdminService {
   }
   getPlanById(id, token) {
     return axios.get(ADMIN_API_BASE_URL + "/plan/" + id, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+  deletePlanById(id, token) {
+    return axios.delete(ADMIN_API_BASE_URL + "/plan/" + id, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

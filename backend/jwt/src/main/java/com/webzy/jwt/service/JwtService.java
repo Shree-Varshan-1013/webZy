@@ -69,6 +69,8 @@ public class JwtService implements UserDetailsService {
 			authenticate(newUserName, userPassword);
 			final UserDetails userDetails = loadUserByUsername(newUserName);
 
+			System.out.println("User Details: " + userDetails);
+
 			if (userDetails != null && passwordEncoder().matches(userPassword, userDetails.getPassword())) {
 				String newGeneratedToken = jwtUtil.generateToken(userDetails);
 				AppUser user = userRepo.findById(newUserName).get();

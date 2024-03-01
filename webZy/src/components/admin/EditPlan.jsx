@@ -54,7 +54,7 @@ const EditPlan = ({ PlanId, accessToken }) => {
             <div className="w-full">
                 <h1 className="text-center text-2xl font-bold font-anuphan dark:text-purple3 sm:text-3xl pt-5">Edit Plan</h1>
                 <form onSubmit={handleSubmit} className="mb-0 space-y-4 rounded-lg p-4 shadow-2xl sm:p-6 lg:p-8">
-                    <div className='grid grid-cols-2 gap-4'>
+                    <div className='grid grid-cols-2 gap-4  dark:text-white'>
                         <div>
                             <label className="sr-only font-anuphan">Name</label>
                             <div className="relative">
@@ -62,6 +62,7 @@ const EditPlan = ({ PlanId, accessToken }) => {
                                     name="planName"
                                     type="text"
                                     value={values.planName}
+                                    placeholder={`${tar.planName}`}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
@@ -76,6 +77,7 @@ const EditPlan = ({ PlanId, accessToken }) => {
                                     name="planData"
                                     type="text"
                                     value={values.planData}
+                                    placeholder={`${tar.planData}`}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
@@ -90,6 +92,7 @@ const EditPlan = ({ PlanId, accessToken }) => {
                                     name="planPrice"
                                     type="text"
                                     value={values.planPrice}
+                                    placeholder={`${tar.planPrice}`}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
@@ -104,6 +107,7 @@ const EditPlan = ({ PlanId, accessToken }) => {
                                     name="planDetails"
                                     type="text"
                                     value={values.planDetails}
+                                    placeholder={`${tar.planDetails}`}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
@@ -118,6 +122,7 @@ const EditPlan = ({ PlanId, accessToken }) => {
                                     name="planValidity"
                                     type="text"
                                     value={values.planValidity}
+                                    placeholder={`${tar.planValidity}`}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
@@ -136,10 +141,10 @@ const EditPlan = ({ PlanId, accessToken }) => {
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan appearance-none dark:bg-slate-900 dark:text-white"
                                 >
                                     <option value="" disabled>Select Operator</option>
-                                    <option value="Airtel">Airtel</option>
-                                    <option value="Bsnl">Bsnl</option>
-                                    <option value="Jio">Jio</option>
-                                    <option value="Vi">Vi</option>
+                                    <option value="Airtel" selected={tar.operatorName === "Airtel"}>Airtel</option>
+                                    <option value="Bsnl" selected={tar.operatorName === "Bsnl"}>Bsnl</option>
+                                    <option value="Jio" selected={tar.operatorName === "Jio"}>Jio</option>
+                                    <option value="Vi" selected={tar.operatorName === "Vi"}>Vi</option>
                                 </select>
                                 {errors.operatorName && touched.operatorName && <div className="text-red-600 text-xs">{errors.operatorName}</div>}
                             </div>

@@ -102,4 +102,22 @@ public class AdminServiceImpl implements AdminService {
     public Plan getPlanById(Long id) {
         return planRepo.findById(id).get();
     }
+
+    public boolean deletePlanById(Long id){
+        if(planRepo.findById(id).isPresent()){
+            planRepo.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean addPlan(Plan plan) {
+        return planRepo.save(plan) != null ? true : false;
+    }
+
+    @Override
+    public boolean addAddon(Addon addon) {
+        return addonRepo.save(addon) != null ? true : false;
+    }
 }

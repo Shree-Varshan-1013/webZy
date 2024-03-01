@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const AUTH_API_BASE_URL = "http://localhost:2018/auth";
+const AUTH_API_BASE_URL = "http://localhost:2018/api/v1/auth";
 class Authentication {
     login(email, password) {
         return axios.post(AUTH_API_BASE_URL + "/login", {

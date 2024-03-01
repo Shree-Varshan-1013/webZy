@@ -87,4 +87,32 @@ public class AddonServiceImpl implements AddonService {
         return addonRepository.findByOperatorName(operatorName);
     }
 
+    @Override
+    public Addon patchUpdateAddon(Long id, Addon updatedAddon) {
+        Addon existingAddon = addonRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Addon not found with id: " + id));
+
+        // Update fields if they are not null in the updatedAddon
+        if (updatedAddon.getAddonName() != null) {
+            existingAddon.setAddonName(updatedAddon.getAddonName());
+        }
+        if (updatedAddon.getData() != null) {
+            existingAddon.setData(updatedAddon.getData());
+        }
+        if (updatedAddon.getAddonPrice() != 0) {
+            existingAddon.setAddonPrice(updatedAddon.getAddonPrice());
+        }
+        if (updatedAddon.getAddonDetails() != null) {
+            existingAddon.setAddonDetails(updatedAddon.getAddonDetails());
+        }
+        if (updatedAddon.getAddonValidity() != null) {
+            existingAddon.setAddonValidity(updatedAddon.getAddonValidity());
+        }
+        if (updatedAddon.getOperatorName() != null) {
+            existingAddon.setOperatorName(updatedAddon.getOperatorName());
+        }
+
+        return addonRepository.save(existingAddon);
+    }
+
 }

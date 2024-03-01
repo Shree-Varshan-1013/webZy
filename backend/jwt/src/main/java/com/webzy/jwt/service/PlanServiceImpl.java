@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.webzy.jwt.dao.PlanRepo;
 import com.webzy.jwt.entity.Plan;
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -42,6 +43,7 @@ public class PlanServiceImpl implements PlanService {
         planRepository.deleteById(id);
     }
 
+//     @PostConstruct
     public void initializeDummyData() {
         List<Plan> dummyPlans = Arrays.asList(
                 createPlan("Prepaid", "Jio", "Gold Plan", "20 days", "1 GB/day",

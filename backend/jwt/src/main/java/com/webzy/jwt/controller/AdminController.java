@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 @CrossOrigin(origins = "http://localhost:5713")
 @RestController
 @RequestMapping("api/v1/admin")
+@PreAuthorize("hasRole('ADMIN')")
 @RequiredArgsConstructor
 public class AdminController {
 
@@ -21,7 +22,6 @@ public class AdminController {
 
     @Operation(summary = "Get all users", description = "Retrieve a list of all users.")
     @GetMapping("/get-all-users")
-    @PreAuthorize("hasRole('ADMIN')")
     public List<AppUser> getAllUsers() {
         return adminService.getAllUsers();
     }
@@ -56,6 +56,18 @@ public class AdminController {
     @GetMapping("/plan/{id}")
     public Plan getPlanById(@Parameter(description = "Plan ID") @PathVariable Long id) {
         return adminService.getPlanById(id);
+    }
+
+    @Operation(summary = "Add plan", description = "Add a plan.")
+    @PostMapping("/plan")
+    public boolean addPlan(@RequestBody Plan plan) {
+        return adminService.addPlan(plan);
+    }
+
+    @Operation(summary = "Delete plan by ID", description = "Delete a plan by its ID.")
+    @DeleteMapping("/plan/{id}")
+    public boolean deletePlanById(@Parameter(description = "Plan ID") @PathVariable Long id) {
+        return adminService.deletePlanById(id);
     }
 
     @Operation(summary = "Get addon by ID", description = "Retrieve an addon by its ID.")

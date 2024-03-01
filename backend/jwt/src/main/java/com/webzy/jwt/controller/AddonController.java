@@ -1,7 +1,15 @@
 package com.webzy.jwt.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.webzy.jwt.entity.Addon;
 import com.webzy.jwt.service.AddonServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
@@ -11,7 +19,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import java.util.List;
 
 @RestController
-@RequestMapping("/addons")
+@RequestMapping("/api/v1/addons")
 public class AddonController {
 
     @Autowired
@@ -45,14 +53,14 @@ public class AddonController {
         return addonService.createAddon(addon);
     }
 
-    @Operation(summary = "Update an addon", description = "Update an existing addon by ID.")
+    @Operation(summary = "Partial Update an addon", description = "Partially Update an existing addon by ID.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Addon updated"),
+            @ApiResponse(responseCode = "200", description = "Addon Partially updated"),
             @ApiResponse(responseCode = "404", description = "Addon not found")
     })
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     public Addon updateAddon(@Parameter(description = "Addon ID") @PathVariable Long id, @RequestBody Addon addon) {
-        return addonService.updateAddon(id, addon);
+        return addonService.patchUpdateAddon(id, addon);
     }
 
     @Operation(summary = "Delete an addon", description = "Delete an addon by ID.")

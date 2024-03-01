@@ -25,7 +25,4 @@ public class Plan {
     private double planPrice;
     private String OperatorName;
 
-    @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL)
-    private List<Recharge> recharges;
-
 }

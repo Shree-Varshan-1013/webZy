@@ -1,9 +1,8 @@
 import axios from "axios";
 
-const CUSTOMER_API_BASE_URL = "http://localhost:2018/api/customer/";
+const CUSTOMER_API_BASE_URL = "http://localhost:2018/api/v1/customer/";
 
 class CustomerService {
-
   getPlans(operatorName, token) {
     return axios.get(CUSTOMER_API_BASE_URL + "plan/" + operatorName, {
       headers: {

@@ -4,39 +4,45 @@ import PropTypes from 'prop-types';
 import PlanSchema from '../../schemas/PlanSchema';
 import { useEffect, useState } from 'react';
 import AdminService from '../../services/AdminService';
+import { AddOnSchema } from './../../schemas/AddOnSchema';
 
 const EditAddon = ({ AddonId, accessToken }) => {
 
     const [tar, setTar] = useState({});
-
-    console.log(AddonId);
+    const [initialData, setInitialData] = useState({});
 
     useEffect(() => {
-        fetchAddOn();
-    }, []);
+        fetchPlan();
+    }, [AddonId, accessToken]);
 
-    const fetchAddOn = async () => {
-        const res = await AdminService.getAddOnById(AddonId, accessToken);
-        console.log(res);
-        setTar(res.data);
+    const fetchPlan = async () => {
+        try {
+            const res = await AdminService.getAddOnById(AddonId, accessToken);
+            console.log(res);
+            setTar(res.data);
+            setInitialData({
+                addonName: res.data.planName,
+                addonType: res.data.planType,
+                addonData: res.data.planData,
+                addonPrice: res.data.planPrice,
+                addonDetails: res.data.planDetails,
+                addonValidity: res.data.planValidity,
+                operatorName: res.data.operatorName
+            });
+        } catch (error) {
+            console.error('Error fetching plan:', error);
+        }
     }
-    
-    const initialData = {
-        addonName: "",
-        data: "",
-        addonPrice: "",
-        addonDetails: "",
-        addonValidity: "",
-        operatorName: ""
-    }
+
+    console.log(tar);
 
     const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
-        initialValues: initialData,
-        validationSchema: PlanSchema,
+        initialValues: () => initialData,
+        validationSchema: AddOnSchema,
         onSubmit: (values, action) => {
             console.log(values);
             eventAction();
-            action.resetForm();
+            // action.resetForm();
         },
     });
 
@@ -44,12 +50,13 @@ const EditAddon = ({ AddonId, accessToken }) => {
         console.log(values);
     }
 
+
     return (
         <div className=" dark:bg-slate-900 w-full h-screen" style={{ backgroundImage: "url(/img/bottom3.svg)", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>
             <div className="">
                 <h1 className="text-center text-2xl font-bold font-anuphan dark:text-purple3 sm:text-3xl pt-5">Edit Addon</h1>
                 <form onSubmit={handleSubmit} className="mb-0 space-y-4 rounded-lg p-4 shadow-2xl sm:p-6 lg:p-8">
-                    <div className='grid grid-cols-2 gap-4'>
+                    <div className='grid grid-cols-2 gap-4 dark:text-white'>
                         <div>
                             <label className="sr-only font-anuphan">Name</label>
                             <div className="relative">
@@ -59,10 +66,9 @@ const EditAddon = ({ AddonId, accessToken }) => {
                                     value={values.addonName}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    placeholder={tar.addonName}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
-                                    placeholder="Enter Add on Name"
                                 />
-
                                 {errors.addonName && touched.addonName && <div className="text-red-600 text-xs">{errors.addonName}</div>}
                             </div>
                         </div>
@@ -75,10 +81,9 @@ const EditAddon = ({ AddonId, accessToken }) => {
                                     value={values.data}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    placeholder={tar.data}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
-                                    placeholder="Enter the data"
                                 />
-
                                 {errors.data && touched.data && <div className="text-red-600 text-xs">{errors.data}</div>}
                             </div>
                         </div>
@@ -91,10 +96,9 @@ const EditAddon = ({ AddonId, accessToken }) => {
                                     value={values.addonPrice}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    placeholder={tar.addonPrice}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
-                                    placeholder="Enter the price"
                                 />
-
                                 {errors.addonPrice && touched.addonPrice && <div className="text-red-600 text-xs">{errors.addonPrice}</div>}
                             </div>
                         </div>
@@ -107,10 +111,9 @@ const EditAddon = ({ AddonId, accessToken }) => {
                                     value={values.addonDetails}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    placeholder={tar.addonDetails}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
-                                    placeholder="Enter description"
                                 />
-
                                 {errors.addonDetails && touched.addonDetails && <div className="text-red-600 text-xs">{errors.addonDetails}</div>}
                             </div>
                         </div>
@@ -123,8 +126,8 @@ const EditAddon = ({ AddonId, accessToken }) => {
                                     value={values.addonValidity}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
+                                    placeholder={tar.addonValidity}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
-                                    placeholder="Enter the Validity"
                                 />
 
                                 {errors.addonValidity && touched.addonValidity && <div className="text-red-600 text-xs">{errors.addonValidity}</div>}
@@ -141,12 +144,11 @@ const EditAddon = ({ AddonId, accessToken }) => {
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan appearance-none dark:bg-slate-900 dark:text-white"
                                 >
                                     <option value="" disabled>Select Operator</option>
-                                    <option value="Airtel">Airtel</option>
-                                    <option value="Bsnl">Bsnl</option>
-                                    <option value="Jio">Jio</option>
-                                    <option value="Vi">Vi</option>
+                                    <option value="Airtel" selected={tar.operatorName === "Airtel"}>Airtel</option>
+                                    <option value="Bsnl" selected={tar.operatorName === "Bsnl"}>Bsnl</option>
+                                    <option value="Jio" selected={tar.operatorName === "Jio"}>Jio</option>
+                                    <option value="Vi" selected={tar.operatorName === "Vi"}>Vi</option>
                                 </select>
-
                                 {errors.operatorName && touched.operatorName && <div className="text-red-600 text-xs">{errors.operatorName}</div>}
                             </div>
                         </div>

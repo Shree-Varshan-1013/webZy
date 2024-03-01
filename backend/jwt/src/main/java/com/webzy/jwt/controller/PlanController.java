@@ -11,7 +11,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import java.util.List;
 
 @RestController
-@RequestMapping("/plans")
+@RequestMapping("/api/v1/plans")
 public class PlanController {
 
     @Autowired

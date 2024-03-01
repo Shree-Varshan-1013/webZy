@@ -1,6 +1,7 @@
 package com.webzy.jwt.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,14 +21,14 @@ import lombok.RequiredArgsConstructor;
 @CrossOrigin(origins = "http://localhost:5713")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/auth")
+@RequestMapping("/api/v1/auth")
 public class AuthController {
 
 	private final JwtService jwtService;
 	
 	private final UserServiceImpl userService;
 
-	@Operation(summary = "Create JWT token", description = "This API creates a JWT token for user authentication.")
+	@Operation(summary = "Authenticate user", description = "This API creates a JWT token for user authentication.")
 	@PostMapping("/login")
 	public JwtResponse createJwtToken(@RequestBody JwtRequest jwtRequest) throws Exception {
 		return jwtService.createJwtToken(jwtRequest);
@@ -39,9 +40,17 @@ public class AuthController {
 		return userService.registerNewUser(user);
 	}
 
-	@Operation(summary = "Sample API", description = "This is a sample API for testing.")
-	@GetMapping("/sam")
-	public String sam() {
-		return "Shree";
+	@Operation(summary = "Sample Test API ADMIN", description = "This is a sample API for ADMIN.")
+	@PreAuthorize("hasRole('ADMIN')")
+	@GetMapping("/test1")
+	public String forAdmin() {
+		return "This route is for only admin";
+	}
+	
+	@Operation(summary = "Sample Test API CUSTOMER", description = "This is a sample API for CUSTOMER.")
+	@PreAuthorize("hasRole('CUSTOMER')")
+	@GetMapping("/test2")
+	public String forUser() {
+		return "This route is for only customer";
 	}
 }

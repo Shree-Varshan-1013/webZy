@@ -1,6 +1,5 @@
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
-
 import PropTypes from 'prop-types';
 import PlanSchema from '../../schemas/PlanSchema';
 import AdminService from '../../services/AdminService';
@@ -27,6 +26,7 @@ const AddPlan = ({ userName }) => {
         onSubmit: (values, action) => {
             console.log(values);
             eventAction();
+            action.resetForm();
         },
     });
 
@@ -98,7 +98,6 @@ const AddPlan = ({ userName }) => {
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
                                     placeholder="Enter description"
                                 />
-
                                 {errors.planDetails && touched.planDetails && <div className="text-red-600 text-xs">{errors.planDetails}</div>}
                             </div>
                         </div>
@@ -114,7 +113,6 @@ const AddPlan = ({ userName }) => {
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
                                     placeholder="Enter the Validity"
                                 />
-
                                 {errors.planValidity && touched.planValidity && <div className="text-red-600 text-xs">{errors.planValidity}</div>}
                             </div>
                         </div>

@@ -1,14 +1,20 @@
 package com.webzy.jwt.controller;
 
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import com.webzy.jwt.entity.Addon;
 import com.webzy.jwt.entity.AppUser;
 import com.webzy.jwt.entity.Plan;
 import com.webzy.jwt.service.AdminServiceImpl;
+import com.webzy.jwt.service.PlanServiceImpl;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 
 @CrossOrigin(origins = "http://localhost:5713")
@@ -19,6 +25,8 @@ import lombok.RequiredArgsConstructor;
 public class AdminController {
 
     private final AdminServiceImpl adminService;
+
+    private final PlanServiceImpl planService;
 
     @Operation(summary = "Get all users", description = "Retrieve a list of all users.")
     @GetMapping("/get-all-users")
@@ -68,6 +76,16 @@ public class AdminController {
     @DeleteMapping("/plan/{id}")
     public boolean deletePlanById(@Parameter(description = "Plan ID") @PathVariable Long id) {
         return adminService.deletePlanById(id);
+    }
+
+    @Operation(summary = "Update a plan", description = "Update an existing plan by ID.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Plan updated"),
+            @ApiResponse(responseCode = "404", description = "Plan not found")
+    })
+    @PutMapping("/plan/{id}")
+    public Plan updatePlan(@Parameter(description = "Plan ID") @PathVariable Long id, @RequestBody Plan plan) {
+        return planService.updatePlan(id, plan);
     }
 
     @Operation(summary = "Get addon by ID", description = "Retrieve an addon by its ID.")

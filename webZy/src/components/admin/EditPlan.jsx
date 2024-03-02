@@ -1,14 +1,18 @@
-import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
-
 import PropTypes from 'prop-types';
-import PlanSchema from '../../schemas/PlanSchema';
 import { useEffect, useState } from 'react';
 import AdminService from '../../services/AdminService';
 
 const EditPlan = ({ PlanId, accessToken }) => {
-    const [tar, setTar] = useState({});
-    const [initialData, setInitialData] = useState({});
+    const [tar, setTar] = useState({
+        planName: "",
+        planType: "",
+        planData: "",
+        planPrice: "",
+        planDetails: "",
+        planValidity: "",
+        operatorName: ""
+    });
 
     useEffect(() => {
         fetchPlan();
@@ -19,41 +23,35 @@ const EditPlan = ({ PlanId, accessToken }) => {
             const res = await AdminService.getPlanById(PlanId, accessToken);
             console.log(res);
             setTar(res.data);
-            setInitialData({
-                planName: res.data.planName,
-                planType: res.data.planType,
-                planData: res.data.planData,
-                planPrice: res.data.planPrice,
-                planDetails: res.data.planDetails,
-                planValidity: res.data.planValidity,
-                operatorName: res.data.operatorName
-            });
         } catch (error) {
             console.error('Error fetching plan:', error);
         }
     }
 
-    console.log(tar);
+    const eventChange = (e) => {
+        const { name, value } = e.target;
+        setTar(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    }
 
-    const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
-        initialValues: () => initialData,
-        validationSchema: PlanSchema,
-        onSubmit: (values, action) => {
-            console.log(values);
-            eventAction();
-            // action.resetForm();
-        },
-    });
+    const eventAction = (e) => {
+        e.preventDefault();
+        console.log(tar);
+        eventSave();
+    }
 
-    const eventAction = () => {
-        console.log(values);
+    const eventSave = async () => {
+        const res = await AdminService.updatePlan(PlanId, tar, accessToken);
+        console.log(res);
     }
 
     return (
         <div className="dark:bg-slate-900" style={{ backgroundImage: "url(/img/bottom3.svg)", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>
             <div className="w-full">
                 <h1 className="text-center text-2xl font-bold font-anuphan dark:text-purple3 sm:text-3xl pt-5">Edit Plan</h1>
-                <form onSubmit={handleSubmit} className="mb-0 space-y-4 rounded-lg p-4 shadow-2xl sm:p-6 lg:p-8">
+                <form className="mb-0 space-y-4 rounded-lg p-4 shadow-2xl sm:p-6 lg:p-8">
                     <div className='grid grid-cols-2 gap-4  dark:text-white'>
                         <div>
                             <label className="sr-only font-anuphan">Name</label>
@@ -61,13 +59,10 @@ const EditPlan = ({ PlanId, accessToken }) => {
                                 <input
                                     name="planName"
                                     type="text"
-                                    value={values.planName}
-                                    placeholder={`${tar.planName}`}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
+                                    value={tar.planName}
+                                    onChange={eventChange}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
                                 />
-                                {errors.planName && touched.planName && <div className="text-red-600 text-xs">{errors.planName}</div>}
                             </div>
                         </div>
                         <div>
@@ -76,13 +71,10 @@ const EditPlan = ({ PlanId, accessToken }) => {
                                 <input
                                     name="planData"
                                     type="text"
-                                    value={values.planData}
-                                    placeholder={`${tar.planData}`}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
+                                    value={tar.planData}
+                                    onChange={eventChange}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
                                 />
-                                {errors.planData && touched.planData && <div className="text-red-600 text-xs">{errors.planData}</div>}
                             </div>
                         </div>
                         <div>
@@ -91,13 +83,10 @@ const EditPlan = ({ PlanId, accessToken }) => {
                                 <input
                                     name="planPrice"
                                     type="text"
-                                    value={values.planPrice}
-                                    placeholder={`${tar.planPrice}`}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
+                                    value={tar.planPrice}
+                                    onChange={eventChange}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
                                 />
-                                {errors.planPrice && touched.planPrice && <div className="text-red-600 text-xs">{errors.planPrice}</div>}
                             </div>
                         </div>
                         <div>
@@ -106,13 +95,10 @@ const EditPlan = ({ PlanId, accessToken }) => {
                                 <input
                                     name="planDetails"
                                     type="text"
-                                    value={values.planDetails}
-                                    placeholder={`${tar.planDetails}`}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
+                                    value={tar.planDetails}
+                                    onChange={eventChange}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
                                 />
-                                {errors.planDetails && touched.planDetails && <div className="text-red-600 text-xs">{errors.planDetails}</div>}
                             </div>
                         </div>
                         <div>
@@ -121,13 +107,10 @@ const EditPlan = ({ PlanId, accessToken }) => {
                                 <input
                                     name="planValidity"
                                     type="text"
-                                    value={values.planValidity}
-                                    placeholder={`${tar.planValidity}`}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
+                                    value={tar.planValidity}
+                                    onChange={eventChange}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
                                 />
-                                {errors.planValidity && touched.planValidity && <div className="text-red-600 text-xs">{errors.planValidity}</div>}
                             </div>
                         </div>
                         <div>
@@ -135,24 +118,22 @@ const EditPlan = ({ PlanId, accessToken }) => {
                             <div className="relative">
                                 <select
                                     name="operatorName"
-                                    value={values.operatorName}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
+                                    value={tar.operatorName}
+                                    onChange={eventChange}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan appearance-none dark:bg-slate-900 dark:text-white"
                                 >
-                                    <option value="" disabled>Select Operator</option>
-                                    <option value="Airtel" selected={tar.operatorName === "Airtel"}>Airtel</option>
-                                    <option value="Bsnl" selected={tar.operatorName === "Bsnl"}>Bsnl</option>
-                                    <option value="Jio" selected={tar.operatorName === "Jio"}>Jio</option>
-                                    <option value="Vi" selected={tar.operatorName === "Vi"}>Vi</option>
+                                    <option value="" key="default" disabled>Select Operator</option>
+                                    <option value="Airtel" key="airtel">Airtel</option>
+                                    <option value="Bsnl" key="bsnl">Bsnl</option>
+                                    <option value="Jio" key="jio">Jio</option>
+                                    <option value="Vi" key="vi">Vi</option>
                                 </select>
-                                {errors.operatorName && touched.operatorName && <div className="text-red-600 text-xs">{errors.operatorName}</div>}
                             </div>
                         </div>
                     </div>
                     <div className='flex justify-center items-center'>
                         <button
-                            type="submit"
+                            onClick={eventAction}
                             className="block w-1/2 text-sm font-medium rounded px-5 py-2.5 overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300"
                         >
                             Confirm
@@ -165,7 +146,8 @@ const EditPlan = ({ PlanId, accessToken }) => {
 }
 
 EditPlan.propTypes = {
-    username: PropTypes.string.isRequired
+    PlanId: PropTypes.number.isRequired,
+    accessToken: PropTypes.string.isRequired
 }
 
-export default EditPlan
+export default EditPlan;

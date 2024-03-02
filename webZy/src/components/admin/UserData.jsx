@@ -4,7 +4,6 @@ import { FaRegEye } from "react-icons/fa";
 import AdminService from '../../services/AdminService';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-
 const UserData = ({ userName }) => {
 
     const { accessToken } = useSelector(state => state.global);

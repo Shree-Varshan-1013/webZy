@@ -37,6 +37,32 @@ const OverAll = ({ userName }) => {
 
     const [showEditPlanForm, setShowEditPlanForm] = useState(false);
 
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const [searchResults, setSearchResults] = useState([]);
+
+    const handleSearch = (event) => {
+        const term = event.target.value.toLowerCase();
+        setSearchTerm(term);
+        console.log(term);
+
+        const results = term.trim() !== '' ? currentRecords.filter(record => {
+            return (
+                record.planName.toLowerCase().includes(term) ||
+                record.planType.toLowerCase().includes(term) ||
+                record.planData.toLowerCase().includes(term) ||
+                record.planDetails.toLowerCase().includes(term) ||
+                (record.planPrice && record.planPrice.toString().toLowerCase().includes(term)) ||
+                record.planValidity.toLowerCase().includes(term) ||
+                record.operatorName.toLowerCase().includes(term)
+            );
+        }) : [];
+    
+        setSearchResults(results);
+    };
+    
+    console.log(searchResults);
+
     const [id, setId] = useState(null);
 
     useEffect(() => {
@@ -44,7 +70,6 @@ const OverAll = ({ userName }) => {
             const fetchData = async () => {
                 try {
                     const data = await fetchPlans();
-                    console.log(data);
                     setRecords(data);
                 } catch (error) {
                     console.error('Error fetching plans:', error);
@@ -72,7 +97,6 @@ const OverAll = ({ userName }) => {
     };
 
     const handleEditPlanButtonClick = (item) => {
-        console.log(item);
         setId(item);
         setShowEditPlanForm(true);
         setSelectedTab(null);
@@ -131,9 +155,7 @@ const OverAll = ({ userName }) => {
                     const res = await AdminService.deleteAddonById(id, accessToken);
                     console.log(res);
                 }
-                // Update state to remove the deleted record
                 setRecords(prevRecords => prevRecords.filter(record => record.planId !== id));
-                // Show success message
                 Swal.fire(
                     'Deleted!',
                     'Your item has been deleted.',
@@ -158,7 +180,7 @@ const OverAll = ({ userName }) => {
             return (
                 <>
                     {
-                        currentRecords.length === 0 ? <h1>No records found</h1> : (<div>
+                        currentRecords.length === 0 ? <div className='h-screen'><h1 className='text-3xl font-anuphan dark:text-white text-center pt-5'>No records found</h1></div> : (<div>
                             <table className="w-full whitespace-nowrap">
                                 <thead>
                                     <tr className='dark:text-fuchsia-400'>
@@ -169,7 +191,7 @@ const OverAll = ({ userName }) => {
                                         <th className="px-4 py-2 text-left">Plan Type</th>
                                         <th className="px-4 py-2 text-left">Operator</th>
                                         <th className="px-4 py-2 text-left">Description</th>
-                                        <th className="px-4 py-2 text-left">Actions</th> {/* Add Actions column header */}
+                                        <th className="px-4 py-2 text-left">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -177,7 +199,7 @@ const OverAll = ({ userName }) => {
                                         currentRecords.map((record) => {
                                             return (
                                                 <>
-                                                    <tr tabIndex="0" className="focus:outline-none h-16 rounded">
+                                                    <tr key={record.id} tabIndex="0" className="focus:outline-none h-16 rounded">
                                                         <td className="px-4 py-2">
                                                             <div className="flex items-center">
                                                                 <p className="text-base font-medium leading-none text-gray-700 dark:text-white">{record.planName}</p>
@@ -244,7 +266,7 @@ const OverAll = ({ userName }) => {
             return (
                 <>
                     {
-                        currentRecords.length === 0 ? <div className='h-screen'><h1 className='text-3xl font-anuphan dark:text-white text-center'>No records found</h1></div> : (<div>
+                        currentRecords.length === 0 ? <div className='h-screen'><h1 className='text-3xl font-anuphan dark:text-white text-center pt-5'>No records found</h1></div> : (<div>
                             <table className="w-full whitespace-nowrap">
                                 <thead>
                                     <tr className='dark:text-fuchsia-400'>
@@ -261,7 +283,7 @@ const OverAll = ({ userName }) => {
                                         currentRecords.map((record) => {
                                             return (
                                                 <>
-                                                    <tr tabIndex="0" className="focus:outline-none h-16 rounded">
+                                                    <tr key={record.id} tabIndex="0" className="focus:outline-none h-16 rounded">
                                                         <td className="px-4 py-2">
                                                             <div className="flex items-center">
                                                                 <p className="text-base font-medium leading-none text-gray-700 dark:text-white">{record.addonName}</p>
@@ -358,7 +380,16 @@ const OverAll = ({ userName }) => {
                             <p>Addon</p>
                         </button>
                         <div className="pl-10">
-                            <input type="text" placeholder="Search for a plan, e.g. 199" className="w-full p-2 border border-gray-300 rounded-lg" />
+                            <input type="text"
+                                value={searchTerm}
+                                onChange={handleSearch}
+                                placeholder="Search for a plan, e.g. 199"
+                                className="w-full p-2 border border-gray-300 rounded-lg" />
+                            <ul>
+                                {/* {searchResults.map((result, index) => (
+                                    <li key={index}>{result.planName}{result.planData}</li>
+                                ))} */}
+                            </ul>
                         </div>
                     </div>
                     {selectedTab === 'plans' && !showForm && (

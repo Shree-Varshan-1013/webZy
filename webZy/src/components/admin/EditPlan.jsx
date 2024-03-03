@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import AdminService from '../../services/AdminService';
+import { Toaster, toast } from 'sonner';
 
 const EditPlan = ({ PlanId, accessToken }) => {
     const [tar, setTar] = useState({
@@ -43,8 +44,21 @@ const EditPlan = ({ PlanId, accessToken }) => {
     }
 
     const eventSave = async () => {
-        const res = await AdminService.updatePlan(PlanId, tar, accessToken);
-        console.log(res);
+        try {
+            toast.loading('Adding changes.....');
+            const res = await AdminService.updatePlan(PlanId, tar, accessToken);
+            console.log(res);
+
+            setTimeout(() => {
+                if (res.status === 200) {
+                    toast.success("Successfully updated the record")
+                }
+            }, 2000);
+        }
+        catch (err) {
+            toast.error('Something went wrong !');
+            console.log(err);
+        }
     }
 
     return (

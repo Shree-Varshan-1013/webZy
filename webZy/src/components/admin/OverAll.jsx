@@ -5,7 +5,7 @@ import EditPlan from './EditPlan';
 import EditAddon from './EditAddon';
 import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
-import AdminService from '../../services/AdminService';
+import AdminService from '../../services/AdminService'; import { Toaster, toast } from 'sonner';
 import PropTypes from 'prop-types';
 
 const OverAll = ({ userName }) => {
@@ -57,10 +57,10 @@ const OverAll = ({ userName }) => {
                 record.operatorName.toLowerCase().includes(term)
             );
         }) : [];
-    
+
         setSearchResults(results);
     };
-    
+
     console.log(searchResults);
 
     const [id, setId] = useState(null);
@@ -136,33 +136,22 @@ const OverAll = ({ userName }) => {
     }
 
     const handleDeleteButtonClick = async (id) => {
-        // Display confirmation dialog
-        Swal.fire({
-            title: 'Are you sure?',
-            text: 'You will not be able to recover this item!',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then(async (result) => {
-            if (result.isConfirmed) {
-                // User confirmed, proceed with deletion
-                if (selectedTab === "plans") {
-                    const res = await AdminService.deletePlanById(id, accessToken);
-                    console.log(res);
-                } else {
-                    const res = await AdminService.deleteAddonById(id, accessToken);
-                    console.log(res);
+        toast("Are you sure to delete the item?", {
+            action: {
+                label: "Delete",
+                onClick: async () => {
+                    if (selectedTab === "plans") {
+                        const res = await AdminService.deletePlanById(id, accessToken);
+                        console.log(res);
+                    } else {
+                        const res = await AdminService.deleteAddonById(id, accessToken);
+                        console.log(res);
+                    }
+                    setRecords(prevRecords => prevRecords.filter(record => record.planId !== id));
+                    toast.success("Successfully deleted !");
                 }
-                setRecords(prevRecords => prevRecords.filter(record => record.planId !== id));
-                Swal.fire(
-                    'Deleted!',
-                    'Your item has been deleted.',
-                    'success'
-                );
             }
-        });
+        })
     }
 
     const renderContent = () => {

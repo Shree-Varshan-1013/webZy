@@ -168,7 +168,9 @@ const EditAddon = ({ AddonId, accessToken }) => {
 }
 
 EditAddon.propTypes = {
-    username: PropTypes.string.isRequired
+    AddonId: PropTypes.number.isRequired,
+    accessToken: PropTypes.string.isRequired
 }
+
 
 export default EditAddon

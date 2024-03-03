@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.*;
 import com.webzy.jwt.entity.Addon;
 import com.webzy.jwt.entity.AppUser;
 import com.webzy.jwt.entity.Plan;
+import com.webzy.jwt.entity.Recharge;
 import com.webzy.jwt.service.AdminServiceImpl;
 import com.webzy.jwt.service.PlanServiceImpl;
+import com.webzy.jwt.service.RechargeServiceImpl;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -27,6 +29,8 @@ public class AdminController {
     private final AdminServiceImpl adminService;
 
     private final PlanServiceImpl planService;
+    
+    private final RechargeServiceImpl rechargeService;
 
     @Operation(summary = "Get all users", description = "Retrieve a list of all users.")
     @GetMapping("/get-all-users")
@@ -92,5 +96,11 @@ public class AdminController {
     @GetMapping("/addon/{id}")
     public Addon getAddonById(@Parameter(description = "Addon ID") @PathVariable Long id) {
         return adminService.getAddonById(id);
+    }
+
+    @Operation(summary = "Get recharges by username", description = "Retrieve recharges by its username.")
+    @GetMapping("/get-recharges/{username}")
+    public List<Recharge> getRechargesByUserName(@Parameter(description = "User Name") @PathVariable String username) {
+        return rechargeService.getRechargesByUserName(username);
     }
 }

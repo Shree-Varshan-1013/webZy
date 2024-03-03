@@ -32,4 +32,7 @@ public class Recharge {
     @JoinColumn(name = "addon_id")
     private Addon addon;
 
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private AppUser app_user;
 }

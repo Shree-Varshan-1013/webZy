@@ -1,11 +1,15 @@
 package com.webzy.jwt.controller;
 
 import java.util.List;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import com.webzy.jwt.entity.Addon;
 import com.webzy.jwt.entity.Plan;
+import com.webzy.jwt.entity.Recharge;
 import com.webzy.jwt.service.AddonServiceImpl;
+import com.webzy.jwt.service.RechargeServiceImpl;
 import com.webzy.jwt.service.UserServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -19,6 +23,7 @@ public class UserController {
 
 	private final UserServiceImpl userService;
 	private final AddonServiceImpl addonService;
+	private final RechargeServiceImpl rechargeService;
 
 	// @PostConstruct
 	// public void initRolesAndUSer() {
@@ -44,5 +49,12 @@ public class UserController {
 	@GetMapping("/getAddons/{operatorName}")
 	public List<Addon> getAddons(@Parameter(description = "Operator name") @PathVariable String operatorName) {
 		return addonService.getAddOnByOperatorName(operatorName);
+	}
+
+	@Operation(summary = "Make recharge", description = "Make recharge for Customers")
+	@PreAuthorize("hasRole('CUSTOMER') or hasRole('ADMIN')")
+	@PostMapping("/make-recharge/{username}")
+	public ResponseEntity<String> makeRecharge(@Parameter(description = "username") @PathVariable String username, @RequestBody Recharge recharge) {
+		return rechargeService.createRecharge(username, recharge);
 	}
 }

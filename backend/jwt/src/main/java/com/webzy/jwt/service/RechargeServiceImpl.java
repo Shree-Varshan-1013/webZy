@@ -1,14 +1,18 @@
 package com.webzy.jwt.service;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.webzy.jwt.dao.AppUserRepo;
+import com.webzy.jwt.dao.PaymentRepo;
 import com.webzy.jwt.dao.RechargeRepo;
 import com.webzy.jwt.entity.AppUser;
+import com.webzy.jwt.entity.Payment;
 import com.webzy.jwt.entity.Recharge;
 
 import lombok.RequiredArgsConstructor;
-
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -18,6 +22,8 @@ public class RechargeServiceImpl implements RechargeService {
     private final RechargeRepo rechargeRepository;
 
     private final AppUserRepo appUserRepository;
+
+    private final PaymentRepo paymentRepo;
 
     @Override
     public List<Recharge> getAllRecharges() {
@@ -30,8 +36,27 @@ public class RechargeServiceImpl implements RechargeService {
     }
 
     @Override
-    public Recharge createRecharge(Recharge recharge) {
-        return rechargeRepository.save(recharge);
+    public ResponseEntity<String> createRecharge(String userName, Recharge recharge) {
+
+        Date currentDate = new Date();
+
+        AppUser user = appUserRepository.findByUserName(userName);
+
+        recharge.setApp_user(user);
+
+        rechargeRepository.save(recharge);
+
+        Payment payment = new Payment();
+        payment.setPaymentDate(currentDate);
+        payment.setStatus("Success");
+        payment.setTotalAmount(recharge.getRechargePrice());
+        payment.setModeOfPayment("UPI");
+        payment.setRecharge(recharge);
+        payment.setUser(user);
+
+        paymentRepo.save(payment);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body("Recharge successful");
     }
 
     @Override
@@ -45,12 +70,11 @@ public class RechargeServiceImpl implements RechargeService {
         rechargeRepository.deleteById(id);
     }
 
-    public List<Recharge> getRechargesByUserName(String username){
-        try{
+    public List<Recharge> getRechargesByUserName(String username) {
+        try {
             AppUser user = appUserRepository.findByUserName(username);
             return rechargeRepository.findByApp_user(username);
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             return null;
         }
     }

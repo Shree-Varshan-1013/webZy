@@ -1,9 +1,7 @@
 package com.webzy.jwt.entity;
 
-import java.util.List;
 import java.util.Set;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
@@ -17,6 +15,7 @@ import lombok.NoArgsConstructor;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 @Data
+// @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -38,7 +37,7 @@ public class AppUser {
 	@Schema(description = "The location of the user")
 	private String location;
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "APP_USER_ROLE", joinColumns = {
 			@JoinColumn(name = "APP_USER_ID")
 	}, inverseJoinColumns = {

@@ -1,5 +1,6 @@
 package com.webzy.jwt.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,9 +34,9 @@ public class RechargeController {
         return rechargeService.getRechargeById(id);
     }
 
-    @PostMapping("/")
-    public Recharge createRecharge(@RequestBody Recharge recharge) {
-        return rechargeService.createRecharge(recharge);
+    @PostMapping("/{username}")
+    public ResponseEntity<String> createRecharge(@PathVariable("username") String username, @RequestBody Recharge recharge) {
+        return rechargeService.createRecharge(username, recharge);
     }
 
     @PutMapping("/{id}")

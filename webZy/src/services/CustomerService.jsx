@@ -23,6 +23,14 @@ class CustomerService {
     return axios.post(CUSTOMER_API_BASE_URL + "make-recharge/");
   }
 
+  getPayments(username, token) {
+    return axios.get(CUSTOMER_API_BASE_URL + "get-payments/" + username, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
 }
 
 export default new CustomerService();

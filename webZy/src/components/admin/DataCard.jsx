@@ -46,13 +46,8 @@ const DataCard = ({ userName }) => {
                                 </svg>
                             </div>
                             <div className="p-4 text-right">
-                                <p className="block antialiased text-sm leading-normal tracking-wider text-blue-gray-600 dark:text-white font-anuphan font-semibold">Today's Money</p>
-                                <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900 dark:text-white">$53k</h4>
-                            </div>
-                            <div className="border-t border-blue-gray-50 p-4">
-                                <p className="block antialiased font-anuphan text-base leading-relaxed font-normal text-blue-gray-600 dark:text-white">
-                                    <strong className="text-green-500 ">+55%</strong>&nbsp;than last week
-                                </p>
+                                <p className="block antialiased text-sm leading-normal tracking-wider text-blue-gray-600 dark:text-white font-anuphan font-semibold">Total Visitors</p>
+                                <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900 dark:text-white">73,000</h4>
                             </div>
                         </div>
                         <div className="relative flex flex-col bg-clip-border rounded-xl bg-white dark:bg-slate-800 text-gray-700 shadow-md">
@@ -62,13 +57,8 @@ const DataCard = ({ userName }) => {
                                 </svg>
                             </div>
                             <div className="p-4 text-right">
-                                <p className="block antialiased text-sm leading-normal text-blue-gray-600 dark:text-white font-anuphan font-semibold tracking-wider">Today's Users</p>
-                                <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900 dark:text-white">2,300</h4>
-                            </div>
-                            <div className="border-t border-blue-gray-50 p-4">
-                                <p className="block antialiased font-anuphan text-base leading-relaxed font-normal text-blue-gray-600 dark:text-white">
-                                    <strong className="text-green-500">+3%</strong>&nbsp;than last month
-                                </p>
+                                <p className="block antialiased text-sm leading-normal text-blue-gray-600 dark:text-white font-anuphan font-semibold tracking-wider">Total Users</p>
+                                <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900 dark:text-white">120</h4>
                             </div>
                         </div>
                         <div className="relative flex flex-col bg-clip-border rounded-xl bg-white dark:bg-slate-800 text-gray-700 shadow-md">
@@ -78,13 +68,8 @@ const DataCard = ({ userName }) => {
                                 </svg>
                             </div>
                             <div className="p-4 text-right">
-                                <p className="block antialiased text-sm leading-normal text-blue-gray-600 dark:text-white font-anuphan font-semibold tracking-wider">New Clients</p>
-                                <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900 dark:text-white">3,462</h4>
-                            </div>
-                            <div className="border-t border-blue-gray-50 p-4">
-                                <p className="block antialiased font-anuphan text-base leading-relaxed font-normal text-blue-gray-600 dark:text-white">
-                                    <strong className="text-red-500">-2%</strong>&nbsp;than yesterday
-                                </p>
+                                <p className="block antialiased text-sm leading-normal text-blue-gray-600 dark:text-white font-anuphan font-semibold tracking-wider">Trending Operators</p>
+                                <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900 dark:text-white">4</h4>
                             </div>
                         </div>
                         <div className="relative flex flex-col bg-clip-border rounded-xl bg-white dark:bg-slate-800 text-gray-700 shadow-md">
@@ -95,12 +80,7 @@ const DataCard = ({ userName }) => {
                             </div>
                             <div className="p-4 text-right">
                                 <p className="block antialiased text-sm leading-normal text-blue-gray-600 dark:text-white font-anuphan font-semibold tracking-wider">Sales</p>
-                                <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900 dark:text-white">$103,430</h4>
-                            </div>
-                            <div className="border-t border-blue-gray-50 p-4">
-                                <p className="block antialiased font-anuphan text-base leading-relaxed font-normal text-blue-gray-600 dark:text-white">
-                                    <strong className="text-green-500">+5%</strong>&nbsp;than yesterday
-                                </p>
+                                <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900 dark:text-white">₹103,430</h4>
                             </div>
                         </div>
                     </div>

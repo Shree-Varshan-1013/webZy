@@ -45,7 +45,7 @@ const AdminDashboard = ({ role }) => {
             transition={{ duration: 1 }}
         >
             <div className="block h-150">
-                <Toaster position="top-center" theme="light" visibleToasts={2} richColors />
+                <Toaster position="top-center" theme="light" visibleToasts={2} richColors closeButton/>
                 {
                     role === "ADMIN" ? (
                         <div className="flex flex-row dark:bg-slate-900" style={{ backgroundImage: "url(/img/bottom3.svg)", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>

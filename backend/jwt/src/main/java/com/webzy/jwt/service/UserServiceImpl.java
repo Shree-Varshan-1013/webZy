@@ -10,9 +10,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.webzy.jwt.dao.AppUserRepo;
+import com.webzy.jwt.dao.PaymentRepo;
 import com.webzy.jwt.dao.PlanRepo;
 import com.webzy.jwt.dao.RoleRepo;
 import com.webzy.jwt.entity.AppUser;
+import com.webzy.jwt.entity.Payment;
 import com.webzy.jwt.entity.Plan;
 import com.webzy.jwt.entity.Role;
 
@@ -27,6 +29,8 @@ public class UserServiceImpl implements UserService {
 	private final PlanRepo planRepo;
 
 	private final RoleRepo roleRepo;
+
+	private final PaymentRepo paymentRepo;
 
 	private final PasswordEncoder passwordEncoder;
 
@@ -99,6 +103,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<Plan> findPlansByOperator(String operatorName){
 		return planRepo.findByOperatorName(operatorName);
+	}
+
+	public List<Payment> getAllPaymentByUsername(String username){
+		return paymentRepo.getPaymentByUserName(username);
 	}
 
 }

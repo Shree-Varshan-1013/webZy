@@ -103,4 +103,10 @@ public class AdminController {
     public List<Recharge> getRechargesByUserName(@Parameter(description = "User Name") @PathVariable String username) {
         return rechargeService.getRechargesByUserName(username);
     }
+
+    @Operation(summary = "Get all customer recharges", description = "Retrieve all recharges")
+    @GetMapping("/get-recharges")
+    public List<Recharge> getAllRechargesByUserName() {
+        return rechargeService.getAllRecharges();
+    }
 }

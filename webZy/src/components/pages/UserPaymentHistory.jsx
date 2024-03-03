@@ -1,7 +1,33 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion';
+import CustomerService from '../../services/CustomerService';
+import { useSelector } from 'react-redux';
 
 const UserPaymentHistory = () => {
+
+    
+    const { userDetails, accessToken } = useSelector(state => state.global);
+    
+    console.log(userDetails.userName, accessToken);
+    
+    useEffect(() => {
+        fetchPayments();
+    }, []);
+    
+    const [data, setData] = useState([]);
+
+    const fetchPayments = async () => {
+        const res = await CustomerService.getPayments(userDetails.userName, accessToken);
+
+        const payment = res.data;
+
+        console.log(res);
+    }
+
+    // const { paymentId, status, totalAmount, paymentDate, modeOfPayment, recharge } = payment;
+    // const { rechargeId, rechargePrice, status: rechargeStatus, date: rechargeDate, plan, addon, app_user } = recharge;
+    // const { userName, email, mobileNumber, location, role } = app_user;
+
     return (
         <motion.div
             initial={{ opacity: 0 }}

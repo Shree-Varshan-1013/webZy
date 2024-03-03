@@ -55,9 +55,9 @@ class AdminService {
       },
     });
   }
-  
-  updatePlan(id, data, token){
-    return axios.put(ADMIN_API_BASE_URL + "/plan/" + id, data,{
+
+  updatePlan(id, data, token) {
+    return axios.put(ADMIN_API_BASE_URL + "/plan/" + id, data, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -74,6 +74,14 @@ class AdminService {
 
   getAddOnById(id, token) {
     return axios.get(ADMIN_API_BASE_URL + "/addon/" + id, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  getRecharges(token) {
+    return axios.get(ADMIN_API_BASE_URL + "/get-recharges", {
       headers: {
         Authorization: `Bearer ${token}`,
       },

@@ -3,6 +3,7 @@ import { GiTrashCan } from "react-icons/gi";
 import { FaRegEye } from "react-icons/fa";
 import AdminService from '../../services/AdminService';
 import { useSelector } from 'react-redux';
+import { toast } from 'sonner';
 import PropTypes from 'prop-types';
 
 const RechargeHistory = ({ userName }) => {
@@ -11,37 +12,34 @@ const RechargeHistory = ({ userName }) => {
 
     const [searchTerm, setSearchTerm] = useState('');
 
-    const [users, setUsers] = useState([]);
+    const [recharges, setRecharges] = useState([]);
 
     const [currentPage, setCurrentPage] = useState(1);
 
-    const itemsPerPage = 4;
+    const itemsPerPage = 5;
 
     const handleSearchInputChange = (event) => {
         setSearchTerm(event.target.value);
     };
 
-    const triggerSearch = () => {
-        // const res = AdminService
-    };
 
-    useEffect(() => {
-        fetchUsers();
-    }, [currentPage]);
-
-    const fetchUsers = async () => {
+    const fetchRecharges = async () => {
         try {
-            const res = await AdminService.getUsersInfos(accessToken);
-            setUsers(res.data);
+            const res = await AdminService.getRecharges(accessToken);
+            setRecharges(res.data);
         } catch (error) {
-            console.error("Error fetching users:", error);
+            console.error("Error fetching recharges:", error);
         }
     };
+    useEffect(() => {
+        fetchRecharges();
+    }, [currentPage]);
+
 
     // Calculate indexes for the current page
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentUsers = users.slice(indexOfFirstItem, indexOfLastItem);
+    const currentRecharges = recharges.slice(indexOfFirstItem, indexOfLastItem);
 
     // Change page
     const nextPage = () => {
@@ -51,6 +49,35 @@ const RechargeHistory = ({ userName }) => {
     const prevPage = () => {
         setCurrentPage(currentPage - 1);
     };
+
+    const eventShowAddon = (addon) => {
+        toast(
+            <div className="bg-white rounded-lg shadow-lg p-6">
+                <h2 className="text-xl font-semibold mb-4">{addon.addonName}</h2>
+                <p className="text-gray-700 mb-2"><span className="font-semibold">Price:</span> ${addon.addonPrice}</p>
+                <p className="text-gray-700 mb-2"><span className="font-semibold">Validity:</span> {addon.addonValidity}</p>
+                <p className="text-gray-700 mb-2"><span className="font-semibold">Data:</span> {addon.data}</p>
+                <p className="text-gray-700 mb-2"><span className="font-semibold">Operator:</span> {addon.operatorName}</p>
+                <p className="text-gray-700 mb-2"><span className="font-semibold">Details:</span> {addon.addonDetails}</p>
+            </div>
+            , {
+                action: {
+                    label: "Ok"
+                },
+            })
+    }
+
+    const eventShowPlan = (plan) => {
+        toast(
+            <div className="bg-white rounded-lg shadow-lg p-6">
+                <h2 className="text-xl font-semibold mb-4">{plan.planName}</h2>
+                <p className="text-gray-700 mb-2"><span className="font-semibold">Price:</span> ${plan.planPrice}</p>
+                <p className="text-gray-700 mb-2"><span className="font-semibold">Validity:</span> {plan.planValidity}</p>
+                <p className="text-gray-700 mb-2"><span className="font-semibold">Data:</span> {plan.planData}</p>
+                <p className="text-gray-700 mb-2"><span className="font-semibold">Operator:</span> {plan.operatorName}</p>
+                <p className="text-gray-700 mb-2"><span className="font-semibold">Details:</span> {plan.planDetails}</p>
+            </div>);
+    }
 
     return (
         <>
@@ -120,78 +147,51 @@ const RechargeHistory = ({ userName }) => {
                                 <table className="min-w-full leading-normal font-anuphan">
                                     <thead>
                                         <tr>
-                                            <th
-                                                className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                                UserName
+                                            <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                                Customer Name
                                             </th>
-                                            <th
-                                                className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                                Email
+                                            <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                                Amount
                                             </th>
-                                            <th
-                                                className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                                Created at
+                                            <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                                Status
                                             </th>
-                                            <th
-                                                className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                                Role
+                                            <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                                Date
                                             </th>
-                                            <th
-                                                className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                                Actions
+                                            <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                                Operator
+                                            </th>
+                                            <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                                Details
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {
-                                            currentUsers.map((user) => {
-                                                return <tr key={user.id}>
-                                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                                        <div className="flex items-center">
-                                                            <div className="flex-shrink-0 w-10 h-10">
-                                                                <img className="w-full h-full rounded-full"
-                                                                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"
-                                                                    alt="" />
-                                                            </div>
-                                                            <div className="ml-3">
-                                                                <p className="text-gray-900 whitespace-no-wrap">
-                                                                    {user.userName}
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                                        <p className="text-gray-900 whitespace-no-wrap">{user.email}</p>
-                                                    </td>
-                                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                                        <p className="text-gray-900 whitespace-no-wrap">
-                                                            {user.role[0].roleName}
-                                                        </p>
-                                                    </td>
-                                                    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                        {currentRecharges.map((recharge) => (
+                                            <tr key={recharge.rechargeId}>
+                                                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">{recharge.app_user?.userName}</td>
+                                                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">₹{recharge.rechargePrice}</td>
+                                                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm"><span
+                                                    className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+                                                    <span aria-hidden
+                                                        className="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
+                                                    <span className="relative">{recharge.status}</span>
+                                                </span></td>
+                                                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">{recharge.date}</td>
+                                                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">{recharge.plan.operatorName}</td>
+                                                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                                    <div className="flex justify-evenly">
                                                         {
-                                                            user.role[0].roleName === "ADMIN" ? <span
-                                                                className="relative inline-block px-3 py-1 font-semibold text-orange-900 leading-tight">
-                                                                <span aria-hidden
-                                                                    className="absolute inset-0 bg-orange-200 opacity-50 rounded-full"></span>
-                                                                <span className="relative">ADMIN</span>
-                                                            </span> : (<span
-                                                                className="relative inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
-                                                                <span aria-hidden
-                                                                    className="absolute inset-0 bg-green-200 opacity-50 rounded-full"></span>
-                                                                <span className="relative">USER</span>
-                                                            </span>)
+                                                            recharge.plan && <h2 onClick={() => eventShowPlan(recharge.plan)}>Plan</h2>
                                                         }
-                                                    </td>
-                                                    <td className="px-5 py-5 border-b border-gray-200 bg-white">
-                                                        <div className='flex justify-evenly'>
-                                                            <FaRegEye fontSize={29} className='mt-1' />
-                                                            <GiTrashCan fontSize={30} />
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            })
-                                        }
+                                                        {
+                                                            recharge.addon && <h2 onClick={() => eventShowAddon(recharge.addon)}>Addon</h2>
+                                                        }
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        ))}
                                     </tbody>
                                 </table>
                                 <div
@@ -206,7 +206,7 @@ const RechargeHistory = ({ userName }) => {
                                             Prev
                                         </button>
                                         <button
-                                            onClick={nextPage} disabled={indexOfLastItem >= users.length}
+                                            onClick={nextPage} disabled={indexOfLastItem >= recharges.length}
                                             className="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-r">
                                             Next
                                         </button>

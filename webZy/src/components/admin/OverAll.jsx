@@ -4,8 +4,8 @@ import Addon from './Addon';
 import EditPlan from './EditPlan';
 import EditAddon from './EditAddon';
 import { useSelector } from 'react-redux';
-import Swal from 'sweetalert2';
-import AdminService from '../../services/AdminService'; import { Toaster, toast } from 'sonner';
+import AdminService from '../../services/AdminService'; 
+import { toast } from 'sonner';
 import PropTypes from 'prop-types';
 
 const OverAll = ({ userName }) => {

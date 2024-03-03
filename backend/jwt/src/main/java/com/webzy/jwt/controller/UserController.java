@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import com.webzy.jwt.entity.Addon;
+import com.webzy.jwt.entity.Payment;
 import com.webzy.jwt.entity.Plan;
 import com.webzy.jwt.entity.Recharge;
 import com.webzy.jwt.service.AddonServiceImpl;
@@ -24,7 +25,6 @@ public class UserController {
 	private final UserServiceImpl userService;
 	private final AddonServiceImpl addonService;
 	private final RechargeServiceImpl rechargeService;
-
 	// @PostConstruct
 	// public void initRolesAndUSer() {
 	// 	userService.initRolesAndUser();
@@ -56,5 +56,12 @@ public class UserController {
 	@PostMapping("/make-recharge/{username}")
 	public ResponseEntity<String> makeRecharge(@Parameter(description = "username") @PathVariable String username, @RequestBody Recharge recharge) {
 		return rechargeService.createRecharge(username, recharge);
+	}
+
+	@Operation(summary = "View Payments", description = "View all payment records")
+	@PreAuthorize("hasRole('CUSTOMER') or hasRole('ADMIN')")
+	@GetMapping("/get-payments/{username}")
+	public List<Payment> getAllPaymentByUsername(@Parameter(description = "username") @PathVariable String username) {
+		return userService.getAllPaymentByUsername(username);
 	}
 }

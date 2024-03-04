@@ -18,6 +18,7 @@ const LazyUserPaymentHistory = React.lazy(() => import('./components/pages/UserP
 const LazyVerifyRecharge = React.lazy(() => import('./components/VerifyRecharge.jsx'));
 const LazyEditProfile = React.lazy(() => import('./components/pages/EditProfile.jsx'));
 const LazyPaymentSuccess = React.lazy(() => import('./components/pages/PaymentSuccess.jsx'));
+const LazyLastPlan = React.lazy(() => import('./components/pages/LastPlan.jsx'));
 import AuthLayout from './layouts/AuthLayout.jsx';
 import UserLayout from './layouts/UserLayout.jsx';
 import './App.css';
@@ -47,6 +48,7 @@ function App() {
           <Route path="/unauthorize" element={<LazyUnauthorize />} />
           <Route path="*" element={<UserLayout component={LazyPageNotFound} />} />
           <Route path="/who" element={<UserLayout component={LazyVerifyRecharge} />} />
+          <Route path="/last-plan-repeat" element={<UserLayout component={LazyLastPlan} />} />
           <Route path="/speed" element={<Speedometer/>} />
         </Routes>
       </Suspense>

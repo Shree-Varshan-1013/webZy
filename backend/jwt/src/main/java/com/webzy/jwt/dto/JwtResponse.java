@@ -1,4 +1,4 @@
-package com.webzy.jwt.entity;
+package com.webzy.jwt.dto;
 
 import lombok.Builder;
 import lombok.Data;
@@ -10,7 +10,7 @@ public class JwtResponse {
 	public JwtResponse() {
 	}
 
-	public JwtResponse(AppUser user, String jwtToken) {
+	public JwtResponse(UserData user, String jwtToken) {
 		super();
 		this.user = user;
 		this.jwtToken = jwtToken;
@@ -20,14 +20,14 @@ public class JwtResponse {
 		this.jwtToken = "Error: " + string;
 	}
 
-	private AppUser user;
+	private UserData user;
 	private String jwtToken;
 
-	public AppUser getUser() {
+	public UserData getUser() {
 		return user;
 	}
 
-	public void setUser(AppUser user) {
+	public void setUser(UserData user) {
 		this.user = user;
 	}
 

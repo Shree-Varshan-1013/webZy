@@ -9,10 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.webzy.jwt.dao.AppUserRepo;
-import com.webzy.jwt.dao.PaymentRepo;
-import com.webzy.jwt.dao.PlanRepo;
-import com.webzy.jwt.dao.RoleRepo;
+import com.webzy.jwt.repository.AppUserRepo;
+import com.webzy.jwt.repository.PaymentRepo;
+import com.webzy.jwt.repository.PlanRepo;
+import com.webzy.jwt.repository.RoleRepo;
 import com.webzy.jwt.entity.AppUser;
 import com.webzy.jwt.entity.Payment;
 import com.webzy.jwt.entity.Plan;
@@ -108,5 +108,10 @@ public class UserServiceImpl implements UserService {
 	public List<Payment> getAllPaymentByUsername(String username){
 		return paymentRepo.getPaymentByUserName(username);
 	}
+
+    public Plan getLatestReord(String username) {
+		List<Payment> tar = paymentRepo.findLatestRecordByUsername(username); 
+        return tar.get(0).getRecharge().getPlan();
+    }
 
 }

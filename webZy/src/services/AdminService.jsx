@@ -64,6 +64,21 @@ class AdminService {
     });
   }
 
+  addAddon(addon, token){
+    return axios.post(ADMIN_API_BASE_URL + "/addon", addon, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+  }
+  updateAddon(id, data, token) {
+    return axios.put(ADMIN_API_BASE_URL + "/addon/" + id, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
   getAddon(token) {
     return axios.get(ADMIN_API_BASE_URL + "/getAddons", {
       headers: {
@@ -74,6 +89,14 @@ class AdminService {
 
   getAddOnById(id, token) {
     return axios.get(ADMIN_API_BASE_URL + "/addon/" + id, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  deleteAddonById(id, token) {
+    return axios.delete(ADMIN_API_BASE_URL + "/addon/" + id, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

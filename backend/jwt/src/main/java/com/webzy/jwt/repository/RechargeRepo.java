@@ -1,9 +1,8 @@
-package com.webzy.jwt.dao;
+package com.webzy.jwt.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.webzy.jwt.entity.AppUser;
 import com.webzy.jwt.entity.Recharge;
 import java.util.List;
 

@@ -13,38 +13,30 @@ const TabsComponent = ({ openTab, setOpenTab, operatorName, accessToken }) => {
 
     const navigate = useNavigate();
 
-    var orderDetails = {
-        "userId": 1,
-        "price": 599 - 100,
-        "providerId": 0,
-        "providerFirstName": "",
-        "providerLastName": "",
-        "providerEmail": "",
-        "providerExperience": 0,
-        "providerAddress": "",
-        "providerGender": "",
-        "providerPhoneNumber": 0
-    }
+    const onPay = (details, target) => {
 
-    const onPay = () => {
+        const price = details.planPrice || details.addonPrice;
 
-        // dispatch(setPaymentSuccess("true"));
         var options = {
             key: "rzp_test_ErrHDhVpplAsdS",
             key_secret: "DUulYAw3CJ05Of3wiSW2jEaQ",
-            amount: (599 - 100) * 100,
+            amount: price * 100,
             currency: "INR",
             name: "Webzy",
             description: "Sample",
             prefill: {
-                name: userDetails.userName,
+                name: userDetails.username,
                 email: userDetails.email,
-                contact: 6369442740,
+                contact: userDetails.mobileNumber,
             },
             handler: function (response) {
                 console.log(response);
-                // dispatch(setPaymentSuccess(true));
-
+                if (target === "plan") {
+                    makeRechargePlan(details, price);
+                }
+                else {
+                    makeRechargeAddon(details, price);
+                }
                 Swal.fire({
                     position: "top-center",
                     icon: "success",
@@ -65,6 +57,34 @@ const TabsComponent = ({ openTab, setOpenTab, operatorName, accessToken }) => {
         pay.open();
     };
 
+    const makeRechargeAddon = async (details, price) => {
+        var today = new Date();
+
+        const data = {
+            // "rechargeId": 0,
+            "rechargePrice": price,
+            "status": "string",
+            "date": today,
+            "addon": details
+        }
+        const res = await CustomerService.makeRecharge(userDetails.username, accessToken, data);
+        console.log(res);
+    }
+    
+    const makeRechargePlan = async (details, price) => {
+        var today = new Date();
+    
+        const data = {
+            // "rechargeId": 0,
+            "rechargePrice": price,
+            "status": "string",
+            "date": today,
+            "plan": details
+        }
+        const res = await CustomerService.makeRecharge(userDetails.username, accessToken, data);
+        console.log(res);
+    }
+
     useEffect(() => {
 
         if (openTab === 1) {
@@ -79,14 +99,6 @@ const TabsComponent = ({ openTab, setOpenTab, operatorName, accessToken }) => {
             };
 
             fetchData();
-            // setRecords([
-            //     { id: 1, name: "Record 1 for Add on" },
-            //     { id: 2, name: "Record 2 for Add on" },
-            //     { id: 3, name: "Record 3 for Add on" },
-            //     { id: 3, name: "Record 4 for Add on" },
-            //     { id: 3, name: "Record 5 for Add on" },
-            //     { id: 3, name: "Record 6 for Add on" },
-            // ]);
         } else if (openTab === 2) {
             const fetchData1 = async () => {
                 try {
@@ -164,7 +176,7 @@ const TabsComponent = ({ openTab, setOpenTab, operatorName, accessToken }) => {
 
                                 <div>
                                     <div className="flex justify-center items-center">
-                                        <a onClick={onPay} className="relative rounded px-5 py-2.5 overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300">
+                                        <a onClick={() => onPay(record, "plan")} className="relative rounded px-5 py-2.5 overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300">
                                             <span className="relative">Apply</span>
                                         </a>
                                     </div>
@@ -193,7 +205,8 @@ const TabsComponent = ({ openTab, setOpenTab, operatorName, accessToken }) => {
                                 </div>
                                 <div>
                                     <div className="flex justify-center items-center">
-                                        <a onClick={() => navigate(`/mobile-recharge/${operatorName}/payment`)} className="relative rounded px-5 py-2.5 overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300">
+                                        {/* <a onClick={() => navigate(`/mobile-recharge/${operatorName}/payment`)} className="relative rounded px-5 py-2.5 overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300"> */}
+                                        <a onClick={() => onPay(record, "addon")} className="relative rounded px-5 py-2.5 overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300">
                                             <span className="relative">Apply</span>
                                         </a>
                                     </div>
@@ -240,12 +253,11 @@ const TabsComponent = ({ openTab, setOpenTab, operatorName, accessToken }) => {
 
 const PlanDetails = () => {
 
-
     const [openTab, setOpenTab] = useState(1);
 
     const { operatorName } = useParams();
 
-    const { accessToken, isLoggedIn } = useSelector((state) => state.global);
+    const { accessToken, isLoggedIn, userDetails } = useSelector((state) => state.global);
 
     return (
         <motion.div
@@ -282,7 +294,7 @@ const PlanDetails = () => {
                                     <strong
                                         className="rounded border border-purple bg-purple px-3 py-1.5 text-[10px] font-medium text-white font-anuphan"
                                     >
-                                        6369442740
+                                        {userDetails.mobileNumber}
                                     </strong>
 
                                     <h3 className="mt-4 text-lg font-medium sm:text-xl dark:text-white">

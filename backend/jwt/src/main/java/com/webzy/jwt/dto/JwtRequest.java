@@ -1,4 +1,4 @@
-package com.webzy.jwt.entity;
+package com.webzy.jwt.dto;
 
 import lombok.Builder;
 import lombok.Data;

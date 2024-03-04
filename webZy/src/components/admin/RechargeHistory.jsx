@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react'
-import { GiTrashCan } from "react-icons/gi";
-import { FaRegEye } from "react-icons/fa";
 import AdminService from '../../services/AdminService';
 import { useSelector } from 'react-redux';
 import { toast } from 'sonner';
@@ -16,7 +14,7 @@ const RechargeHistory = ({ userName }) => {
 
     const [currentPage, setCurrentPage] = useState(1);
 
-    const itemsPerPage = 5;
+    const itemsPerPage = 4;
 
     const handleSearchInputChange = (event) => {
         setSearchTerm(event.target.value);
@@ -100,8 +98,9 @@ const RechargeHistory = ({ userName }) => {
                                     </ol>
                                 </nav>
                             </div>
-                            <div className="flex items-center">
-                                <a>
+                            <div className="flex items-center flex-row">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#9ca3af" d="M17 17q.625 0 1.063-.437T18.5 15.5q0-.625-.437-1.062T17 14q-.625 0-1.062.438T15.5 15.5q0 .625.438 1.063T17 17m0 3q.775 0 1.425-.363t1.05-.962q-.55-.325-1.175-.5T17 18q-.675 0-1.3.175t-1.175.5q.4.6 1.05.963T17 20m0 2q-2.075 0-3.537-1.463T12 17q0-2.075 1.463-3.537T17 12q2.075 0 3.538 1.463T22 17q0 2.075-1.463 3.538T17 22m-5 0q-3.475-.875-5.738-3.988T4 11.1V5l8-3l8 3v5.675q-.65-.325-1.463-.5T17 10q-2.9 0-4.95 2.05T10 17q0 1.55.588 2.8t1.487 2.175q-.025 0-.037.013T12 22" /></svg>
+                                <a className='pl-3'>
                                     <span className="font-anuphan">{userName}</span>
                                 </a>
                             </div>
@@ -179,14 +178,26 @@ const RechargeHistory = ({ userName }) => {
                                                     <span className="relative">{recharge.status}</span>
                                                 </span></td>
                                                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">{recharge.date}</td>
-                                                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">{recharge.plan.operatorName}</td>
+                                                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">{recharge.plan && recharge.plan.operatorName}</td>
                                                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                                     <div className="flex justify-evenly">
                                                         {
-                                                            recharge.plan && <h2 onClick={() => eventShowPlan(recharge.plan)}>Plan</h2>
+                                                            recharge.plan && <div className='flex justify-center items-center'>
+                                                                <button
+                                                                    onClick={() => eventShowPlan(recharge.plan)}
+                                                                    className="block text-sm font-medium rounded px-5 py-2.5 overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300"
+                                                                >
+                                                                    Plan
+                                                                </button>
+                                                            </div>
                                                         }
                                                         {
-                                                            recharge.addon && <h2 onClick={() => eventShowAddon(recharge.addon)}>Addon</h2>
+                                                            recharge.addon && <button
+                                                                onClick={() => eventShowAddon(recharge.addon)}
+                                                                className="block text-sm font-medium rounded px-5 py-2.5 overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300"
+                                                            >
+                                                                Addon
+                                                            </button>
                                                         }
                                                     </div>
                                                 </td>
@@ -197,7 +208,7 @@ const RechargeHistory = ({ userName }) => {
                                 <div
                                     className="px-5 py-2 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between          ">
                                     <span className="text-xs xs:text-sm text-gray-900">
-                                        Showing 1 to 4 of 50 Entries
+                                        Showing {indexOfFirstItem + 1} to {Math.min(indexOfLastItem, recharges.length)} of {recharges.length} Entries
                                     </span>
                                     <div className="inline-flex mt-2 xs:mt-0">
                                         <button

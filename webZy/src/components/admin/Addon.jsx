@@ -1,39 +1,53 @@
 import { useFormik } from 'formik';
-import { useNavigate } from 'react-router-dom';
-
 import PropTypes from 'prop-types';
-import PlanSchema from '../../schemas/PlanSchema';
+import AddOnSchema from '../../schemas/AddOnSchema';
+import AdminService from '../../services/AdminService';
+import { useSelector } from 'react-redux';
+import { toast } from 'sonner';
 
 const Addon = ({ userName }) => {
+
+    const { accessToken } = useSelector(state => state.global);
 
     const initialData = {
         addonName: "",
         data: "",
         addonPrice: "",
         addonDetails: "",
-        addonValidity: "",
         operatorName: ""
     }
 
     const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
         initialValues: initialData,
-        validationSchema: PlanSchema,
+        validationSchema: AddOnSchema,
         onSubmit: (values, action) => {
             console.log(values);
             eventAction();
-            action.resetForm();
         },
     });
 
-    const eventAction = () => {
-        console.log(values);
+    const eventAction = async () => {
+        try {
+            toast.loading('Creating new Addon...');
+            const res = await AdminService.addAddon(values, accessToken);
+            console.log(res);
+            setTimeout(() => {
+                if (res.status === 200) {
+                    toast.success("Successfully Addon added")
+                }
+            }, 2000);
+        }
+        catch (err) {
+            toast.error('Something went wrong !');
+            console.log(err);
+        }
     }
 
     return (
         <div className=" dark:bg-slate-900 w-full" style={{ backgroundImage: "url(/img/bottom3.svg)", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>
             <div className="">
                 <form onSubmit={handleSubmit} className="mb-0 space-y-4 rounded-lg p-4 shadow-2xl sm:p-6 lg:p-8">
-                    <div className='grid grid-cols-2 gap-4'>
+                    <div className='grid grid-cols-2 gap-4 dark:text-white'>
                         <div>
                             <label className="sr-only font-anuphan">Name</label>
                             <div className="relative">
@@ -46,7 +60,6 @@ const Addon = ({ userName }) => {
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
                                     placeholder="Enter Add on Name"
                                 />
-
                                 {errors.addonName && touched.addonName && <div className="text-red-600 text-xs">{errors.addonName}</div>}
                             </div>
                         </div>
@@ -62,7 +75,6 @@ const Addon = ({ userName }) => {
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
                                     placeholder="Enter the data"
                                 />
-
                                 {errors.data && touched.data && <div className="text-red-600 text-xs">{errors.data}</div>}
                             </div>
                         </div>
@@ -78,7 +90,6 @@ const Addon = ({ userName }) => {
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
                                     placeholder="Enter the price"
                                 />
-
                                 {errors.addonPrice && touched.addonPrice && <div className="text-red-600 text-xs">{errors.addonPrice}</div>}
                             </div>
                         </div>
@@ -94,24 +105,7 @@ const Addon = ({ userName }) => {
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
                                     placeholder="Enter description"
                                 />
-
                                 {errors.addonDetails && touched.addonDetails && <div className="text-red-600 text-xs">{errors.addonDetails}</div>}
-                            </div>
-                        </div>
-                        <div>
-                            <label className="sr-only font-anuphan">Validity</label>
-                            <div className="relative">
-                                <input
-                                    name="addonValidity"
-                                    type="text"
-                                    value={values.addonValidity}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
-                                    placeholder="Enter the Validity"
-                                />
-
-                                {errors.addonValidity && touched.addonValidity && <div className="text-red-600 text-xs">{errors.addonValidity}</div>}
                             </div>
                         </div>
                         <div>
@@ -130,7 +124,6 @@ const Addon = ({ userName }) => {
                                     <option value="Jio">Jio</option>
                                     <option value="Vi">Vi</option>
                                 </select>
-
                                 {errors.operatorName && touched.operatorName && <div className="text-red-600 text-xs">{errors.operatorName}</div>}
                             </div>
                         </div>

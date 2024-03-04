@@ -18,6 +18,7 @@ import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5713")
 @RequestMapping("/api/v1/customer")
 @RequiredArgsConstructor
 public class UserController {
@@ -27,7 +28,7 @@ public class UserController {
 	private final RechargeServiceImpl rechargeService;
 	// @PostConstruct
 	// public void initRolesAndUSer() {
-	// 	userService.initRolesAndUser();
+	// userService.initRolesAndUser();
 	// }
 
 	@Operation(summary = "Admin route", description = "Accessible only by admin roles.")
@@ -54,7 +55,8 @@ public class UserController {
 	@Operation(summary = "Make recharge", description = "Make recharge for Customers")
 	@PreAuthorize("hasRole('CUSTOMER') or hasRole('ADMIN')")
 	@PostMapping("/make-recharge/{username}")
-	public ResponseEntity<String> makeRecharge(@Parameter(description = "username") @PathVariable String username, @RequestBody Recharge recharge) {
+	public ResponseEntity<String> makeRecharge(@Parameter(description = "username") @PathVariable String username,
+			@RequestBody Recharge recharge) {
 		return rechargeService.createRecharge(username, recharge);
 	}
 
@@ -63,5 +65,12 @@ public class UserController {
 	@GetMapping("/get-payments/{username}")
 	public List<Payment> getAllPaymentByUsername(@Parameter(description = "username") @PathVariable String username) {
 		return userService.getAllPaymentByUsername(username);
+	}
+
+	@Operation(summary = "Get latest payment", description = "View latest payment of the particular user")
+	@PreAuthorize("hasRole('CUSTOMER') or hasRole('ADMIN')")
+	@GetMapping("/get-latest-plan/{username}")
+	public Plan getLatest(@Parameter(description = "username") @PathVariable String username) {
+		return userService.getLatestReord(username);
 	}
 }

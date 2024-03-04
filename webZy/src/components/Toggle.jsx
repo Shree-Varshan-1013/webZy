@@ -39,7 +39,7 @@ const Toggle = () => {
 
     return (
         <button
-            className="w-[70px] h-8 rounded-full bg-white flex items-center transition duration-300 focus:outline-none shadow"
+            className="w-[70px] h-8 rounded-full bg-white flex items-center transition duration-300 focus:outline-none shadow select-none"
             onClick={toggleTheme}
         >
             <div

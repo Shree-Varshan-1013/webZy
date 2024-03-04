@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 function ProfilePage() {
 
-    const { userDetails } = useSelector((state) => state.global);
+    const { userDetails, fullPlan } = useSelector((state) => state.global);
 
     const navigate = useNavigate();
 
@@ -36,7 +36,7 @@ function ProfilePage() {
                                 <div className="flex flex-wrap justify-center">
                                     <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
                                         <div className="relative -bottom-12 flex h-[87px] w-[87px] items-center justify-center rounded-full border-[4px] border-gray-300 bg-purple3 dark:!border-navy-700">
-                                            <span className="text-white text-4xl font-bold">{userDetails.userName ? userDetails.userName.charAt(0).toUpperCase() : ''}</span>
+                                            <span className="text-white text-4xl font-bold">{userDetails.username ? userDetails.username.charAt(0).toUpperCase() : ''}</span>
                                         </div>
                                     </div>
                                     <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
@@ -49,31 +49,30 @@ function ProfilePage() {
                                     <div className="w-full lg:w-4/12 px-4 lg:order-1">
                                         <div className="flex justify-center py-4 lg:pt-4 pt-8">
                                             <div className="mr-4 p-3 text-center" style={{ width: "120px", whiteSpace: "nowrap" }}>
-                                                <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600 text-purple3">JIO</span><span className="text-sm text-blueGray-400">Sim</span>
+                                                <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600 text-purple3">{fullPlan.operatorName}</span><span className="text-sm text-blueGray-400">Sim</span>
                                             </div>
                                             <div className="mr-2 p-3 text-center" style={{ width: "120px", whiteSpace: "nowrap" }}>
-                                                <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600 text-purple3">Prepaid</span><span className="text-sm text-blueGray-400">Plan Type</span>
+                                                <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600 text-purple3">{fullPlan.planType}</span><span className="text-sm text-blueGray-400">Plan Type</span>
                                             </div>
                                             <div className="lg:mr-4 p-3 text-center" style={{ width: "160px", whiteSpace: "nowrap" }}>
-                                                <span className="text-lg font-bold font-anuphan block uppercase tracking-wide text-blueGray-600 text-purple3">2 GB/Day</span><span className="text-sm text-blueGray-400">Data</span>
+                                                <span className="text-lg font-bold font-anuphan block uppercase tracking-wide text-blueGray-600 text-purple3">{fullPlan.planData}</span><span className="text-sm text-blueGray-400">Data</span>
                                             </div>
                                             <div className="lg:mr-4 p-3 text-center" style={{ width: "120px", whiteSpace: "nowrap" }}>
                                                 <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600 text-purple3">5 days</span><span className="text-sm text-blueGray-400">Expiring in</span>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
                                 <div className="text-center mt-12">
                                     <h3 className="text-4xl font-semibold leading-normal text-blueGray-700 mb-2">
-                                        {userDetails.userName}
+                                        {userDetails.username}
                                     </h3>
                                     <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
                                         <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
-                                        Coimbatore, TamilNadu
+                                        {userDetails.location}, TamilNadu
                                     </div>
                                     <div className="mb-2 text-blueGray-600 mt-10">
-                                        <i className="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>Phone Number - 6369442740
+                                        <i className="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>Phone Number - {userDetails.mobileNumber}
                                     </div>
                                     <div className="mb-2 text-blueGray-600">
                                         <i className="fas fa-university mr-2 text-lg text-blueGray-400"></i>Write Something

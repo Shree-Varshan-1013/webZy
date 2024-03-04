@@ -49,7 +49,7 @@ public class AddonController {
 
     @Operation(summary = "Create a new addon", description = "Create a new addon.")
     @PostMapping("/")
-    public Addon createAddon(@RequestBody Addon addon) {
+    public boolean createAddon(@RequestBody Addon addon) {
         return addonService.createAddon(addon);
     }
 

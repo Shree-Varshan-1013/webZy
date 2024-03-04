@@ -11,7 +11,7 @@ const SignIn = () => {
 
     const navigate = useNavigate();
 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch(); 
 
     const { isDark } = useSelector((state) => state.global);
 

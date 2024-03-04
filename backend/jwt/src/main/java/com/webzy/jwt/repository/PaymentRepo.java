@@ -1,4 +1,4 @@
-package com.webzy.jwt.dao;
+package com.webzy.jwt.repository;
 
 import java.util.List;
 
@@ -11,4 +11,7 @@ public interface PaymentRepo extends JpaRepository<Payment, Long> {
 
     @Query(value = "SELECT u FROM Payment u WHERE u.user.userName = ?1")
     public List<Payment> getPaymentByUserName(String username);
+
+    @Query("SELECT p FROM Payment p WHERE p.user.userName = ?1")
+    List<Payment> findLatestRecordByUsername(String username);
 }

@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 import com.webzy.jwt.entity.AppUser;
-import com.webzy.jwt.entity.Payment;
 import com.webzy.jwt.entity.Plan;
 
 public interface UserService {

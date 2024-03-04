@@ -23,10 +23,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.webzy.jwt.dao.AppUserRepo;
+import com.webzy.jwt.dto.JwtRequest;
+import com.webzy.jwt.dto.JwtResponse;
+import com.webzy.jwt.dto.UserData;
 import com.webzy.jwt.entity.AppUser;
-import com.webzy.jwt.entity.JwtRequest;
-import com.webzy.jwt.entity.JwtResponse;
+import com.webzy.jwt.repository.AppUserRepo;
 import com.webzy.jwt.util.JwtUtil;
 
 import lombok.RequiredArgsConstructor;
@@ -74,7 +75,15 @@ public class JwtService implements UserDetailsService {
 			if (userDetails != null && passwordEncoder().matches(userPassword, userDetails.getPassword())) {
 				String newGeneratedToken = jwtUtil.generateToken(userDetails);
 				AppUser user = userRepo.findById(newUserName).get();
-				return new JwtResponse(user, newGeneratedToken);
+
+				UserData obj = new UserData();
+				obj.setUsername(newUserName);
+				obj.setEmail(user.getEmail());
+				obj.setMobileNumber(user.getMobileNumber());
+				obj.setLocation(user.getLocation());
+				obj.setRole(user.getRole());
+				
+				return new JwtResponse(obj, newGeneratedToken);
 			}
 		} catch (Exception ex) {
 			return new JwtResponse("Invalid Credentials !");

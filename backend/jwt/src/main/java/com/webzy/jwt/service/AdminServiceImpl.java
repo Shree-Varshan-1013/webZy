@@ -9,10 +9,10 @@ import java.util.Set;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.webzy.jwt.dao.AddonRepo;
-import com.webzy.jwt.dao.AppUserRepo;
-import com.webzy.jwt.dao.PlanRepo;
-import com.webzy.jwt.dao.RoleRepo;
+import com.webzy.jwt.repository.AddonRepo;
+import com.webzy.jwt.repository.AppUserRepo;
+import com.webzy.jwt.repository.PlanRepo;
+import com.webzy.jwt.repository.RoleRepo;
 import com.webzy.jwt.entity.Addon;
 import com.webzy.jwt.entity.AppUser;
 import com.webzy.jwt.entity.Plan;

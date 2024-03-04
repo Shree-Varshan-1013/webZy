@@ -1,16 +1,13 @@
 import { useState, useEffect } from 'react';
 import DataCard from './DataCard';
 import UserData from './UserData';
-// import Search from './Search';
 import { motion, AnimatePresence } from 'framer-motion';
-// import AddAdmin from './AddAdmin';
 import PropTypes from 'prop-types';
-import AddPlan from './AddPlan';
 import PaymentHistory from './RechargeHistory';
-import Addon from './Addon';
 import OverAll from './OverAll';
 
 const AdminSideBarContent = ({ activeLink, userName }) => {
+
     const [content, setContent] = useState(null);
 
     useEffect(() => {
@@ -26,9 +23,9 @@ const AdminSideBarContent = ({ activeLink, userName }) => {
     return (
         <AnimatePresence mode='wait'>
             <motion.div key={activeLink}
-                initial={{ opacity: 0, y: 50 }} // Start from bottom
-                animate={{ opacity: 1, y: 0 }} // Move up to original position
-                exit={{ opacity: 0, y: -50 }} // Exit by moving back down
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -50 }} 
                 transition={{ duration: 0.5 }}
                 className="w-full block dark:bg-slate-900">
                 {content}

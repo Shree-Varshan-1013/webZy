@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.webzy.jwt.dao.PlanRepo;
+import com.webzy.jwt.repository.PlanRepo;
 import com.webzy.jwt.entity.Plan;
 
 import jakarta.annotation.PostConstruct;

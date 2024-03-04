@@ -4,7 +4,7 @@ import Addon from './Addon';
 import EditPlan from './EditPlan';
 import EditAddon from './EditAddon';
 import { useSelector } from 'react-redux';
-import AdminService from '../../services/AdminService'; 
+import AdminService from '../../services/AdminService';
 import { toast } from 'sonner';
 import PropTypes from 'prop-types';
 
@@ -61,8 +61,6 @@ const OverAll = ({ userName }) => {
         setSearchResults(results);
     };
 
-    console.log(searchResults);
-
     const [id, setId] = useState(null);
 
     useEffect(() => {
@@ -91,7 +89,8 @@ const OverAll = ({ userName }) => {
         }
     }, [currentPage, selectedTab]);
 
-    const handleEditButtonClick = () => {
+    const handleEditButtonClick = (item) => {
+        setId(item);
         setShowEditForm(true);
         setSelectedTab(null);
     };
@@ -140,19 +139,24 @@ const OverAll = ({ userName }) => {
             action: {
                 label: "Delete",
                 onClick: async () => {
-                    if (selectedTab === "plans") {
-                        const res = await AdminService.deletePlanById(id, accessToken);
-                        console.log(res);
-                    } else {
-                        const res = await AdminService.deleteAddonById(id, accessToken);
-                        console.log(res);
+                    try {
+                        if (selectedTab === "plans") {
+                            await AdminService.deletePlanById(id, accessToken);
+                            setRecords(prevRecords => prevRecords.filter(record => record.planId !== id));
+                        } else {
+                            await AdminService.deleteAddonById(id, accessToken);
+                            setRecords(prevRecords => prevRecords.filter(record => record.addonId !== id));
+                        }
+                        toast.success("Successfully deleted !");
+                    } catch (err) {
+                        console.log(err);
+                        toast.error("Something went wrong !");
                     }
-                    setRecords(prevRecords => prevRecords.filter(record => record.planId !== id));
-                    toast.success("Successfully deleted !");
                 }
             }
-        })
-    }
+        });
+    };
+
 
     const renderContent = () => {
         if (showForm) {
@@ -301,7 +305,7 @@ const OverAll = ({ userName }) => {
                                                                 <button className="mr-2" onClick={() => handleEditButtonClick(record.addonId)}>
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="#B65FCF" fillRule="evenodd" clipRule="evenodd"><path d="M11.3 6.2H5a2 2 0 0 0-2 2V19a2 2 0 0 0 2 2h11c1.1 0 2-1 2-2.1V11l-4 4.2c-.3.3-.7.6-1.2.7l-2.7.6c-1.7.3-3.3-1.3-3-3.1l.6-2.9c.1-.5.4-1 .7-1.3l3-3.1Z" /><path d="M19.8 4.3a2.1 2.1 0 0 0-1-1.1a2 2 0 0 0-2.2.4l-.6.6l2.9 3l.5-.6a2.1 2.1 0 0 0 .6-1.5c0-.2 0-.5-.2-.8m-2.4 4.4l-2.8-3l-4.8 5l-.1.3l-.7 3c0 .3.3.7.6.6l2.7-.6l.3-.1l4.7-5Z" /></g></svg>
                                                                 </button>
-                                                                <button>
+                                                                <button onClick={() => handleDeleteButtonClick(record.addonId)}>
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#B65FCF" d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6zM19 4h-3.5l-1-1h-5l-1 1H5v2h14z" /></svg>
                                                                 </button>
                                                             </div>
@@ -331,7 +335,7 @@ const OverAll = ({ userName }) => {
     };
 
     return (
-        <div className="dark:bg-slate-900 font-anuphan" style={{ backgroundImage: "url(/img/bottom3.svg)", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>
+        <div className="dark:bg-slate-900 font-anuphan" >
             <div className="pl-4 pr-4">
                 <nav className="block w-full max-w-full bg-transparent text-white shadow-none rounded-xl transition-all px-0 py-1">
                     <div className="flex flex-col-reverse justify-between gap-6 md:flex-row md:items-center p-3">
@@ -350,9 +354,10 @@ const OverAll = ({ userName }) => {
                                 </ol>
                             </nav>
                         </div>
-                        <div className="flex items-center">
-                            <a>
-                                <span className="font-anuphan">{userName}</span>
+                        <div className="flex items-center flex-row">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#9ca3af" d="M17 17q.625 0 1.063-.437T18.5 15.5q0-.625-.437-1.062T17 14q-.625 0-1.062.438T15.5 15.5q0 .625.438 1.063T17 17m0 3q.775 0 1.425-.363t1.05-.962q-.55-.325-1.175-.5T17 18q-.675 0-1.3.175t-1.175.5q.4.6 1.05.963T17 20m0 2q-2.075 0-3.537-1.463T12 17q0-2.075 1.463-3.537T17 12q2.075 0 3.538 1.463T22 17q0 2.075-1.463 3.538T17 22m-5 0q-3.475-.875-5.738-3.988T4 11.1V5l8-3l8 3v5.675q-.65-.325-1.463-.5T17 10q-2.9 0-4.95 2.05T10 17q0 1.55.588 2.8t1.487 2.175q-.025 0-.037.013T12 22" /></svg>
+                            <a className='pl-3'>
+                                <span className="font-anuphan dark:text-white">{userName}</span>
                             </a>
                         </div>
                     </div>

@@ -10,7 +10,7 @@ class CustomerService {
       },
     });
   }
-  
+
   getAddon(operatorName, token) {
     return axios.get(CUSTOMER_API_BASE_URL + "getAddons/" + operatorName, {
       headers: {
@@ -19,12 +19,24 @@ class CustomerService {
     });
   }
 
-  makeRecharge(username, token, data){
-    return axios.post(CUSTOMER_API_BASE_URL + "make-recharge/");
+  makeRecharge(username, token, data) {
+    return axios.post(CUSTOMER_API_BASE_URL + "make-recharge/" + username, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   }
 
   getPayments(username, token) {
     return axios.get(CUSTOMER_API_BASE_URL + "get-payments/" + username, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  getOnePayment(username, token) {
+    return axios.get(CUSTOMER_API_BASE_URL + "get-latest-plan/" + username, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

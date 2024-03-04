@@ -10,11 +10,11 @@ public interface AddonService {
 
     Addon getAddonById(Long id);
 
-    Addon createAddon(Addon addon);
+    boolean createAddon(Addon addon);
 
     Addon updateAddon(Long id, Addon addon);
 
-    void deleteAddon(Long id);
+    boolean deleteAddon(Long id);
 
     List<Addon> getAddOnByOperatorName(String operatorName);
 

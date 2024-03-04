@@ -4,9 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.webzy.jwt.dao.AppUserRepo;
-import com.webzy.jwt.dao.PaymentRepo;
-import com.webzy.jwt.dao.RechargeRepo;
+import com.webzy.jwt.repository.AppUserRepo;
+import com.webzy.jwt.repository.PaymentRepo;
+import com.webzy.jwt.repository.RechargeRepo;
 import com.webzy.jwt.entity.AppUser;
 import com.webzy.jwt.entity.Payment;
 import com.webzy.jwt.entity.Recharge;

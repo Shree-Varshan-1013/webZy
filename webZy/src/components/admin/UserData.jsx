@@ -73,8 +73,9 @@ const UserData = ({ userName }) => {
                                 </nav>
                             </div>
                             <div className="flex items-center">
-                                <a>
-                                    <span className="font-anuphan">{userName}</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#9ca3af" d="M17 17q.625 0 1.063-.437T18.5 15.5q0-.625-.437-1.062T17 14q-.625 0-1.062.438T15.5 15.5q0 .625.438 1.063T17 17m0 3q.775 0 1.425-.363t1.05-.962q-.55-.325-1.175-.5T17 18q-.675 0-1.3.175t-1.175.5q.4.6 1.05.963T17 20m0 2q-2.075 0-3.537-1.463T12 17q0-2.075 1.463-3.537T17 12q2.075 0 3.538 1.463T22 17q0 2.075-1.463 3.538T17 22m-5 0q-3.475-.875-5.738-3.988T4 11.1V5l8-3l8 3v5.675q-.65-.325-1.463-.5T17 10q-2.9 0-4.95 2.05T10 17q0 1.55.588 2.8t1.487 2.175q-.025 0-.037.013T12 22" /></svg>
+                                <a className='pl-3'>
+                                    <span className="font-anuphan dark:text-white">{userName}</span>
                                 </a>
                             </div>
                         </div>
@@ -149,7 +150,7 @@ const UserData = ({ userName }) => {
                                 <div
                                     className="px-5 py-2 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between          ">
                                     <span className="text-xs xs:text-sm text-gray-900">
-                                        Showing 1 to 4 of 50 Entries
+                                        Showing {indexOfFirstItem + 1} to {Math.min(indexOfLastItem, users.length)} of {users.length} Entries
                                     </span>
                                     <div className="inline-flex mt-2 xs:mt-0">
                                         <button

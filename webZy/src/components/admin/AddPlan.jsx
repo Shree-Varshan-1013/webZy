@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { toast } from 'sonner';
 import PlanSchema from '../../schemas/PlanSchema';
 import AdminService from '../../services/AdminService';
 import { useSelector } from 'react-redux';
@@ -20,7 +20,7 @@ const AddPlan = ({ userName }) => {
         operatorName: ""
     }
 
-    const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
+    const { values, errors, touched, handleChange, handleSubmit } = useFormik({
         initialValues: initialData,
         validationSchema: PlanSchema,
         onSubmit: (values, action) => {
@@ -31,8 +31,20 @@ const AddPlan = ({ userName }) => {
     });
 
     const eventAction = async () => {
-        const res = await AdminService.addPlan(values, accessToken);
-        console.log(res);
+        try {
+            toast.loading('Creating new Plan...');
+            const res = await AdminService.addPlan(values, accessToken);
+            console.log(res);
+            setTimeout(() => {
+                if (res.status === 200) {
+                    toast.success("Successfully Plan added")
+                }
+            }, 2000);
+        }
+        catch (err) {
+            toast.error('Something went wrong !');
+            console.log(err);
+        }
     }
 
 
@@ -49,7 +61,6 @@ const AddPlan = ({ userName }) => {
                                     type="text"
                                     value={values.planName}
                                     onChange={handleChange}
-                                    onBlur={handleBlur}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
                                     placeholder="Enter Plan Name"
                                 />
@@ -64,7 +75,6 @@ const AddPlan = ({ userName }) => {
                                     type="text"
                                     value={values.planData}
                                     onChange={handleChange}
-                                    onBlur={handleBlur}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
                                     placeholder="Enter the data"
                                 />
@@ -79,7 +89,6 @@ const AddPlan = ({ userName }) => {
                                     type="text"
                                     value={values.planPrice}
                                     onChange={handleChange}
-                                    onBlur={handleBlur}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
                                     placeholder="Enter the price"
                                 />
@@ -94,7 +103,6 @@ const AddPlan = ({ userName }) => {
                                     type="text"
                                     value={values.planDetails}
                                     onChange={handleChange}
-                                    onBlur={handleBlur}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
                                     placeholder="Enter description"
                                 />
@@ -109,7 +117,6 @@ const AddPlan = ({ userName }) => {
                                     type="text"
                                     value={values.planValidity}
                                     onChange={handleChange}
-                                    onBlur={handleBlur}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
                                     placeholder="Enter the Validity"
                                 />
@@ -123,7 +130,6 @@ const AddPlan = ({ userName }) => {
                                     name="operatorName"
                                     value={values.operatorName}
                                     onChange={handleChange}
-                                    onBlur={handleBlur}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan appearance-none dark:bg-slate-900 dark:text-white"
                                 >
                                     <option value="" disabled>Select Operator</option>
@@ -133,6 +139,20 @@ const AddPlan = ({ userName }) => {
                                     <option value="Vi">Vi</option>
                                 </select>
                                 {errors.operatorName && touched.operatorName && <div className="text-red-600 text-xs">{errors.operatorName}</div>}
+                            </div>
+                        </div>
+                        <div>
+                            <label className="sr-only font-anuphan">Plan Type</label>
+                            <div className="relative">
+                                <input
+                                    name="planType"
+                                    type="text"
+                                    value={values.planType}
+                                    onChange={handleChange}
+                                    className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
+                                    placeholder="Enter description"
+                                />
+                                {errors.planType && touched.planType && <div className="text-red-600 text-xs">{errors.planType}</div>}
                             </div>
                         </div>
                     </div>
@@ -150,8 +170,5 @@ const AddPlan = ({ userName }) => {
     )
 }
 
-AddPlan.propTypes = {
-    username: PropTypes.string.isRequired
-}
 
 export default AddPlan

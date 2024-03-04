@@ -2,13 +2,13 @@ package com.webzy.jwt.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import com.webzy.jwt.entity.Addon;
 import com.webzy.jwt.entity.AppUser;
 import com.webzy.jwt.entity.Plan;
 import com.webzy.jwt.entity.Recharge;
+import com.webzy.jwt.service.AddonServiceImpl;
 import com.webzy.jwt.service.AdminServiceImpl;
 import com.webzy.jwt.service.PlanServiceImpl;
 import com.webzy.jwt.service.RechargeServiceImpl;
@@ -29,6 +29,8 @@ public class AdminController {
     private final AdminServiceImpl adminService;
 
     private final PlanServiceImpl planService;
+
+    private final AddonServiceImpl addonService;
     
     private final RechargeServiceImpl rechargeService;
 
@@ -75,11 +77,22 @@ public class AdminController {
     public boolean addPlan(@RequestBody Plan plan) {
         return adminService.addPlan(plan);
     }
+    @Operation(summary = "Add addon", description = "Add a addon.")
+    @PostMapping("/addon")
+    public boolean addAddon(@RequestBody Addon addon) {
+        return addonService.createAddon(addon);
+    }
 
     @Operation(summary = "Delete plan by ID", description = "Delete a plan by its ID.")
     @DeleteMapping("/plan/{id}")
     public boolean deletePlanById(@Parameter(description = "Plan ID") @PathVariable Long id) {
         return adminService.deletePlanById(id);
+    }
+
+    @Operation(summary = "Delete Addon by ID", description = "Delete addon by its ID.")
+    @DeleteMapping("/addon/{id}")
+    public boolean deleteAddonById(@Parameter(description = "Addon ID") @PathVariable Long id) {
+        return addonService.deleteAddon(id);
     }
 
     @Operation(summary = "Update a plan", description = "Update an existing plan by ID.")
@@ -90,6 +103,16 @@ public class AdminController {
     @PutMapping("/plan/{id}")
     public Plan updatePlan(@Parameter(description = "Plan ID") @PathVariable Long id, @RequestBody Plan plan) {
         return planService.updatePlan(id, plan);
+    }
+
+    @Operation(summary = "Update a addon", description = "Update an existing addon by ID.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Addon updated"),
+            @ApiResponse(responseCode = "404", description = "Addon not found")
+    })
+    @PutMapping("/addon/{id}")
+    public Addon updateAddon(@Parameter(description = "Addon ID") @PathVariable Long id, @RequestBody Addon addon) {
+        return addonService.updateAddon(id, addon);
     }
 
     @Operation(summary = "Get addon by ID", description = "Retrieve an addon by its ID.")

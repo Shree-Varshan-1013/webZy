@@ -50,7 +50,7 @@ const AdminDashboard = ({ role }) => {
                     role === "ADMIN" ? (
                         <div className="flex flex-row dark:bg-slate-900" style={{ backgroundImage: "url(/img/bottom3.svg)", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>
                             <AdminSideBar setActiveLink={setActiveLink} eventLogout={eventLogout} />
-                            <AdminSideBarContent activeLink={activeLink} userName={userDetails.userName} />
+                            <AdminSideBarContent activeLink={activeLink} userName={userDetails.username} />
                         </div>
                     ) : (
                         <Unauthorize />

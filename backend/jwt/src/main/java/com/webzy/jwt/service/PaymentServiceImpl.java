@@ -2,7 +2,7 @@ package com.webzy.jwt.service;
 
 import org.springframework.stereotype.Service;
 
-import com.webzy.jwt.dao.PaymentRepo;
+import com.webzy.jwt.repository.PaymentRepo;
 import com.webzy.jwt.entity.Payment;
 
 import lombok.RequiredArgsConstructor;

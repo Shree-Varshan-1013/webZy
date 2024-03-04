@@ -2,7 +2,7 @@ package com.webzy.jwt.service;
 
 import org.springframework.stereotype.Service;
 
-import com.webzy.jwt.dao.RoleRepo;
+import com.webzy.jwt.repository.RoleRepo;
 import com.webzy.jwt.entity.Role;
 
 import lombok.RequiredArgsConstructor;

@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.webzy.jwt.dto.JwtRequest;
+import com.webzy.jwt.dto.JwtResponse;
 import com.webzy.jwt.entity.AppUser;
-import com.webzy.jwt.entity.JwtRequest;
-import com.webzy.jwt.entity.JwtResponse;
 import com.webzy.jwt.service.JwtService;
 import com.webzy.jwt.service.UserServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;

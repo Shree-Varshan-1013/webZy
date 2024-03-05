@@ -17,5 +17,7 @@ public interface RechargeService {
     Recharge updateRecharge(Long id, Recharge recharge);
 
     void deleteRecharge(Long id);
+
+    ResponseEntity<String> createRechargeForOthers(String userName, Long mobileNumber,  Recharge recharge);
     
 }

@@ -26,6 +26,7 @@ public class Recharge {
     private double rechargePrice;
     private String status;
     private Date date;
+    private Long mobileNumber;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "plan_id")

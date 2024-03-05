@@ -43,6 +43,31 @@ public class RechargeServiceImpl implements RechargeService {
         AppUser user = appUserRepository.findByUserName(userName);
 
         recharge.setApp_user(user);
+        recharge.setMobileNumber(user.getMobileNumber());
+
+        rechargeRepository.save(recharge);
+
+        Payment payment = new Payment();
+        payment.setPaymentDate(currentDate);
+        payment.setStatus("Success");
+        payment.setTotalAmount(recharge.getRechargePrice());
+        payment.setModeOfPayment("UPI");
+        payment.setRecharge(recharge);
+        payment.setUser(user);
+
+        paymentRepo.save(payment);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body("Recharge successful");
+    }
+    @Override
+    public ResponseEntity<String> createRechargeForOthers(String userName, Long mobileNumber,  Recharge recharge) {
+
+        Date currentDate = new Date();
+
+        AppUser user = appUserRepository.findByUserName(userName);
+
+        recharge.setApp_user(user);
+        recharge.setMobileNumber(mobileNumber);
 
         rechargeRepository.save(recharge);
 

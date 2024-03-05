@@ -39,6 +39,11 @@ public class RechargeController {
         return rechargeService.createRecharge(username, recharge);
     }
 
+    @PostMapping("/{username}/{mobileNumber}")
+    public ResponseEntity<String> createRechargeForOthers(@PathVariable("username") String username,@PathVariable("mobileNumber") Long mobileNumber, @RequestBody Recharge recharge) {
+        return rechargeService.createRechargeForOthers(username, mobileNumber, recharge);
+    }
+
     @PutMapping("/{id}")
     public Recharge updateRecharge(@PathVariable Long id, @RequestBody Recharge recharge) {
         return rechargeService.updateRecharge(id, recharge);

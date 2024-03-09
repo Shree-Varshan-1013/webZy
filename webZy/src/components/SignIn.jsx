@@ -85,7 +85,7 @@ const SignIn = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 1 }}
         >
-            <Toaster position="top-center" theme="light" visibleToasts={2} richColors style={{ zIndex: 9999, marginTop: "50px" }} />
+            <Toaster position="top-center" theme="light" visibleToasts={1} richColors style={{ zIndex: 9999, marginTop: "50px" }} />
             <div className='block dark:bg-slate-900 sm:h-screen backdrop-blur-lg'>
                 <div className='flex lg:justify-between w-full overflow-hidden bg-white dark:bg-slate-900 border-none backdrop-blur-lg pt-10' style={{ backgroundImage: `url(${imageUrl})`, backgroundSize: "cover" }}>
                     <div className="items-center hidden lg:flex lg:w-[40%] justify-center">

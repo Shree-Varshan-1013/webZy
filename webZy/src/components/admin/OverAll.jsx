@@ -134,6 +134,35 @@ const OverAll = ({ userName }) => {
         return res.data;
     }
 
+    const eventShowAddonDetails = (addon) => {
+        toast(
+            <div className="bg-white rounded-lg shadow-lg p-6">
+                <h2 className="text-xl font-semibold mb-4">{addon.addonName}</h2>
+                <p className="text-gray-700 mb-2"><span className="font-semibold">Price:</span> ${addon.addonPrice}</p>
+                <p className="text-gray-700 mb-2"><span className="font-semibold">Validity:</span> {addon.addonValidity}</p>
+                <p className="text-gray-700 mb-2"><span className="font-semibold">Data:</span> {addon.data}</p>
+                <p className="text-gray-700 mb-2"><span className="font-semibold">Operator:</span> {addon.operatorName}</p>
+                <p className="text-gray-700 mb-2"><span className="font-semibold">Details:</span> {addon.addonDetails}</p>
+            </div>
+            , {
+                action: {
+                    label: "Ok"
+                },
+            })
+    }
+
+    const eventShowPlanDetails = (plan) => {
+        toast(
+            <div className="bg-white rounded-lg shadow-lg p-6">
+                <h2 className="text-xl font-semibold mb-4">{plan.planName}</h2>
+                <p className="text-gray-700 mb-2"><span className="font-semibold">Price:</span> ${plan.planPrice}</p>
+                <p className="text-gray-700 mb-2"><span className="font-semibold">Validity:</span> {plan.planValidity}</p>
+                <p className="text-gray-700 mb-2"><span className="font-semibold">Data:</span> {plan.planData}</p>
+                <p className="text-gray-700 mb-2"><span className="font-semibold">Operator:</span> {plan.operatorName}</p>
+                <p className="text-gray-700 mb-2"><span className="font-semibold">Details:</span> {plan.planDetails}</p>
+            </div>);
+    }
+
     const handleDeleteButtonClick = async (id) => {
         toast("Are you sure to delete the item?", {
             action: {
@@ -220,7 +249,7 @@ const OverAll = ({ userName }) => {
                                                             <button className="py-3 px-3 text-sm focus:outline-none leading-none text-red-700 bg-red-100 rounded">{record.operatorName}</button>
                                                         </td>
                                                         <td className="px-4 py-2 max-w-md">
-                                                            <div className="flex items-center">
+                                                            <div className="flex items-center cursor-pointer" onClick={() => eventShowPlanDetails(record)}>
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256"><path fill="#B65FCF" d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24m-4 48a12 12 0 1 1-12 12a12 12 0 0 1 12-12m12 112a16 16 0 0 1-16-16v-40a8 8 0 0 1 0-16a16 16 0 0 1 16 16v40a8 8 0 0 1 0 16" /></svg>
                                                             </div>
                                                         </td>
@@ -296,7 +325,7 @@ const OverAll = ({ userName }) => {
                                                             <button className="py-3 px-3 text-sm focus:outline-none leading-none text-purple3 bg-fuchsia-200 rounded">{record.operatorName}</button>
                                                         </td>
                                                         <td className="px-4 py-2 max-w-md">
-                                                            <div className="flex items-center">
+                                                            <div className="flex items-center cursor-pointer" onClick={() => eventShowAddonDetails(record)}>
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256"><path fill="#B65FCF" d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24m-4 48a12 12 0 1 1-12 12a12 12 0 0 1 12-12m12 112a16 16 0 0 1-16-16v-40a8 8 0 0 1 0-16a16 16 0 0 1 16 16v40a8 8 0 0 1 0 16" /></svg>
                                                             </div>
                                                         </td>
@@ -357,7 +386,7 @@ const OverAll = ({ userName }) => {
                         <div className="flex items-center flex-row">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#9ca3af" d="M17 17q.625 0 1.063-.437T18.5 15.5q0-.625-.437-1.062T17 14q-.625 0-1.062.438T15.5 15.5q0 .625.438 1.063T17 17m0 3q.775 0 1.425-.363t1.05-.962q-.55-.325-1.175-.5T17 18q-.675 0-1.3.175t-1.175.5q.4.6 1.05.963T17 20m0 2q-2.075 0-3.537-1.463T12 17q0-2.075 1.463-3.537T17 12q2.075 0 3.538 1.463T22 17q0 2.075-1.463 3.538T17 22m-5 0q-3.475-.875-5.738-3.988T4 11.1V5l8-3l8 3v5.675q-.65-.325-1.463-.5T17 10q-2.9 0-4.95 2.05T10 17q0 1.55.588 2.8t1.487 2.175q-.025 0-.037.013T12 22" /></svg>
                             <a className='pl-3'>
-                                <span className="font-anuphan dark:text-white">{userName}</span>
+                                <span className="font-anuphan dark:text-white text-gray-600">{userName}</span>
                             </a>
                         </div>
                     </div>
@@ -373,18 +402,6 @@ const OverAll = ({ userName }) => {
                         <button onClick={() => handleTabClick('addon')} className={`rounded-full focus:outline-none focus:ring-2 focus:bg-fuchsia-50 focus:ring-fuchsia-800 ml-4 sm:ml-8 ${selectedTab === 'addon' ? 'bg-fuchsia-100 text-fuchsia-700' : 'text-gray-600 dark:text-white hover:text-fuchsia-700 hover:bg-fuchsia-100'} py-2 px-8 rounded-full`}>
                             <p>Addon</p>
                         </button>
-                        <div className="pl-10">
-                            <input type="text"
-                                value={searchTerm}
-                                onChange={handleSearch}
-                                placeholder="Search for a plan, e.g. 199"
-                                className="w-full p-2 border border-gray-300 rounded-lg" />
-                            <ul>
-                                {/* {searchResults.map((result, index) => (
-                                    <li key={index}>{result.planName}{result.planData}</li>
-                                ))} */}
-                            </ul>
-                        </div>
                     </div>
                     {selectedTab === 'plans' && !showForm && (
                         <button onClick={() => handleAddButtonClick("plans")} className="relative rounded px-5 py-1.5 overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300">

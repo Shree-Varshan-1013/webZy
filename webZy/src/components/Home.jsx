@@ -44,7 +44,7 @@ const Home = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 1 }}
     >
-      <Toaster position="top-center" theme="light" visibleToasts={2} richColors style={{ zIndex: 9999, marginTop: "50px" }} />
+      <Toaster position="top-center" theme="light" visibleToasts={1} richColors style={{ zIndex: 9999, marginTop: "50px" }} />
       <Hero />
       <Logos />
       <Content />

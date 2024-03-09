@@ -1,13 +1,30 @@
-import React from 'react'
+import { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion'
+import { toast, Toaster } from 'sonner';
 import Swal from 'sweetalert2'
 import CustomerService from '../../services/CustomerService';
 const LastPlan = () => {
 
     const { fullPlan, userDetails, operatorName, planName, internet, validity, details, planType, planPrice, accessToken } = useSelector(state => state.global);
 
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (fullPlan === null) {
+            console.log("asd")
+            toast("There is no last plan. Please make a recharge ?", {
+                action: {
+                    label: "Recharge Now",
+                    onClick: () => {
+                        navigate(`/mobile-recharge/Jio/${userDetails.mobileNumber}`);
+                    }
+                },
+                onAutoClose: "false"
+            });
+        }
+    }, []);
 
     const makeRechargePlan = async (details, price) => {
         var today = new Date();
@@ -77,95 +94,102 @@ const LastPlan = () => {
         url = "/img/vi.png";
     }
 
-    const navigate = useNavigate();
-
     return (
-        <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1 }}
-        >
-            <section className="overflow-hidden bg-gray-50 dark:bg-slate-900 dark:text-white sm:grid sm:grid-cols-2 h-screen font-anuphan">
-                <div className="p-8 md:p-12 lg:px-16 lg:py-24">
-                    <div className="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
-                        <h2 className="text-2xl font-bold text-gray-900 md:text-3xl dark:text-white pt-5 pb-5">
-                            Repeat Last Plan
-                        </h2>
-                        <article className="rounded-xl bg-white dark:bg-slate-800 p-4 ring ring-fuchsia-100 dark:ring-fuchsia-400 sm:p-6 lg:p-8">
-                            <div className="flex items-start sm:gap-8">
-                                <div className='flrex'>
-                                    <div
-                                        className="hidden sm:grid sm:size-20 sm:shrink-0 sm:place-content-center sm:rounded-full sm:border-2 sm:border-fuchsia-500"
-                                        aria-hidden="true"
-                                    >
-                                        <div className="flex items-center gap-5">
-                                            <img src={url} width={100} className='rounded-full' />
+        <>
+            <Toaster position="top-center" theme="light" visibleToasts={1} richColors closeButton />
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1 }}
+            >
+                {
+                    fullPlan === null ? <div className="grid h-screen place-content-center bg-white dark:bg-slate-900 px-4">
+                        <div className="text-center">
+                            <h1 className="text-9xl font-black text-gray-200 dark:text-caramel  ">Oops !</h1>
+                        </div>
+                    </div> : (<section className="overflow-hidden bg-gray-50 dark:bg-slate-900 dark:text-white sm:grid sm:grid-cols-2 h-screen font-anuphan">
+                        <div className="p-8 md:p-12 lg:px-16 lg:py-24">
+                            <div className="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
+                                <h2 className="text-2xl font-bold text-gray-900 md:text-3xl dark:text-white pt-5 pb-5">
+                                    Repeat Last Plan
+                                </h2>
+                                <article className="rounded-xl bg-white dark:bg-slate-800 p-4 ring ring-fuchsia-100 dark:ring-fuchsia-400 sm:p-6 lg:p-8">
+                                    <div className="flex items-start sm:gap-8">
+                                        <div className='flrex'>
+                                            <div
+                                                className="hidden sm:grid sm:size-20 sm:shrink-0 sm:place-content-center sm:rounded-full sm:border-2 sm:border-fuchsia-500"
+                                                aria-hidden="true"
+                                            >
+                                                <div className="flex items-center gap-5">
+                                                    <img src={url} width={100} className='rounded-full' />
+                                                </div>
+                                            </div>
+                                            <h1 className='text-xl font-bold'>{planType}</h1>
+                                            <h1 className='text-xl font-bold'>₹{planPrice}</h1>
+                                        </div>
+                                        <div>
+                                            <strong
+                                                className="rounded border border-fuchsia-500 bg-fuchsia-800 px-4 py-2.5 text-[15px] font-medium text-white"
+                                            >
+                                                {userDetails.mobileNumber}
+                                            </strong>
+                                            <div className='flex align-baseline mt-4'>
+                                                <h3 className="text-lg font-medium sm:text-xl mr-14">
+                                                    Plan
+                                                </h3>
+                                                <p className="text-lg text-gray-700 dark:text-caramel">
+                                                    {planName}
+                                                </p>
+                                            </div>
+                                            <div className='flex align-baseline mt-4'>
+                                                <h3 className="text-lg font-medium sm:text-xl mr-14">
+                                                    Data
+                                                </h3>
+                                                <p className="text-lg text-gray-700 dark:text-caramel">
+                                                    {internet}
+                                                </p>
+                                            </div>
+                                            <div className='flex align-baseline mt-4'>
+                                                <h3 className="text-lg font-medium sm:text-xl mr-7">
+                                                    Validity
+                                                </h3>
+                                                <p className="text-lg text-gray-700 dark:text-caramel">
+                                                    {validity}
+                                                </p>
+                                            </div>
+                                            <div className='flex align-baseline mt-4'>
+                                                <h3 className="text-lg font-medium sm:text-xl">
+                                                    Details
+                                                </h3>
+                                                <p className="text-lg text-gray-700 dark:text-caramel">
+                                                    {details}
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
-                                    <h1 className='text-xl font-bold'>{planType}</h1>
-                                    <h1 className='text-xl font-bold'>₹{planPrice}</h1>
-                                </div>
-                                <div>
-                                    <strong
-                                        className="rounded border border-fuchsia-500 bg-fuchsia-800 px-4 py-2.5 text-[15px] font-medium text-white"
-                                    >
-                                        {userDetails.mobileNumber}
-                                    </strong>
-                                    <div className='flex align-baseline mt-4'>
-                                        <h3 className="text-lg font-medium sm:text-xl mr-14">
-                                            Plan
-                                        </h3>
-                                        <p className="text-lg text-gray-700 dark:text-caramel">
-                                            {planName}
-                                        </p>
-                                    </div>
-                                    <div className='flex align-baseline mt-4'>
-                                        <h3 className="text-lg font-medium sm:text-xl mr-14">
-                                            Data
-                                        </h3>
-                                        <p className="text-lg text-gray-700 dark:text-caramel">
-                                            {internet}
-                                        </p>
-                                    </div>
-                                    <div className='flex align-baseline mt-4'>
-                                        <h3 className="text-lg font-medium sm:text-xl mr-7">
-                                            Validity
-                                        </h3>
-                                        <p className="text-lg text-gray-700 dark:text-caramel">
-                                            {validity}
-                                        </p>
-                                    </div>
-                                    <div className='flex align-baseline mt-4'>
-                                        <h3 className="text-lg font-medium sm:text-xl">
-                                            Details
-                                        </h3>
-                                        <p className="text-lg text-gray-700 dark:text-caramel">
-                                            {details}
-                                        </p>
+                                </article>
+                                <div className="mt-4 md:mt-8">
+                                    <div className="flex justify-evenly items-center mt-5">
+                                        <a onClick={onPay} className="relative rounded px-5 py-2.5 overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300">
+                                            <span className="relative">Repeat</span>
+                                        </a>
+                                        <a onClick={() => navigate(`/mobile-recharge/${operatorName}/${userDetails.mobileNumber}`)} className="relative rounded px-5 py-2.5 overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300">
+                                            <span className="relative">Change</span>
+                                        </a>
                                     </div>
                                 </div>
-                            </div>
-                        </article>
-                        <div className="mt-4 md:mt-8">
-                            <div className="flex justify-evenly items-center mt-5">
-                                <a onClick={onPay} className="relative rounded px-5 py-2.5 overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300">
-                                    <span className="relative">Repeat</span>
-                                </a>
-                                <a onClick={() => navigate(`/mobile-recharge/${operatorName}/${userDetails.mobileNumber}`)} className="relative rounded px-5 py-2.5 overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300">
-                                    <span className="relative">Change</span>
-                                </a>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <img
-                    alt="repeat"
-                    src="/img/repeat.svg"
-                    className="h-56 w-full object-cover sm:h-full"
-                />
-            </section>
-        </motion.div>
+                        <img
+                            alt="repeat"
+                            src="/img/repeat.svg"
+                            className="h-56 w-full object-cover sm:h-full"
+                        />
+                    </section>)
+                }
+            </motion.div>
+        </>
     )
 }
 

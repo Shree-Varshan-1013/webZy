@@ -18,7 +18,7 @@ function ProfilePage() {
             transition={{ duration: 1 }}
         >
             <main className="profile-page lg:pt-[350px] dark:bg-slate-900 dark:text-white font-anuphan">
-                <Toaster position="top-center" theme="light" visibleToasts={2} richColors style={{ zIndex: 9999, marginTop: "50px" }} />
+                <Toaster position="top-center" theme="light" visibleToasts={1} richColors style={{ zIndex: 9999, marginTop: "50px" }} />
                 <section className="block h-500-px">
                     <div className="absolute top-0 w-full h-full bg-center bg-cover" style={{ backgroundImage: "url(/img/hearts.svg)" }}>
                         <span id="blackOverlay" className="w-full h-full absolute opacity-50 bg-black"></span>
@@ -49,16 +49,16 @@ function ProfilePage() {
                                     <div className="w-full lg:w-4/12 px-4 lg:order-1">
                                         <div className="flex justify-center py-4 lg:pt-4 pt-8">
                                             <div className="mr-4 p-3 text-center" style={{ width: "120px", whiteSpace: "nowrap" }}>
-                                                <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600 text-purple3">{fullPlan.operatorName}</span><span className="text-sm text-blueGray-400">Sim</span>
+                                                <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600 text-purple3">{fullPlan ? fullPlan.operatorName : "-" }</span><span className="text-sm text-blueGray-400">Sim</span>
                                             </div>
                                             <div className="mr-2 p-3 text-center" style={{ width: "120px", whiteSpace: "nowrap" }}>
-                                                <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600 text-purple3">{fullPlan.planType}</span><span className="text-sm text-blueGray-400">Plan Type</span>
+                                                <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600 text-purple3">{fullPlan ? fullPlan.planType : "-" }</span><span className="text-sm text-blueGray-400">Plan Type</span>
                                             </div>
                                             <div className="lg:mr-4 p-3 text-center" style={{ width: "160px", whiteSpace: "nowrap" }}>
-                                                <span className="text-lg font-bold font-anuphan block uppercase tracking-wide text-blueGray-600 text-purple3">{fullPlan.planData}</span><span className="text-sm text-blueGray-400">Data</span>
+                                                <span className="text-lg font-bold font-anuphan block uppercase tracking-wide text-blueGray-600 text-purple3">{fullPlan ? fullPlan.planData : "-" }</span><span className="text-sm text-blueGray-400">Data</span>
                                             </div>
                                             <div className="lg:mr-4 p-3 text-center" style={{ width: "120px", whiteSpace: "nowrap" }}>
-                                                <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600 text-purple3">5 days</span><span className="text-sm text-blueGray-400">Expiring in</span>
+                                                <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600 text-purple3">{fullPlan ? "28 Days" : "-" }</span><span className="text-sm text-blueGray-400">Expiring in</span>
                                             </div>
                                         </div>
                                     </div>

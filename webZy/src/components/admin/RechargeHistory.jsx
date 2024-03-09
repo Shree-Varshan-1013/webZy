@@ -101,7 +101,7 @@ const RechargeHistory = ({ userName }) => {
                             <div className="flex items-center flex-row">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#9ca3af" d="M17 17q.625 0 1.063-.437T18.5 15.5q0-.625-.437-1.062T17 14q-.625 0-1.062.438T15.5 15.5q0 .625.438 1.063T17 17m0 3q.775 0 1.425-.363t1.05-.962q-.55-.325-1.175-.5T17 18q-.675 0-1.3.175t-1.175.5q.4.6 1.05.963T17 20m0 2q-2.075 0-3.537-1.463T12 17q0-2.075 1.463-3.537T17 12q2.075 0 3.538 1.463T22 17q0 2.075-1.463 3.538T17 22m-5 0q-3.475-.875-5.738-3.988T4 11.1V5l8-3l8 3v5.675q-.65-.325-1.463-.5T17 10q-2.9 0-4.95 2.05T10 17q0 1.55.588 2.8t1.487 2.175q-.025 0-.037.013T12 22" /></svg>
                                 <a className='pl-3'>
-                                    <span className="font-anuphan">{userName}</span>
+                                    <span className="font-anuphan text-gray-600 dark:text-white">{userName}</span>
                                 </a>
                             </div>
                         </div>
@@ -109,38 +109,6 @@ const RechargeHistory = ({ userName }) => {
                 </div>
                 <div className="container mx-auto px-4 sm:px-8">
                     <div className="">
-                        <div className="my-1 flex sm:flex-row flex-col">
-                            <div className="flex flex-row mb-1 sm:mb-0">
-                                <div className="relative font-anuphan">
-                                    <select
-                                        className="h-full rounded-r border-t sm:rounded-r-none sm:border-r-0 border-r border-b block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:border-l focus:border-r focus:bg-white focus:border-gray-500">
-                                        <option>All</option>
-                                        <option>Admin</option>
-                                        <option>Users</option>
-                                    </select>
-                                    <div
-                                        className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                        <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="block relative">
-                                <span className="h-full absolute inset-y-0 left-0 flex items-center pl-2">
-                                    <svg viewBox="0 0 24 24" className="h-4 w-4 fill-current text-gray-500">
-                                        <path
-                                            d="M10 4a6 6 0 100 12 6 6 0 000-12zm-8 6a8 8 0 1114.32 4.906l5.387 5.387a1 1 0 01-1.414 1.414l-5.387-5.387A8 8 0 012 10z">
-                                        </path>
-                                    </svg>
-                                </span>
-                                <input
-                                    value={searchTerm}
-                                    onChange={handleSearchInputChange}
-                                    placeholder="Search"
-                                    className="appearance-none rounded-r rounded-l sm:rounded-l-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
-                            </div>
-                        </div>
                         <div className="container mx-auto px-4 sm:px-8 mt-5">
                             <div className="overflow-y-auto max-h-screen">
                                 <table className="min-w-full leading-normal font-anuphan">

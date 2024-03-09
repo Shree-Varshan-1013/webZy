@@ -48,14 +48,14 @@ public class UserServiceImpl implements UserService {
                 .body("User already exists with this email or username");
 		}
 
-		Role role = null;
+		Role role = roleRepo.findById("CUSTOMER").orElseThrow(() -> new RuntimeException("Role 'CUSTOMER' not found"));
 		
-		if(user.getRole().iterator().next().getRoleName().equals("CUSTOMER")){
-			role = roleRepo.findById("CUSTOMER").orElseThrow(() -> new RuntimeException("Role 'CUSTOMER' not found"));
-		}
-		else{
-			role = roleRepo.findById("ADMIN").orElseThrow(() -> new RuntimeException("Role 'ADMIN' not found"));
-		}
+		// if(user.getRole().iterator().next().getRoleName().equals("CUSTOMER")){
+		// 	role = roleRepo.findById("CUSTOMER").orElseThrow(() -> new RuntimeException("Role 'CUSTOMER' not found"));
+		// }
+		// else{
+		// 	role = roleRepo.findById("ADMIN").orElseThrow(() -> new RuntimeException("Role 'ADMIN' not found"));
+		// }
 
 		Set<Role> roles = new HashSet<>();
 		roles.add(role);

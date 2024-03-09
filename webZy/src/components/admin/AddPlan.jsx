@@ -150,7 +150,7 @@ const AddPlan = ({ userName }) => {
                                     value={values.planType}
                                     onChange={handleChange}
                                     className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
-                                    placeholder="Enter description"
+                                    placeholder="Enter Plan Type"
                                 />
                                 {errors.planType && touched.planType && <div className="text-red-600 text-xs">{errors.planType}</div>}
                             </div>

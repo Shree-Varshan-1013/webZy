@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
-import { addToken, addUserDetails, deleteRole, deleteToken, deleteUserDetails, toggleLogin } from '../config/GlobalSlice';
+import { addToken, addUserDetails, delDetails, delFullPlan, delInternet, delOperatorName, delPlanName, delPlanPrice, delPlanType, delValidity, deleteRole, deleteToken, deleteUserDetails, toggleLogin } from '../config/GlobalSlice';
 import { useSelector } from 'react-redux';
 
 const ProfileDropdown = () => {
@@ -39,6 +39,15 @@ const ProfileDropdown = () => {
             dispatch(deleteRole());
             dispatch(addUserDetails(null));
             dispatch(addToken(null));
+            dispatch(delDetails());
+            dispatch(delFullPlan());
+            dispatch(delInternet());
+            dispatch(delOperatorName());
+            dispatch(delPlanName());
+            dispatch(delPlanPrice());
+            dispatch(delPlanType());
+            dispatch(delValidity());
+        
             setTimeout(() => {
                 navigate('/');
             }, 2000);

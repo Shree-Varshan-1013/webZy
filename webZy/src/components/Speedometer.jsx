@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactSpeedometer from "react-d3-speedometer";
 
 const Speedometer = () => {
-    const [value, setValue] = useState(733);
+    const [value, setValue] = useState(0);
+
+    useEffect(() => {
+        const randomValue = Math.floor(Math.random() * 1025); // Generate a random value between 0 and 1024
+        setValue(randomValue);
+    }, []); // Run only once on component mount
 
     return (
         <div className="w-full md:w-1/2 lg:mr-4 mb-4 md:mb- font-anuphan">
-            <div className="speedometer" style={{height: "10px" }}>
+            <div className="speedometer" style={{ height: "10px" }}>
                 <ReactSpeedometer
                     maxValue={1024}
                     value={value}

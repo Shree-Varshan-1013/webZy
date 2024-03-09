@@ -112,44 +112,29 @@ const TabsComponent = ({ openTab, setOpenTab, operatorName, accessToken }) => {
                 }
             };
             fetchData1();
-        } else if (openTab === 3) {
-            setRecords([
-                { id: 1, name: "Record 1 for Exclusive" },
-                { id: 2, name: "Record 2 for Exclusive" },
-                { id: 3, name: "Record 3 for Exclusive" },
-            ]);
         }
     }, [openTab]);
 
     const fetchPlans = async () => {
-        console.log(operatorName, accessToken)
-        const res = await CustomerService.getPlans(operatorName, accessToken);
+        console.log(operator, accessToken)
+        const res = await CustomerService.getPlans(operator, accessToken);
         console.log(res.data);
         return res.data;
     }
 
     const fetchAddon = async () => {
-        console.log(operatorName, accessToken)
-        const res = await CustomerService.getAddon(operatorName, accessToken);
+        console.log(operator, accessToken)
+        const res = await CustomerService.getAddon(operator, accessToken);
         console.log(res.data);
         return res.data;
-    }
-
-    const openModal = (record) => {
-        Swal.fire({
-            title: `${record.planName}`,
-            text: `${record.planDetails}`,
-            icon: "info"
-        });
     }
 
     return (
 
         <div className="max-w-full mx-auto">
             <div className="mb-4 flex space-x-4 p-2 bg-white rounded-lg shadow-md">
-                <button onClick={() => setOpenTab(1)} className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300 ${openTab === 1 ? 'bg-purple3 text-white' : ''}`}>Recommended</button>
+                <button onClick={() => setOpenTab(1)} className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300 ${openTab === 1 ? 'bg-purple3 text-white' : ''}`}>Plans</button>
                 <button onClick={() => setOpenTab(2)} className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300 ${openTab === 2 ? 'bg-purple3 text-white' : ''}`}>Add on</button>
-                <button onClick={() => setOpenTab(3)} className={`flex-1 py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue transition-all duration-300 ${openTab === 3 ? 'bg-purple3 text-white' : ''}`}>Exclusive</button>
             </div>
 
             <div style={{ display: openTab === 1 ? 'block' : 'none' }}>
@@ -218,37 +203,6 @@ const TabsComponent = ({ openTab, setOpenTab, operatorName, accessToken }) => {
                     </>
                 ))}
             </div>
-            <div style={{ display: openTab === 3 ? 'block' : 'none' }}>
-                {records.map(record => (
-                    <>
-                        <div className="transition-all duration-300 bg-white p-4 rounded-lg shadow-md border-l-4 border-purple3 mb-2">
-                            <div className="flex justify-between items-center">
-                                <div className='flex'>
-                                    <div className='md:mr-40'>
-                                        <div className="text-2xl font-semibold text-purple3">₹ 499</div>
-                                        <div className="text-gray-700">Unlimited Calls</div>
-                                    </div>
-                                    <div className='md:mr-40'>
-                                        <div className="text-2xl font-semibold text-purple3">28</div>
-                                        <div className="text-gray-700">Validity</div>
-                                    </div>
-                                    <div className='md:mr-10'>
-                                        <div className="text-2xl font-semibold text-purple3">2 GB/Day</div>
-                                        <div className="text-gray-700">Data</div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div className="flex justify-center items-center">
-                                        <a onClick={() => navigate(`/mobile-recharge/${operatorName}/payment`)} className="relative rounded px-5 py-2.5 overflow-hidden group bg-purple2 hover:bg-gradient-to-r hover:from-purple2 hover:to-purple text-white hover:ring-2 hover:ring-offset-2 hover:ring-purple2 transition-all ease-out duration-300">
-                                            <span className="relative">Apply</span>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </>
-                ))}
-            </div>
         </div >
     );
 };
@@ -257,7 +211,7 @@ const PlanDetails = () => {
 
     const [openTab, setOpenTab] = useState(1);
 
-    const { operatorName } = useParams();
+    const { operator } = useParams();
 
     const { accessToken, isLoggedIn, userDetails } = useSelector((state) => state.global);
 
@@ -279,16 +233,16 @@ const PlanDetails = () => {
                                 >
                                     <div className="flex items-center">
                                         {
-                                            operatorName === "Airtel" && <img src="/img/airtel.png" className="rounded-full" />
+                                            operator === "Airtel" && <img src="/img/airtel.png" className="rounded-full" />
                                         }
                                         {
-                                            operatorName === "Jio" && <img src="/img/jio.png" className="rounded-full" />
+                                            operator === "Jio" && <img src="/img/jio.png" className="rounded-full" />
                                         }
                                         {
-                                            operatorName === "BSNL" && <img src="/img/bsnl.png" className="rounded-full" />
+                                            operator === "BSNL" && <img src="/img/bsnl.png" className="rounded-full" />
                                         }
                                         {
-                                            operatorName === "Vi" && <img src="/img/vi.png" height={100} className="rounded-full bg-cover" />
+                                            operator === "Vi" && <img src="/img/vi.png" height={100} className="rounded-full bg-cover" />
                                         }
                                     </div>
                                 </div>
@@ -300,21 +254,21 @@ const PlanDetails = () => {
                                     </strong>
 
                                     <h3 className="mt-4 text-lg font-medium sm:text-xl dark:text-white">
-                                        <p className="font-poppins">{operatorName}</p>
+                                        <p className="font-poppins">{operator}</p>
                                     </h3>
 
                                     <p className="mt-1 text-sm text-gray-700 font-anuphan dark:text-white">
-                                        {operatorName} Prepaid | Tamil Nadu
+                                        {operator} Prepaid | Tamil Nadu
                                     </p>
                                 </div>
                             </div>
                         </article>
                     </div>
                     <div className="md:w-full bg-gray-200 py-4 px-4 overflow-y-auto dark:bg-slate-800">
-                        <div className="mb-4">
+                        {/* <div className="mb-4">
                             <input type="text" placeholder="Search for a plan,eg.199" className="w-full p-2 border border-gray-300 rounded-lg" />
-                        </div>
-                        <TabsComponent openTab={openTab} setOpenTab={setOpenTab} operatorName={operatorName} accessToken={accessToken} />
+                        </div> */}
+                        <TabsComponent openTab={openTab} setOpenTab={setOpenTab} operatorName={operator} accessToken={accessToken} />
                     </div>
                 </div> : <SignIn />
             }

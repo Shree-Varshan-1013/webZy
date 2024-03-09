@@ -35,7 +35,7 @@ const ProfileDropdown = () => {
         toast.loading("Logging you out !");
         setTimeout(() => {
             toast.success("Successfully logged out see you next time !");
-            dispatch(toggleLogin());
+            dispatch(toggleLogin(false));
             dispatch(deleteRole());
             dispatch(addUserDetails(null));
             dispatch(addToken(null));

@@ -56,7 +56,7 @@ const SignIn = () => {
                 }
 
                 dispatch(addUserDetails(user));
-                dispatch(toggleLogin());
+                dispatch(toggleLogin(true));
                 dispatch(addRole(role));
                 dispatch(addToken(token));
 

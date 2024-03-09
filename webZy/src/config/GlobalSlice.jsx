@@ -22,7 +22,7 @@ const globalSlice = createSlice({
     initialState,
     reducers: {
         toggleLogin: (state, action) => {
-            state.isLoggedIn = !state.isLoggedIn;
+            state.isLoggedIn = action.payload;
         },
         toggleDarkMode: (state, action) => {
             state.isDark = action.payload;

@@ -40,7 +40,7 @@ function App() {
           <Route path="/edit-profile" element={<UserLayout component={LazyEditProfile} />} />
           <Route path="/payment-history" element={<UserLayout component={LazyUserPaymentHistory} />} />
           <Route path="/mobile-recharge" element={<UserLayout component={LazyDataEnter} />} />
-          <Route path="/mobile-recharge/:operatorName" element={<UserLayout component={LazyPlanDetails} />} />
+          <Route path="/mobile-recharge/:operator/:mobileNumber" element={<UserLayout component={LazyPlanDetails} />} />
           <Route path="/mobile-recharge/:operatorName/payment" element={<UserLayout component={LazyPayment} />} />
           <Route path="/admin-dash" element={<LazyAdminDashboard role={role} />} />
           <Route path="/webzy/sign-in" element={<AuthLayout component={LazySignIn} />} />

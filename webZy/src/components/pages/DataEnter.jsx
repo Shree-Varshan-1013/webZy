@@ -24,7 +24,7 @@ const DataEnter = () => {
     });
 
     const eventPlan = () => {
-        navigate(`/mobile-recharge/${values.operatorName}`);
+        navigate(`/mobile-recharge/${values.operatorName}/${values.mobileNumber}`);
     }
 
     return (

@@ -11,6 +11,8 @@ const TabsComponent = ({ openTab, setOpenTab, operatorName, accessToken }) => {
 
     const { userDetails } = useSelector(state => state.global);
 
+    const { mobileNumber, operator } = useParams();
+
     const navigate = useNavigate();
 
     const onPay = (details, target) => {
@@ -27,7 +29,7 @@ const TabsComponent = ({ openTab, setOpenTab, operatorName, accessToken }) => {
             prefill: {
                 name: userDetails.username,
                 email: userDetails.email,
-                contact: userDetails.mobileNumber,
+                contact: mobileNumber,
             },
             handler: function (response) {
                 console.log(response);
@@ -70,10 +72,10 @@ const TabsComponent = ({ openTab, setOpenTab, operatorName, accessToken }) => {
         const res = await CustomerService.makeRecharge(userDetails.username, accessToken, data);
         console.log(res);
     }
-    
+
     const makeRechargePlan = async (details, price) => {
         var today = new Date();
-    
+
         const data = {
             // "rechargeId": 0,
             "rechargePrice": price,

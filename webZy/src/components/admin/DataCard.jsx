@@ -1,12 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Chart from "react-apexcharts";
 import { useSelector } from 'react-redux';
 import { PropTypes } from 'prop-types';
 import Pie from './Pie';
+import AdminService from '../../services/AdminService';
 
 const DataCard = ({ userName }) => {
 
-    const { isDark } = useSelector((state) => state.global);
+    const { isDark, accessToken } = useSelector((state) => state.global);
+
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+        fetchUserCount();
+    }, []);
+
+    const fetchUserCount = async () => {
+        const res = await AdminService.getUserCount(accessToken);
+        setCount(res.data);
+    }
 
     return (
         <div className=" dark:bg-slate-900 w-full h-screen" style={{ backgroundImage: "url(/img/bottom3.svg)", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}>
@@ -61,7 +73,7 @@ const DataCard = ({ userName }) => {
                             </div>
                             <div className="p-4 text-right">
                                 <p className="block antialiased text-sm leading-normal text-blue-gray-600 dark:text-white font-anuphan font-semibold tracking-wider">Total Users</p>
-                                <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900 dark:text-white">120</h4>
+                                <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900 dark:text-white">{count}</h4>
                             </div>
                         </div>
                         <div className="relative flex flex-col bg-clip-border rounded-xl bg-white dark:bg-slate-800 text-gray-700 shadow-md">

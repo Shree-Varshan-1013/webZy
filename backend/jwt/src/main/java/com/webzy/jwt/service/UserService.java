@@ -13,6 +13,8 @@ public interface UserService {
 
 	AppUser findUserNameByEmail(String email);
 
+	int findAll();
+	
 	List<Plan> findPlansByOperator(String operatorName);
 
 }

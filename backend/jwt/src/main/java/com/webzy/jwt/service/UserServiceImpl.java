@@ -114,4 +114,9 @@ public class UserServiceImpl implements UserService {
         return tar.get(0).getRecharge().getPlan();
     }
 
+	@Override
+	public int findAll() {
+		return userRepo.findAll().size();
+	}
+
 }

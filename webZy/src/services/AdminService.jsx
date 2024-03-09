@@ -25,6 +25,16 @@ class AdminService {
     );
   }
 
+  getUserCount(token) {
+    return axios.get(
+      ADMIN_API_BASE_URL + "/get-user-count",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+  }
 
   addPlan(plan, token) {
     return axios.post(ADMIN_API_BASE_URL + "/plan", plan, {
@@ -64,7 +74,7 @@ class AdminService {
     });
   }
 
-  addAddon(addon, token){
+  addAddon(addon, token) {
     return axios.post(ADMIN_API_BASE_URL + "/addon", addon, {
       headers: {
         Authorization: `Bearer ${token}`

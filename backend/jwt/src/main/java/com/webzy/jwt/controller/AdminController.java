@@ -12,6 +12,7 @@ import com.webzy.jwt.service.AddonServiceImpl;
 import com.webzy.jwt.service.AdminServiceImpl;
 import com.webzy.jwt.service.PlanServiceImpl;
 import com.webzy.jwt.service.RechargeServiceImpl;
+import com.webzy.jwt.service.UserServiceImpl;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -31,8 +32,10 @@ public class AdminController {
     private final PlanServiceImpl planService;
 
     private final AddonServiceImpl addonService;
-    
+
     private final RechargeServiceImpl rechargeService;
+
+    private final UserServiceImpl userServiceImpl;
 
     @Operation(summary = "Get all users", description = "Retrieve a list of all users.")
     @GetMapping("/get-all-users")
@@ -77,6 +80,7 @@ public class AdminController {
     public boolean addPlan(@RequestBody Plan plan) {
         return adminService.addPlan(plan);
     }
+
     @Operation(summary = "Add addon", description = "Add a addon.")
     @PostMapping("/addon")
     public boolean addAddon(@RequestBody Addon addon) {
@@ -131,5 +135,11 @@ public class AdminController {
     @GetMapping("/get-recharges")
     public List<Recharge> getAllRechargesByUserName() {
         return rechargeService.getAllRecharges();
+    }
+
+    @Operation(summary = "Get count of total users", description = "Retrieve count of users")
+    @GetMapping("/get-user-count")
+    public int getCount() {
+        return userServiceImpl.findAll();
     }
 }

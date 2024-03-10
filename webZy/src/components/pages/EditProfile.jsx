@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import { EditProfileSchema } from './../../schemas/EditProfileSchema';
 import { toast } from 'sonner';
 import { useDispatch } from 'react-redux';
-import { addUserDetails } from '../../config/GlobalSlice';
+import { addOperatorName, addUserDetails } from '../../config/GlobalSlice';
 
 const EditProfile = () => {
 
@@ -62,6 +62,7 @@ const EditProfile = () => {
 
             if (res.status === 200) {
                 dispatch(addUserDetails(res.data));
+                dispatch(addOperatorName(res.data.operatorName));
                 setTimeout(() => {
                     toast.success("Successfully updated your profile !");
                     setTimeout(() => {
@@ -101,7 +102,7 @@ const EditProfile = () => {
                                     value={values.email}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900 text-white"
+                                    className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900 dark:text-white"
                                     placeholder="Enter the email"
                                 />
                                 <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
@@ -141,7 +142,7 @@ const EditProfile = () => {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     type="text"
-                                    className="dark:bg-slate-900 w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan text-white"
+                                    className="dark:bg-slate-900 w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:text-white"
                                     placeholder="Enter the location"
                                 />
                                 <span className="absolute inset-y-0 end-0 grid place-content-center px-4 mb-3">

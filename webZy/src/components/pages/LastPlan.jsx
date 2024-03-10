@@ -7,11 +7,14 @@ import Swal from 'sweetalert2'
 import CustomerService from '../../services/CustomerService';
 const LastPlan = () => {
 
-    const { fullPlan, userDetails, operatorName, planName, internet, validity, details, planType, planPrice, accessToken } = useSelector(state => state.global);
+    const { fullPlan, userDetails, operatorName, planName, internet, validity, details, planType, planPrice, accessToken, isLoggedIn } = useSelector(state => state.global);
 
     const navigate = useNavigate();
 
     useEffect(() => {
+        if(isLoggedIn === false){
+            navigate("/sign-in")
+        }
         if (fullPlan === null) {
             console.log("asd")
             toast("There is no last plan. Please make a recharge ?", {
@@ -108,15 +111,12 @@ const LastPlan = () => {
                         <div className="text-center">
                             <h1 className="text-9xl font-black dark:text-caramel  ">Oops !</h1>
                         </div>
-                    </div> : (<section className="overflow-hidden bg-gray-50 dark:bg-slate-900 dark:text-white sm:grid sm:grid-cols-2 h-screen font-anuphan">
-                        <div className="p-8 md:p-12 lg:px-16 lg:py-24">
+                    </div> : (<section className="h-screen overflow-hidden bg-gray-50 dark:bg-slate-900 dark:text-white sm:grid sm:grid-cols-2 font-anuphan">
+                        <div className="">
                             <div className="mx-auto max-w-xl text-center ltr:sm:text-left rtl:sm:text-right">
-                                <h2 className="text-2xl font-bold text-gray-900 md:text-3xl dark:text-white pt-5 pb-5">
-                                    Repeat Last Plan
-                                </h2>
-                                <article className="rounded-xl bg-white dark:bg-slate-800 p-4 ring ring-fuchsia-100 dark:ring-fuchsia-400 sm:p-6 lg:p-8">
+                                <article className="mt-[85px] rounded-xl bg-white dark:bg-slate-800 p-4 ring ring-fuchsia-100 dark:ring-fuchsia-400 sm:p-6 lg:p-8">
                                     <div className="flex items-start sm:gap-8">
-                                        <div className='flrex'>
+                                        <div className=''>
                                             <div
                                                 className="hidden sm:grid sm:size-20 sm:shrink-0 sm:place-content-center sm:rounded-full sm:border-2 sm:border-fuchsia-500"
                                                 aria-hidden="true"

@@ -52,7 +52,7 @@ const SignUp = () => {
                     icon: <FaCheck style={{ color: "green", fontSize: "1rem" }} />
                 });
                 setTimeout(() => {
-                    navigate('/webzy/sign-in');
+                    navigate('/sign-in');
                 }, 2000);
             }, 2000);
         }

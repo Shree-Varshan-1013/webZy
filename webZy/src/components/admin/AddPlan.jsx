@@ -26,7 +26,6 @@ const AddPlan = ({ userName }) => {
         onSubmit: (values, action) => {
             console.log(values);
             eventAction();
-            action.resetForm();
         },
     });
 

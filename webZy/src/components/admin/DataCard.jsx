@@ -10,14 +10,22 @@ const DataCard = ({ userName }) => {
     const { isDark, accessToken } = useSelector((state) => state.global);
 
     const [count, setCount] = useState(0);
+    const [income, setIncome] = useState(0);
 
     useEffect(() => {
         fetchUserCount();
+        fetchIncome();
     }, []);
 
     const fetchUserCount = async () => {
         const res = await AdminService.getUserCount(accessToken);
         setCount(res.data);
+    }
+
+    const fetchIncome = async () => {
+        const res = await AdminService.fetchTotalIncome(accessToken);
+        console.log(res);
+        setIncome(res.data);
     }
 
     return (
@@ -62,7 +70,7 @@ const DataCard = ({ userName }) => {
                             </div>
                             <div className="p-4 text-right">
                                 <p className="block antialiased text-sm leading-normal tracking-wider text-blue-gray-600 dark:text-white font-anuphan font-semibold">Total Visitors</p>
-                                <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900 dark:text-white">73,000</h4>
+                                <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900 dark:text-white">NA</h4>
                             </div>
                         </div>
                         <div className="relative flex flex-col bg-clip-border rounded-xl bg-white dark:bg-slate-800 text-gray-700 shadow-md">
@@ -94,8 +102,8 @@ const DataCard = ({ userName }) => {
                                 </svg>
                             </div>
                             <div className="p-4 text-right">
-                                <p className="block antialiased text-sm leading-normal text-blue-gray-600 dark:text-white font-anuphan font-semibold tracking-wider">Sales</p>
-                                <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900 dark:text-white">₹103,430</h4>
+                                <p className="block antialiased text-sm leading-normal text-blue-gray-600 dark:text-white font-anuphan font-semibold tracking-wider">Total Income</p>
+                                <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900 dark:text-white">₹{income}</h4>
                             </div>
                         </div>
                     </div>

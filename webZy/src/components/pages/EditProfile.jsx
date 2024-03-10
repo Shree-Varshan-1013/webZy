@@ -101,7 +101,7 @@ const EditProfile = () => {
                                     value={values.email}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
+                                    className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900 text-white"
                                     placeholder="Enter the email"
                                 />
                                 <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
@@ -141,13 +141,13 @@ const EditProfile = () => {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     type="text"
-                                    className="dark:bg-slate-900 w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan"
+                                    className="dark:bg-slate-900 w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan text-white"
                                     placeholder="Enter the location"
                                 />
                                 <span className="absolute inset-y-0 end-0 grid place-content-center px-4 mb-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#9ca3af" d="M12 11.5A2.5 2.5 0 0 1 9.5 9A2.5 2.5 0 0 1 12 6.5A2.5 2.5 0 0 1 14.5 9a2.5 2.5 0 0 1-2.5 2.5M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7" /></svg>
                                 </span>
-                                {errors.location && touched.location && <div className="text-red-600 text-xs">{errors.location}</div>}
+                                {errors.location && touched.location && <div className="text-red-600 text-xs ">{errors.location}</div>}
                             </div>
                         </div>
                         <button

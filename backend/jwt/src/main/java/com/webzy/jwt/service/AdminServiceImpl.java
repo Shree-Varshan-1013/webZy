@@ -12,10 +12,12 @@ import org.springframework.stereotype.Service;
 import com.webzy.jwt.repository.AddonRepo;
 import com.webzy.jwt.repository.AppUserRepo;
 import com.webzy.jwt.repository.PlanRepo;
+import com.webzy.jwt.repository.RechargeRepo;
 import com.webzy.jwt.repository.RoleRepo;
 import com.webzy.jwt.entity.Addon;
 import com.webzy.jwt.entity.AppUser;
 import com.webzy.jwt.entity.Plan;
+import com.webzy.jwt.entity.Recharge;
 import com.webzy.jwt.entity.Role;
 
 import lombok.RequiredArgsConstructor;
@@ -31,6 +33,8 @@ public class AdminServiceImpl implements AdminService {
     private final PlanRepo planRepo;
 
     private final AddonRepo addonRepo;
+
+    private final RechargeRepo rechargeRepo;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -119,5 +123,16 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public boolean addAddon(Addon addon) {
         return addonRepo.save(addon) != null ? true : false;
+    }
+
+    public int getAllIncome() {
+        int income = 0;
+        List<Recharge> recharges = rechargeRepo.findAll();
+
+        for(Recharge k : recharges){
+            income += k.getRechargePrice();
+        }
+    
+        return income;
     }
 }

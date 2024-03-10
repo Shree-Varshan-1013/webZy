@@ -13,6 +13,16 @@ class AdminService {
       }
     );
   }
+  fetchTotalIncome(token) {
+    return axios.get(
+      ADMIN_API_BASE_URL + "/get-income",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  }
   registerNewAdmin(token, data) {
     return axios.post(
       ADMIN_API_BASE_URL + "/register-new-admin",

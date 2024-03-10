@@ -42,6 +42,11 @@ public class AdminController {
     public List<AppUser> getAllUsers() {
         return adminService.getAllUsers();
     }
+    @Operation(summary = "Get all users", description = "Retrieve a list of all users.")
+    @GetMapping("/get-income")
+    public int getAllIncome() {
+        return adminService.getAllIncome();
+    }
 
     @Operation(summary = "Register a new admin", description = "Register a new admin user.")
     @PostMapping("/register-new-admin")

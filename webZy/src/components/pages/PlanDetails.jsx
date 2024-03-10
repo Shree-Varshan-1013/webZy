@@ -239,7 +239,7 @@ const PlanDetails = () => {
                                             operator === "Jio" && <img src="/img/jio.png" className="rounded-full" />
                                         }
                                         {
-                                            operator === "BSNL" && <img src="/img/bsnl.png" className="rounded-full" />
+                                            operator === "Bsnl" && <img src="/img/bsnl.png" className="rounded-full" />
                                         }
                                         {
                                             operator === "Vi" && <img src="/img/vi.png" height={100} className="rounded-full bg-cover" />

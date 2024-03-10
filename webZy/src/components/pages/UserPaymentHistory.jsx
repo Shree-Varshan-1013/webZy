@@ -89,7 +89,7 @@ const UserPaymentHistory = () => {
                 {
                     currentPayment.length === 0 ? <div className="grid h-screen place-content-center bg-white px-4 dark:bg-slate-900">
                         <div className="text-center">
-                            <h1 className="text-9xl font-black text-gray-200 dark:text-caramel">Oops</h1>
+                            <h1 className="text-9xl font-black dark:text-caramel">Oops</h1>
 
                             <p className="text-2xl font-bold tracking-tight mt-10 text-gray-900 dark:text-caramel sm:text-4xl">Uh-oh!</p>
 

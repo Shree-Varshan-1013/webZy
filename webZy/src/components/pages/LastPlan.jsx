@@ -106,7 +106,7 @@ const LastPlan = () => {
                 {
                     fullPlan === null ? <div className="grid h-screen place-content-center bg-white dark:bg-slate-900 px-4">
                         <div className="text-center">
-                            <h1 className="text-9xl font-black text-gray-200 dark:text-caramel  ">Oops !</h1>
+                            <h1 className="text-9xl font-black dark:text-caramel  ">Oops !</h1>
                         </div>
                     </div> : (<section className="overflow-hidden bg-gray-50 dark:bg-slate-900 dark:text-white sm:grid sm:grid-cols-2 h-screen font-anuphan">
                         <div className="p-8 md:p-12 lg:px-16 lg:py-24">

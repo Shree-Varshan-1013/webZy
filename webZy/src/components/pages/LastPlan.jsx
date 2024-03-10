@@ -18,7 +18,7 @@ const LastPlan = () => {
                 action: {
                     label: "Recharge Now",
                     onClick: () => {
-                        navigate(`/mobile-recharge/Jio/${userDetails.mobileNumber}`);
+                        navigate(`/mobile-recharge/${userDetails.operatorName}/${userDetails.mobileNumber}`);
                     }
                 },
                 onAutoClose: "false"

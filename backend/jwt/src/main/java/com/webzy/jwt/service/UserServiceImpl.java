@@ -13,6 +13,7 @@ import com.webzy.jwt.repository.AppUserRepo;
 import com.webzy.jwt.repository.PaymentRepo;
 import com.webzy.jwt.repository.PlanRepo;
 import com.webzy.jwt.repository.RoleRepo;
+import com.webzy.jwt.dto.UserData;
 import com.webzy.jwt.entity.AppUser;
 import com.webzy.jwt.entity.Payment;
 import com.webzy.jwt.entity.Plan;
@@ -117,6 +118,30 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int findAll() {
 		return userRepo.findAll().size();
+	}
+
+    public AppUser finduserByUsername(String username) {
+        return userRepo.findByUserName(username);
+    }
+
+	public UserData updateUser(String username, String email, String operator, String location) {
+		AppUser user = userRepo.findByUserName(username);
+		user.setEmail(email);
+		user.setOperatorName(operator);
+		user.setLocation(location);
+		userRepo.save(user);
+		
+		AppUser newUser = userRepo.findByUserName(username);
+		
+		UserData userData = new UserData();
+		userData.setEmail(newUser.getEmail());
+		userData.setMobileNumber(newUser.getMobileNumber());
+		userData.setLocation(newUser.getLocation());
+		userData.setOperatorName(newUser.getOperatorName());
+		userData.setUsername(username);
+		userData.setRole(newUser.getRole());
+
+		return userData;
 	}
 
 }

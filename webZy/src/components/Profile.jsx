@@ -36,7 +36,7 @@ function ProfilePage() {
                                 <div className="flex flex-wrap justify-center">
                                     <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
                                         <div className="relative -bottom-12 flex h-[87px] w-[87px] items-center justify-center rounded-full border-[4px] border-gray-300 bg-purple3 dark:!border-navy-700">
-                                            <span className="text-white text-4xl font-bold">{userDetails.username ? userDetails.username.charAt(0).toUpperCase() : ''}</span>
+                                            <span className="text-white text-4xl font-bold">{userDetails ? userDetails.username.charAt(0).toUpperCase() : ''}</span>
                                         </div>
                                     </div>
                                     <div className="w-full lg:w-4/12 px-4 lg:order-3 lg:text-right lg:self-center">
@@ -49,7 +49,7 @@ function ProfilePage() {
                                     <div className="w-full lg:w-4/12 px-4 lg:order-1">
                                         <div className="flex justify-center py-4 lg:pt-4 pt-8">
                                             <div className="mr-4 p-3 text-center" style={{ width: "120px", whiteSpace: "nowrap" }}>
-                                                <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600 text-purple3">{fullPlan ? fullPlan.operatorName : "-" }</span><span className="text-sm text-blueGray-400">Sim</span>
+                                                <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600 text-purple3">{userDetails ? userDetails.operatorName : "-" }</span><span className="text-sm text-blueGray-400">Sim</span>
                                             </div>
                                             <div className="mr-2 p-3 text-center" style={{ width: "120px", whiteSpace: "nowrap" }}>
                                                 <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600 text-purple3">{fullPlan ? fullPlan.planType : "-" }</span><span className="text-sm text-blueGray-400">Plan Type</span>

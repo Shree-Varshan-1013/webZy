@@ -1,31 +1,79 @@
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
-import { detailSchema } from '../../schemas/detailSchema';
 import { motion } from 'framer-motion'
 import { Toaster } from 'sonner';
+import CustomerService from '../../services/CustomerService';
+import { useSelector } from 'react-redux';
+import { EditProfileSchema } from './../../schemas/EditProfileSchema';
+import { toast } from 'sonner';
+import { useDispatch } from 'react-redux';
+import { addUserDetails } from '../../config/GlobalSlice';
 
 const EditProfile = () => {
 
     const navigate = useNavigate();
 
+    const { accessToken, userDetails } = useSelector(state => state.global);
+
+    const dispatch = useDispatch();
+
     const initialData = {
+        email: "",
         operatorName: "",
         location: ""
     }
 
-    const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
+    useEffect(() => {
+        fetchUserData();
+    }, [])
+
+    const [data, setData] = useState(initialData);
+
+    const { values, errors, touched, handleBlur, handleChange, handleSubmit, setValues } = useFormik({
         initialValues: initialData,
-        validationSchema: detailSchema,
+        validationSchema: EditProfileSchema,
         onSubmit: (values, action) => {
             console.log(values);
             eventPlan();
-            action.resetForm();
         },
     });
 
-    const eventPlan = () => {
-        navigate(`/mobile-recharge/${values.operatorName}`);
+    useEffect(() => {
+        fetchUserData();
+    }, []);
+
+    const fetchUserData = async () => {
+        const res = await CustomerService.getUserData(userDetails.username, accessToken);
+        console.log(res);
+        const tar = {
+            "email": res.data.email,
+            "operatorName": res.data.operatorName,
+            "location": res.data.location
+        }
+        setValues(tar);
+    }
+    const eventPlan = async () => {
+        console.log(values);
+        try {
+            toast.loading('Updating your profile.....');
+            const res = await CustomerService.UpdateUserData(userDetails.username, values.email, values.operatorName, values.location, accessToken);
+            console.log(res);
+
+            if (res.status === 200) {
+                dispatch(addUserDetails(res.data));
+                setTimeout(() => {
+                    toast.success("Successfully updated your profile !");
+                    setTimeout(() => {
+                        navigate("/profile");
+                    }, 2000); 
+                }, 2000); 
+            }
+        }
+        catch (err) {
+            toast.error('Something went wrong !');
+            console.log(err);
+        }
     }
 
 
@@ -60,24 +108,6 @@ const EditProfile = () => {
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#9ca3af" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m-.4 4.25l-7.07 4.42c-.32.2-.74.2-1.06 0L4.4 8.25a.85.85 0 1 1 .9-1.44L12 11l6.7-4.19a.85.85 0 1 1 .9 1.44" /></svg>
                                 </span>
                                 {errors.email && touched.email && <div className="text-red-600 text-xs">{errors.email}</div>}
-                            </div>
-                        </div>
-                        <div>
-                            <label className="sr-only font-anuphan">Mobile Number</label>
-                            <div className="relative">
-                                <input
-                                    name="mobileNumber"
-                                    type="text"
-                                    value={values.mobileNumber}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan dark:bg-slate-900"
-                                    placeholder="Enter mobile number"
-                                />
-                                <span className="absolute inset-y-0 end-0 grid place-content-center px-4">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#9ca3af" d="m21 15.46l-5.27-.61l-2.52 2.52a15.045 15.045 0 0 1-6.59-6.59l2.53-2.53L8.54 3H3.03C2.45 13.18 10.82 21.55 21 20.97z" /></svg>
-                                </span>
-                                {errors.mobileNumber && touched.mobileNumber && <div className="text-red-600 text-xs">{errors.mobileNumber}</div>}
                             </div>
                         </div>
                         <div>
@@ -118,24 +148,6 @@ const EditProfile = () => {
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#9ca3af" d="M12 11.5A2.5 2.5 0 0 1 9.5 9A2.5 2.5 0 0 1 12 6.5A2.5 2.5 0 0 1 14.5 9a2.5 2.5 0 0 1-2.5 2.5M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7" /></svg>
                                 </span>
                                 {errors.location && touched.location && <div className="text-red-600 text-xs">{errors.location}</div>}
-                            </div>
-                        </div>
-                        <div>
-                            <label className="sr-only">About</label>
-                            <div className="relative">
-                                <input
-                                    name="about"
-                                    value={values.about}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    type="text"
-                                    className="dark:bg-slate-900 w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm font-anuphan"
-                                    placeholder="Describe yourself"
-                                />
-                                <span className="absolute inset-y-0 end-0 grid place-content-center px-4 mb-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="#9ca3af" d="M11.427 16.615v-6.042c0-.997-.444-1.669-1.541-1.669c-.906 0-1.754.614-2.159 1.228v6.483H5.704v-6.042c0-.997-.423-1.669-1.523-1.669c-.905 0-1.734.633-2.158 1.228v6.483H0V7.351h2.023v1.247C2.428 8.04 3.642 7.12 5.068 7.12c1.386 0 2.235.69 2.543 1.688c.52-.825 1.754-1.688 3.16-1.688c1.697 0 2.68.92 2.68 2.8v6.694zM24 12.163c0-2.925-1.788-5.042-4.604-5.042c-2.777 0-4.759 2.174-4.759 4.869c0 2.945 2.079 4.888 4.913 4.89c1.476 0 2.855-.482 3.807-1.368l-.932-1.328c-.68.673-1.747 1.04-2.68 1.04c-1.768 0-2.815-1.174-2.971-2.56H24zm-7.245-.943c.077-1.116.893-2.444 2.622-2.444c1.845 0 2.602 1.347 2.66 2.444z" /></svg>
-                                </span>
-                                {errors.about && touched.about && <div className="text-red-600 text-xs">{errors.about}</div>}
                             </div>
                         </div>
                         <button

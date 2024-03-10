@@ -3,6 +3,21 @@ import axios from "axios";
 const CUSTOMER_API_BASE_URL = "http://localhost:2018/api/v1/customer/";
 
 class CustomerService {
+
+  getUserData(username, token){
+    return axios.get(CUSTOMER_API_BASE_URL  + username, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+  UpdateUserData(username, email, operator, location, token){
+    return axios.get(CUSTOMER_API_BASE_URL  + username + "/" + email + "/" + operator + "/" + location, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
   getPlans(operatorName, token) {
     return axios.get(CUSTOMER_API_BASE_URL + "plan/" + operatorName, {
       headers: {

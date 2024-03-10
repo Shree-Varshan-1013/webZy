@@ -82,6 +82,7 @@ public class JwtService implements UserDetailsService {
 				obj.setMobileNumber(user.getMobileNumber());
 				obj.setLocation(user.getLocation());
 				obj.setRole(user.getRole());
+				obj.setOperatorName(user.getOperatorName());
 				
 				return new JwtResponse(obj, newGeneratedToken);
 			}

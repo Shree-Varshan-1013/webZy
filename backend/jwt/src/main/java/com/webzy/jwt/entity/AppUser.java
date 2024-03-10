@@ -36,6 +36,9 @@ public class AppUser {
 
 	@Schema(description = "The location of the user")
 	private String location;
+	
+	@Schema(description = "The operator of the user")
+	private String operatorName;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "APP_USER_ROLE", joinColumns = {

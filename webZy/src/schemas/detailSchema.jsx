@@ -5,5 +5,5 @@ export const detailSchema = Yup.object({
         .required("Please enter the phone number!")
         .matches(/^\d{10}$/, "Phone number must be exactly 10 digits"),
     operatorName: Yup.string().required("Please Enter the operator name !"),
-    location: Yup.string().min(10).max(30).required("Please Enter the location !"),
+    location: Yup.string().required("Please Enter the location !"),
 });

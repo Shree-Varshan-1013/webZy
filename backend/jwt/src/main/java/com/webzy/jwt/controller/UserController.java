@@ -5,7 +5,10 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import com.webzy.jwt.dto.UserData;
 import com.webzy.jwt.entity.Addon;
+import com.webzy.jwt.entity.AppUser;
 import com.webzy.jwt.entity.Payment;
 import com.webzy.jwt.entity.Plan;
 import com.webzy.jwt.entity.Recharge;
@@ -43,6 +46,21 @@ public class UserController {
 	@GetMapping("/plan/{operatorName}")
 	public List<Plan> viewPlan(@Parameter(description = "Operator name") @PathVariable String operatorName) {
 		return userService.findPlansByOperator(operatorName);
+	}
+
+	@PreAuthorize("hasRole('CUSTOMER') or hasRole('ADMIN')")
+	@GetMapping("/{username}")
+	public AppUser viewCustomerDetails(@Parameter(description = "Username") @PathVariable String username) {
+		return userService.finduserByUsername(username);
+	}
+
+	@PreAuthorize("hasRole('CUSTOMER') or hasRole('ADMIN')")
+	@GetMapping("/{username}/{email}/{operator}/{location}")
+	public UserData viewCustomerDetails(@Parameter(description = "Username") @PathVariable String username,
+			@Parameter(description = "email") @PathVariable String email,
+			@Parameter(description = "Operator") @PathVariable String operator,
+			@Parameter(description = "location") @PathVariable String location) {
+		return userService.updateUser(username, email, operator, location);
 	}
 
 	@Operation(summary = "Get addons by operator name", description = "Get addons by operator name.")

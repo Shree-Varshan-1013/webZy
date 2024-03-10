@@ -17,6 +17,8 @@ public class UserData {
 
     private String location;
 
+    private String operatorName;
+
     private Set<Role> role;
 
 }

@@ -29,10 +29,10 @@ public class UserController {
 	private final UserServiceImpl userService;
 	private final AddonServiceImpl addonService;
 	private final RechargeServiceImpl rechargeService;
-	// @PostConstruct
-	// public void initRolesAndUSer() {
-	// userService.initRolesAndUser();
-	// }
+	@PostConstruct
+	public void initRolesAndUSer() {
+	userService.initRolesAndUser();
+	}
 
 	@Operation(summary = "Admin route", description = "Accessible only by admin roles.")
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")

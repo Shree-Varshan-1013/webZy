@@ -2,7 +2,7 @@ version: '3'
 services:
 
   webzy-back-end:
-    image: "webzy-backend:0.0.1"
+    image: "final_backend"
     container_name: webzy-back-end
     ports:
       - "2018:2018"
@@ -12,7 +12,7 @@ services:
       - webzy-network
 
   webzy-front-end:
-    image: "webzy-ui:0.0.1"
+    image: "final_frontend"
     container_name: webzy-front-end
     ports:
       - "5713:5713"
